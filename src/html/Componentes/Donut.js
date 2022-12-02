@@ -133,7 +133,7 @@ function Donut() {
         <>
             <ReactEcharts
                 option={option_donut}
-                style={{ width: "34rem", height: "34rem" }}
+                style={{ width: "54rem", height: "54rem" }}
             ></ReactEcharts>
 
         </>
