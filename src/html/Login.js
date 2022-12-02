@@ -1,7 +1,7 @@
 import "../css/styleLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-
+import logo from "../assets/LogoOrkesta.png";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -21,7 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
 
 
-  
+
   function inicio_sesion() {
     axios
       .post(
@@ -76,7 +76,7 @@ const Login = () => {
   return (
     <>
 
-      <main className="main-container ">
+      <main className="main-container" id="main-container">
         {/* <div
           className=" w-full h-screen flex items-center justify-center flex-col"
           id="cover"
@@ -119,24 +119,30 @@ const Login = () => {
             </div>
           </div>
         </div> */}
-        <div className="container-lg">
-        <div className="row justify-content-md-center mt-5 ">
-                    <div className="mb-3 flex-column col-lg-6">
-                        <div >
-                            <label for="label_user" className="form-label">Ingrese usuario</label>
-                            <input type="text" className="form-control" id="formGroupExampleInput" placeholder="Usuario"
-                            onChange={handleChangeUsuario} />
-                            <label for="label_pass" className="form-label">Ingrese contraseña</label>
-                            <input type="password" className="form-control" id="formGroupExampleInput2" placeholder="Contraseña"
-                            onChange={handleChangePassword} />
-                            <div className="d-flex justify-content-center">
-                                <button type="button" className="btn btn-primary sm mt-3"
-                                onClick={inicio_sesion}>Ingresar</button>
-                            </div>
-                        </div>
-                    </div>
+        <div className="container-sm-lg-4">
+          <div className="card" id="card" >
+            <div className="row justify-content-md-center mt-5 ">
+              <div className="mb-3 flex-column col-lg-6 col-sm-6">
+                
+                  <img className="img-fluid" src={logo}/>
+                  <p className="mt-2 mb-4">Bienvenido Procollect CRM</p>
+              
+
+                <label for="label_user" className="form-label">Ingrese usuario</label>
+                <input type="text" className="form-control" id="formGroupExampleInput" placeholder="Usuario"
+                  onChange={handleChangeUsuario} />
+                <label for="label_pass" className="form-label">Ingrese contraseña</label>
+                <input type="password" className="form-control" id="formGroupExampleInput2" placeholder="Contraseña"
+                  onChange={handleChangePassword} />
+                <div className="d-flex justify-content-center">
+                  <button type="button" className="btn btn-primary sm mt-3"
+                    onClick={inicio_sesion}>Ingresar</button>
                 </div>
-                </div>                
+
+              </div>
+            </div>
+          </div>
+        </div>
 
       </main>
 
