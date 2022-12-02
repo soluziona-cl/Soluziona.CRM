@@ -21,7 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
 
 
-  
+
   function inicio_sesion() {
     axios
       .post(
@@ -122,7 +122,7 @@ const Login = () => {
         <div className="container-lg">
         <div className="row justify-content-md-center mt-5 ">
                     <div className="mb-3 flex-column col-lg-6">
-                        <div >
+                        <div>
                             <label for="label_user" className="form-label">Ingrese usuario</label>
                             <input type="text" className="form-control" id="formGroupExampleInput" placeholder="Usuario"
                             onChange={handleChangeUsuario} />
