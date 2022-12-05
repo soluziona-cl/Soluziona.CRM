@@ -9,11 +9,11 @@ const Dashboard = () => {
 
   return (
     <>
-    <div className='h-full bg-white'>
+    <div className=' h-auto bg-white'>
     <Header />
-    <div className=' flex flex-row'>
+    <div className=' flex-lg-row'>
         <SideBar />
-     <div className=' '>
+     <div className=' flex-md-row'>
     
     <h1 className='text-3xl text-[#003767] text-center ml-4 my-6 font-bold font-sans'> Titulo</h1>
           <section className=" flex flex-col">

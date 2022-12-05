@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {useState} from 'react';
 
-import back from '../../assets/back.png'
-import icon from '../../assets/iconOrkesta.png'
+// import back from '../../assets/back.png'
+// import icon from '../../assets/iconOrkesta.png'
 
 import Nav from 'react-bootstrap/Nav';
 
@@ -11,90 +11,50 @@ import Nav from 'react-bootstrap/Nav';
 
 
 const SideBar = () => {
-  const [open, setOpen] = useState(true);
-  
-  const [mostrar, setMostrar] = useState(true);
-
-  const mostrarClick = event => {
-
-      setMostrar(current => !current);
-
-  };
  
-  const rutaservidor = "/Orkesta_CallSouth_Salcobrand";
+  // const rutaservidor = "/Orkesta_CallSouth_Salcobrand";
 
   return (
-    <div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 ">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+    <>
+    <div className="container-fluid position-absolute">
+    <div className="row flex-nowrap">
+        <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+            <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span className="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li className="nav-item">
+                        <a href="#" className="nav-link align-middle px-0">
+                            <i className="fs-4 bi-house"></i> <span className="ms-1 d-none d-sm-inline">Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
-                    </li>
-                    <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu"><i class="bi bi-balloon-heart-fill"></i>
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                        <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                            <i className="fs-4 bi-speedometer2"></i> <span className="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                       
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="col py-3">
-            Content area...
-        </div>
     </div>
 </div>
+
+</>
+
+);
+};
+
+export default SideBar;
+
+
+// const [open, setOpen] = useState(true);
+  
+// const [mostrar, setMostrar] = useState(true);
+
+// const mostrarClick = event => {
+
+//     setMostrar(current => !current);
 //     <div>
 // <div className='float-right mr-1 '> 
 //  <button onClick={mostrarClick} ><img
@@ -137,7 +97,3 @@ const SideBar = () => {
 //     </div>
 // )}
 //     </div> 
-  );
-};
-
-export default SideBar;
