@@ -11,7 +11,7 @@ import Nav from 'react-bootstrap/Nav';
 
 
 const SideBar = () => {
- 
+  const rutaservidor = "/"; //Prueba
   // const rutaservidor = "/Orkesta_CallSouth_Salcobrand";
 
   return (
@@ -26,15 +26,18 @@ const SideBar = () => {
                 <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li className="nav-item">
                         <a href="#" className="nav-link align-middle px-0">
-                            <i className="fs-4 bi-house"></i> <span className="ms-1 d-none d-sm-inline">Home</span>
+                            <i className="fs-4 bi-house"></i> <span className="ms-1 d-none d-sm-inline">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                            <i className="fs-4 bi-speedometer2"></i> <span className="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                        <a href="#SubirArchivos" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                            <i className="fs-4 bi-speedometer2"></i> <span className="ms-1 d-none d-sm-inline">Subir Archivos</span> </a>
                        
                     </li>
                 </ul>
+                {/* <Link  to={rutaservidor + '/Dashboard'}className='flex mr-12 items-center h-12 px-2 mt-6 hover:opacity-40 rounded'>
+              <div className='ml-2  text-slate-200 text-sm font-medium'><i class="fa-solid fa-chart-line mr-2"></i> Dashboard</div>
+            </Link> */}
             </div>
         </div>
     </div>
