@@ -120,14 +120,15 @@ const Login = () => {
           </div>
         </div> */}
 
-        <div className="container-sm-lg-4">
+        <div className="container-sm-lg-6 col-sm-4">
+
           <div className="card" id="card" >
-            <div className="row justify-content-md-center mt-5 ">
-              <div className="mb-3 flex-column col-lg-6 col-sm-6">
-                
-                  <img className="img-fluid" src={logo}/>
-                  <p className="mt-2 mb-4">Bienvenido Procollect CRM</p>
-              
+            <div className="row justify-content-md-center ">
+              <div className="mb-3 flex-column col-lg-6 col-sm-4">
+
+                <img className="img-fluid" src={logo} />
+                <p className="mt-2 mb-4">Bienvenido Procollect CRM</p>
+
 
                 <label for="label_user" className="form-label">Ingrese usuario</label>
                 <input type="text" className="form-control" id="formGroupExampleInput" placeholder="Usuario"
