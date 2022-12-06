@@ -9,7 +9,7 @@ function Header() {
         navigate(rutaservidor);
     };
 
-    const rutaservidor = "/Orkesta_CallSouth_Salcobrand";
+    const rutaservidor = "/";
 
     return (
         <>

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {useState} from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
 const SideBar = () => {
-
+    const navigate = useNavigate();
   const rutaservidor = "/";
 
   return (
@@ -19,8 +19,10 @@ const SideBar = () => {
          
         <div className=" text-black">
           <section className="items-center mt-2 p-2 border-gray-200 ">
+          
+
           <Link  to={rutaservidor + '/Dashboard'} >
-              <div className='mt-2 text-black'> <i class="fa-solid fa-chart-line"></i>
+              <div className='mt-2 text-black'> 
               Dashboard
               </div>
             </Link>
