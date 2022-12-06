@@ -84,9 +84,9 @@ function ListarCargas() {
 
     return (
         <>
-            <div className=" flex">
-                <div className=" flex ">
-                    <table id="tbl_acumulado_dia" class="table table-striped table-sm text-nowrap text-sm" width="100%">
+            <div className=" container-lg">
+                <div className=" flex-column ">
+                    <table id="tbl_acumulado_dia" className="table table-striped table-sm text-nowrap text-sm" width="100%">
                         <thead>
                             <tr>
                                 <th>Fecha carga</th>

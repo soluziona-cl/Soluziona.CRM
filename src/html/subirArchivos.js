@@ -6,7 +6,7 @@ import ImportarArchivo from './Componentes/ImportarArchivo';
 import Company_Campaing from './Componentes/Company_Campaing';
 
 
-function subirArchivos() {
+function SubirArchivos() {
     return (        
         <>
          <div className=' d-block'>
@@ -25,4 +25,4 @@ function subirArchivos() {
         </>
     )
 }
-export default subirArchivos
+export default SubirArchivos

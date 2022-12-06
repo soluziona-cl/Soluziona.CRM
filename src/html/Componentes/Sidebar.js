@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SideBar = () => {
     const navigate = useNavigate();
-  const rutaservidor = "/";
+  const rutaservidor = "";
 
   return (
       
@@ -31,29 +31,29 @@ const SideBar = () => {
               Cargador
               </div>
             </Link>
-            <Link  to={rutaservidor + '/Admin'}>
+            <Link  to={rutaservidor + '/AdminCargas'}>
               <div className='pt-2 text-black mt-3'><i class="fa-solid fa-user"></i>
               Admin
               </div>
             </Link>
             <Link  to={rutaservidor + '/Reportes'}>
-              <div className='pt-2 text-black mt-3 mb-2'><i class="fa-solid fa-bars "></i>
+              <div className='pt-2 text-black mt-3 mb-2'><i class="fa-solid fa-bars disabled "></i>
               Reportes
               </div>
             </Link>
-            <Link  to={rutaservidor + '/Repo-Carga'} >
+            <Link  to={rutaservidor + '/RepoCarga'} >
               <div className='flex text-black mr-12 items-center h-12 px-2 mt-6 hover:opacity-40 rounded'>
-              Repo-Carga
+              RepoCarga
               </div>
             </Link>
-            <Link  to={rutaservidor + '/Repo-Gestión'} >
+            <Link  to={rutaservidor + '/RepoGestión'} >
               <div className='flex text-black mr-12 items-center h-12 px-2 mt-6 hover:opacity-40 rounded'>
-              Repo-Gestión
+              RepoGestión
               </div>
             </Link>
-            <Link  to={rutaservidor + '/Repo-Agentes'} >
+            <Link  to={rutaservidor + '/RepoAgentes'} >
               <div className='flex text-black mr-12 items-center h-12 px-2 mt-6 hover:opacity-40 rounded'>
-              Repo-Agentes
+              RepoAgentes
               </div>
             </Link>
           </section>

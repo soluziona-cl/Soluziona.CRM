@@ -5,6 +5,9 @@ import Login from "./html/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SubirArchivos from "./html/SubirArchivos";
 import ListarCargas from "./html/AdminCargas";
+import RepoCarga from "./html/RepoCarga.js";
+import RepoAgentes from "./html/RepoAgentes.js";
+
 
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
         <Route path={rutaservidor + "/login"} element={<Login />} />
         <Route path={rutaservidor + "/Dashboard"} element={<Dashboard />} />
         <Route path={rutaservidor + "/SubirArchivos"} element={<SubirArchivos />} />
+        <Route path={rutaservidor + "/AdminCargas"} element={<ListarCargas />} />
+        <Route path={rutaservidor + "/RepoCarga"} element={<RepoCarga />} />
+        <Route path={rutaservidor + "/AdminCargas"} element={<ListarCargas />} />
         <Route path={rutaservidor + "/AdminCargas"} element={<ListarCargas />} />
         {/* <Route path="/" element={<Login />} /> */}
           {/* <Route path="/Dashboard" element={<Dashboard />} />
