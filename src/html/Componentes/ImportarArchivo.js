@@ -29,7 +29,7 @@ function ImportarArchivo() {
     return (
         <>
             <input type="file" onChange={handleFile} />
-            <button onClick={coneccionApi}>Subir</button>
+            <button onClick={coneccionApi} className="btn btn-primary sm mt-3" >Subir</button>
         </>
     )
 }
