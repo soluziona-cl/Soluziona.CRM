@@ -3,9 +3,10 @@ import SideBar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 
 import ImportarArchivo from '../html/Componentes/ImportarArchivo';
+import Company_Campaing from '../html/Componentes/Company_Campaing';
 
 
-function OnlineView() {
+function subirArchivos() {
     return (        
         <>
          <div className=' d-block'>
@@ -13,6 +14,9 @@ function OnlineView() {
         <div>
         {/* <SideBar /> */}
             <div className=' justify-content-center align-items-center'>
+                <Company_Campaing />
+            </div>
+            <div className=' justify-content-center align-items-center mt-2'>
                 <ImportarArchivo />
             </div>
             </div>
@@ -21,4 +25,4 @@ function OnlineView() {
         </>
     )
 }
-export default OnlineView
+export default subirArchivos

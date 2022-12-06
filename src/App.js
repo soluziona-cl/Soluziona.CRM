@@ -4,6 +4,7 @@ import Dashboard from "./html/Dashboard";
 import Login from "./html/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SubirArchivos from "./html/subirArchivos";
+import ListarCargas from "./html/AdminCargas";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path={rutaservidor + "/login"} element={<Login />} />
         <Route path={rutaservidor + "/Dashboard"} element={<Dashboard />} />
         <Route path={rutaservidor + "/subirArchivos"} element={<SubirArchivos />} />
+        <Route path={rutaservidor + "/AdminCargas"} element={<ListarCargas />} />
         {/* <Route path="/" element={<Login />} /> */}
           {/* <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/ImportarArchivo" element={<ImportarArchivo />} /> */}
