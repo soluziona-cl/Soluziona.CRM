@@ -65,7 +65,8 @@ const Login = () => {
         } else {
           console.log("SIP");
 
-
+          //navigate("/Orkesta_CallSouth_Salcobrand/Dashboard");
+          navigate("/Dashboard");
         }
       })
       .catch((error) => {
