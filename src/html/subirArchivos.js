@@ -2,17 +2,17 @@ import Header from './Componentes/Header';
 import SideBar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 
-import ImportarArchivo from '../html/Componentes/ImportarArchivo';
-import Company_Campaing from '../html/Componentes/Company_Campaing';
+import ImportarArchivo from './Componentes/ImportarArchivo';
+import Company_Campaing from './Componentes/Company_Campaing';
 
 
-function subirArchivos() {
+function SubirArchivos() {
     return (        
         <>
          <div className=' d-block'>
-        {/* <Header />   */}
+        <Header />  
         <div>
-        {/* <SideBar /> */}
+        <SideBar />
             <div className=' justify-content-center align-items-center'>
                 <Company_Campaing />
             </div>
@@ -25,4 +25,4 @@ function subirArchivos() {
         </>
     )
 }
-export default subirArchivos
+export default SubirArchivos
