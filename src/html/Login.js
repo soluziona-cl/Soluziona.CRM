@@ -5,6 +5,8 @@ import logo from "../assets/LogoOrkesta.png";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+import { setUserSession } from './Componentes/Common';
+
 
 const Login = () => {
   const [user, setUsuario] = useState('');
@@ -20,8 +22,6 @@ const Login = () => {
   // console.log(pass);
   const navigate = useNavigate();
 
-
-
   function inicio_sesion() {
     axios
       .post(
@@ -30,7 +30,7 @@ const Login = () => {
         { username: user, password: pass }
       )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
 
         var id = "";
         var login = {
@@ -63,7 +63,10 @@ const Login = () => {
           console.log("NOP");
           alert("credenciales erróneas");
         } else {
-          console.log("SIP");
+
+          setUserSession(login.token, login.id_usuario);
+          navigate("/subirArchivos");
+          
 
 
         }
