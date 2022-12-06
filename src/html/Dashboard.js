@@ -9,7 +9,7 @@ const Dashboard = () => {
 
   return (
     <>
-    <div className=' h-auto bg-white'>
+    <div className=' bi-fullscreen bg-white'>
     <Header />
     <div className=' flex-lg-row'>
         <SideBar />

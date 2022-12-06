@@ -3,7 +3,7 @@ import './App.css';
 import Dashboard from "./html/Dashboard";
 import Login from "./html/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SubirArchivos from "./html/subirArchivos";
+import SubirArchivos from "./html/SubirArchivos";
 import ListarCargas from "./html/AdminCargas";
 
 
@@ -17,7 +17,7 @@ function App() {
         <Route index path={rutaservidor} element={<Login />} />
         <Route path={rutaservidor + "/login"} element={<Login />} />
         <Route path={rutaservidor + "/Dashboard"} element={<Dashboard />} />
-        <Route path={rutaservidor + "/subirArchivos"} element={<SubirArchivos />} />
+        <Route path={rutaservidor + "/SubirArchivos"} element={<SubirArchivos />} />
         <Route path={rutaservidor + "/AdminCargas"} element={<ListarCargas />} />
         {/* <Route path="/" element={<Login />} /> */}
           {/* <Route path="/Dashboard" element={<Dashboard />} />
