@@ -16,3 +16,12 @@ code {
 #sidebar-nav {
   width: 160px;
 }
+
+
+#ini,#fin{
+  background: #216ca5;
+  width: 8rem;
+  font-size: bold;
+  color:white;
+  border-radius: 8%;
+}
