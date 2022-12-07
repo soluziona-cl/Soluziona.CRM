@@ -7,9 +7,6 @@ import SubirArchivos from "./html/SubirArchivos";
 import ListarCargas from "./html/AdminCargas";
 import RepoCarga from "./html/RepoCarga.js";
 import RepoAgentes from "./html/RepoAgentes.js";
-
-
-
 function App() {
 
   const rutaservidor = "/"; //Prueba

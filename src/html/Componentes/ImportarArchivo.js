@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-
-
 import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 
@@ -55,7 +53,8 @@ function ImportarArchivo() {
         const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/FlujosCarga', { dato: sesiones.sid, dato_2: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
-
+            console.log("archivo arriba")
+            alert("archivo arriba")
             console.log(result.data)
             var arrr = result.data;
 
@@ -91,7 +90,7 @@ function ImportarArchivo() {
     return (
         <>
             <input type="file" onChange={handleFile} />
-            <button onClick={Flujo}>Subir</button>
+            <button className='btn btn-success' id="btn-carga" onClick={Flujo}><i className="fa-solid fa-upload m-2"></i>Subir</button>
         </>
     )
 }

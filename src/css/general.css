@@ -1,15 +1,13 @@
 
 #header{
-   
     margin-top: -1.5rem;
-  
     background-color: #5b198ab5;
 }
 
 #sidebar{
  font-size: medium;
     background-color: #aea1b9cd;
-    height:max-content;
+  position:relative;
 }
 
 #footer{
@@ -24,4 +22,9 @@
 .d-block{
    
     height: 100%;
+    background-color: #c52acc;
+}
+#btn-carga{
+    height: 3rem;
+    width: 7.5rem;
 }
