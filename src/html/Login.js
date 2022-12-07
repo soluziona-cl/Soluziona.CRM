@@ -5,6 +5,8 @@ import logo from "../assets/LogoOrkesta.png";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+import { setUserSession } from './Componentes/Common';
+
 
 const Login = () => {
   const [user, setUsuario] = useState('');
@@ -20,8 +22,6 @@ const Login = () => {
   // console.log(pass);
   const navigate = useNavigate();
 
-
-
   function inicio_sesion() {
     axios
       .post(
@@ -30,7 +30,7 @@ const Login = () => {
         { username: user, password: pass }
       )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
 
         var id = "";
         var login = {
@@ -63,9 +63,13 @@ const Login = () => {
           console.log("NOP");
           alert("credenciales erróneas");
         } else {
-          console.log("SIP");
 
+          setUserSession(login.token, login.id_usuario);
+          navigate("/subirArchivos");
+          
 
+          //navigate("/Orkesta_CallSouth_Salcobrand/Dashboard");
+          navigate("/Dashboard");
         }
       })
       .catch((error) => {
@@ -137,7 +141,7 @@ const Login = () => {
                 <input type="password" className="form-control" id="formGroupExampleInput2" placeholder="Contraseña"
                   onChange={handleChangePassword} />
                 <div className="d-flex justify-content-center">
-                  <button type="button" className="btn btn-primary sm mt-3"
+                  <button type="button" id="btn-login" className="btn btn-primary sm mt-3"
                     onClick={inicio_sesion}>Ingresar</button>
 
                 </div>

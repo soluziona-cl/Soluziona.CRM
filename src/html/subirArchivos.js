@@ -2,17 +2,21 @@ import Header from './Componentes/Header';
 import SideBar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 
-import ImportarArchivo from '../html/Componentes/ImportarArchivo';
+import ImportarArchivo from './Componentes/ImportarArchivo';
+import Company_Campaing from './Componentes/Company_Campaing';
 
 
-function OnlineView() {
+function SubirArchivos() {
     return (        
         <>
          <div className=' d-block'>
-        {/* <Header />   */}
+        <Header />  
         <div>
-        {/* <SideBar /> */}
+        <SideBar />
             <div className=' justify-content-center align-items-center'>
+                <Company_Campaing />
+            </div>
+            <div className=' justify-content-center align-items-center mt-2'>
                 <ImportarArchivo />
             </div>
             </div>
@@ -21,4 +25,4 @@ function OnlineView() {
         </>
     )
 }
-export default OnlineView
+export default SubirArchivos

@@ -1,5 +1,7 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
+import "../../css/general.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Header() {
 
@@ -9,28 +11,27 @@ function Header() {
         navigate(rutaservidor);
     };
 
-    const rutaservidor = "/Orkesta_CallSouth_Salcobrand";
+    const rutaservidor = "/";
+    // const rutaservidor = "/Orkesta_CallSouth_Salcobrand";
 
     return (
-        <>
-            <nav className=" h-full bg-slate-500 border-gray-200 px-4  py-2.5 ">
-                <div className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 m-3 border-top">
-                <div className="justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-                        <span className="text-xl text-gray-200 px-10">Control CRM Orkesta Salcobrand</span>
+        <>  
+            
+            <div className="  px-4 top-0 " id="header">
+                <div className="d-flex flex-wrap justify-content-between align-items-center py-0 my-4 m-3">
+                    <div className="justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                        <span className="" style={{ color: 'white' }}>Control CRM Orkesta Procollect</span>
                     </div>
-                    <div className="flex items-center lg:order-2">
-
-                        <button
+                    <div className="flex items-center">
+                        <button 
                             onClick={handleLogout}
-                            className=' text-gray-200 bg-slate-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5  focus:outline-none '
-                        ><i class="fa-solid fa-right-from-bracket mr-4"></i>
-                            Salir
+                            className="btn btn-danger sm" 
+                        ><i class="fa-solid fa-right-from-bracket m-2"></i>
+                             Salir
                         </button>
-
                     </div>
-                    
                 </div>
-            </nav>
+            </div>
         </>
     )
 }

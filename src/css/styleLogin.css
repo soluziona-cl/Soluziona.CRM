@@ -194,7 +194,7 @@
     margin: 0rem 0rem 2rem 0rem;
   }
   
-  .btn {
+  #btn-login {
     width: 150px;
     background-color: #2ABFA1;
     border: none;
@@ -210,13 +210,9 @@
     text-align: center;
   }
   
-  .btn:hover {
+  #btn-login:hover {
     background-color: #FB8700;
   }
-  
-  
-  
-  
   
   @media (max-width: 1280px) and (min-width: 1024px) {
         
