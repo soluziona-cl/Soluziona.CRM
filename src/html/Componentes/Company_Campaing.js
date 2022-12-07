@@ -24,7 +24,7 @@ function Company_Campaing() {
         Company(sesiones.sid)
     }, []);
 
-  
+
 
     const Company = (async (company) => {
 
@@ -74,8 +74,11 @@ function Company_Campaing() {
 
     return (
         <>
-            <div className="row">
-                <div className="col">
+            <div className="row mb-2">
+                <div class="page-header pt-3">
+                    <h3>Filtros</h3>
+                </div>
+                <div className="col-sm-12 col-lg-3">
                     <select className="form-control form-select" id="ddl_company"
                         disabled={false}
                         // value={select}
@@ -88,7 +91,7 @@ function Company_Campaing() {
                         ))}
                     </select>
                 </div>
-                <div className="col">
+                <div className="col-sm-12 col-lg-3 mt-sm-2 mt-lg-0">
                     <select className="form-control form-select" id="ddl_campana"
                         disabled={optionListDetalleEstado}
                         value={optionListDetalleEstadoSelect}
