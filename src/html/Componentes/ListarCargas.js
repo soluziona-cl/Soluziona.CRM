@@ -124,7 +124,7 @@ function ListarCargas() {
                                     <td>{data.camp_6}%</td>
                                     <td>{data.camp_7}%</td>
                                     <td>{data.camp_9}%</td>
-                                    <td><button onClick={""} data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success">Detalle</button></td>
+                                    <td><button onClick={""} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success">Detalle</button></td>
 
                                 </tr>
                             ))}

@@ -14,10 +14,12 @@ import { format } from "date-fns";
 import Header from './Componentes/Header';
 import SideBar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //con DataTable
 const RepoCarga = () => {
@@ -29,7 +31,7 @@ const RepoCarga = () => {
   const [datafull, setDataFull] = useState([]);
   const [datafullIntervalo, setDataFullIntervalo] = useState([]);
 
-  
+
   function secondsToString(seconds) {
     var hour = Math.floor(seconds / 3600);
     hour = hour < 10 ? "0" + hour : hour;
@@ -101,7 +103,7 @@ const RepoCarga = () => {
   // ));
 
   const handleOnExportFull = () => {
-   
+
     //creates a new workbook
     let wb = XLSX.utils.book_new();
 
@@ -133,7 +135,7 @@ const RepoCarga = () => {
   };
 
   const handleOnExportIntervalo = () => {
-    
+
     //creates a new workbook
     let wb = XLSX.utils.book_new();
 
@@ -308,120 +310,186 @@ const RepoCarga = () => {
   }
   return (
     <>
-      <div className="h-full">
-        <Header />
+      <main className="">
+        <div className="h-full">
+          <Header />
+        </div>
         <div className="flex flex-row">
           <SideBar />
-          <section className="w-screen flex flex-col items-center m-8">
-            <section className=" justify-start">
-              <div className="flex flex-row justify-start">
-                <div className="flex flex-col justify-start items-center mr-20">
-                  <p> Fecha Inicio:</p>
+        </div>
 
-                  <DatePicker
-                    className=" rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                    //  customInput={<ExampleCustomInput />}
-                    renderCustomHeader={({
-                      date,
-                      changeYear,
-                      changeMonth,
-                      decreaseMonth,
-                      increaseMonth,
-                      prevMonthButtonDisabled,
-                      nextMonthButtonDisabled,
-                    }) => (
-                      <div
-                        style={{
-                          margin: 10,
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
+        <div className="container-sm-lg-6 col-sm-4">
+          <section className="flex flex-row justify-center">
+            <div className="flex flex-row justify-start">
+              <div className="flex flex-col justify-start items-center mr-20">
+                <p> Fecha Inicio:</p>
+
+                <DatePicker
+                  locale='es'
+                  className=" rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                  //  customInput={<ExampleCustomInput />}
+                  renderCustomHeader={({
+                    date,
+                    changeYear,
+                    changeMonth,
+                    decreaseMonth,
+                    increaseMonth,
+                    prevMonthButtonDisabled,
+                    nextMonthButtonDisabled,
+                  }) => (
+                    <div
+                      style={{
+                        margin: 10,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <button
+                        onClick={decreaseMonth}
+                        disabled={prevMonthButtonDisabled}
                       >
-                        <button
-                          onClick={decreaseMonth}
-                          disabled={prevMonthButtonDisabled}
-                        >
-                          {"<"}
-                        </button>
-                        <select
-                          value={getYear(date)}
-                          onChange={({ target: { value } }) => changeYear(value)}
-                        >
-                          {years.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
+                        {"<"}
+                      </button>
+                      <select
+                        value={getYear(date)}
+                        onChange={({ target: { value } }) => changeYear(value)}
+                      >
+                        {years.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
 
-                        <select
-                          value={months[getMonth(date)]}
-                          onChange={({ target: { value } }) =>
-                            changeMonth(months.indexOf(value))
-                          }
-                        >
-                          {months.map((option) => (
-                            <option key={option} value={option}>
-                              {option}
-                            </option>
-                          ))}
-                        </select>
+                      <select
+                        value={months[getMonth(date)]}
+                        onChange={({ target: { value } }) =>
+                          changeMonth(months.indexOf(value))
+                        }
+                      >
+                        {months.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
 
-                        <button
-                          onClick={increaseMonth}
-                          disabled={nextMonthButtonDisabled}
-                        >
-                          {">"}
-                        </button>
-                      </div>
-                    )}
-                    selected={startdateini}
-                    dateFormat="dd/MM/yyyy"
-                    onChange={(date) => {
-                      setStartDateIni(date);
-                      setMostrarGrid(date);
-                    }}
-                  />
-                </div>
-                <div className="flex flex-col justify-start items-center mr-10">
-                  <p>Fecha Termino:</p>
-                  <DatePicker
-                    id="fin"
-                    dateFormat="dd/MM/yyyy"
-                    // customInput={<ExampleCustomInput />}
-                    selected={startdatefin}
-                    onChange={(date) => {
-                      setStartDateFin(date);
-                      setMostrarGrid(date);
-                    }}
-                    className=" rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                  />
-                </div>
-                {/* Fecha Inicio:<DatePicker id="ini"  />
-                Fecha Termino:<DatePicker id="fin" /> */}
-                <div className="flex flex-col justify-end items-end">
-                  <button
-                    type="button"
-                    className=" h-10 inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-slate-400 rounded-md border border-gray-200 hover:bg-gray-100 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 "
-                    value="Buscar"
-                    onClick={filtrar}
-                  >
-                    Buscar
-                  </button>
-                </div>
+                      <button
+                        onClick={increaseMonth}
+                        disabled={nextMonthButtonDisabled}
+                      >
+                        {">"}
+                      </button>
+                    </div>
+                  )}
+                  selected={startdateini}
+                  dateFormat="dd/MM/yyyy"
+                  minDate={new Date()}
+                  onChange={(date) => {
+                    setStartDateIni(date);
+
+                  }}
+                />
               </div>
-            </section>
-            <section className="w-fit flex flex-col justify-center items-end mt-2">
-              {/* <TablaFull /> */}
-              {mostrarGrid !== false && <TablaFull />}
-            </section>
-            <section className="w-fit  flex flex-col justify-center items-end mt-2">
-              {mostrarGrid !== false && <TablaTraficoIntervalo />}
-            </section>
+              <div className="flex flex-col justify-start items-center mr-10">
+                <p>Fecha Termino:</p>
+                <DatePicker
+                  id="fin"
+                  locale='es'
+                  className=" rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                  //  customInput={<ExampleCustomInput />}
+                  renderCustomHeader={({
+                    date,
+                    changeYear,
+                    changeMonth,
+                    decreaseMonth,
+                    increaseMonth,
+                    prevMonthButtonDisabled,
+                    nextMonthButtonDisabled,
+                  }) => (
+                    <div
+                      style={{
+                        margin: 10,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <button
+                        onClick={decreaseMonth}
+                        disabled={prevMonthButtonDisabled}
+                      >
+                        {"<"}
+                      </button>
+                      <select
+                        value={getYear(date)}
+                        onChange={({ target: { value } }) => changeYear(value)}
+                      >
+                        {years.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+
+                      <select
+                        value={months[getMonth(date)]}
+                        onChange={({ target: { value } }) =>
+                          changeMonth(months.indexOf(value))
+                        }
+                      >
+                        {months.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+
+                      <button
+                        onClick={increaseMonth}
+                        disabled={nextMonthButtonDisabled}
+                      >
+                        {">"}
+                      </button>
+                    </div>
+                  )}
+                  selected={startdateini}
+                  dateFormat="dd/MM/yyyy"
+                  minDate={new Date()}
+                  onChange={(date) => {
+                    setStartDateIni(date);
+
+                  }}
+                />
+              </div>
+              {/* Fecha Inicio:<DatePicker id="ini"  />
+                Fecha Termino:<DatePicker id="fin" /> */}
+              <div className="flex flex-col justify-end items-end">
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  value="Buscar"
+                  onClick={filtrar}
+                >
+                  Buscar
+                </button>
+              </div>
+            </div>
+          </section>
+          <section className="w-fit flex flex-col justify-center items-end mt-2">
+            {/* <TablaFull /> */}
+            {mostrarGrid !== false && <TablaFull />}
+          </section>
+          <section className="w-fit  flex flex-col justify-center items-end mt-2">
+            {mostrarGrid !== false && <TablaTraficoIntervalo />}
           </section>
         </div>
-      </div>
-      <Footer />
+
+
+
+
+
+        <Footer />
+      </main>
     </>
   );
 };

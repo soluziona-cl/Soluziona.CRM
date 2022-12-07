@@ -1,6 +1,7 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
 import "../../css/general.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Header() {
 
@@ -22,10 +23,9 @@ function Header() {
                         <span className="" style={{ color: 'white' }}>Control CRM Orkesta Procollect</span>
                     </div>
                     <div className="flex items-center">
-
-                        <button
+                        <button 
                             onClick={handleLogout}
-                            className=' text-gray-200 focus:ring-4 focus:ring-gray-300 focus:outline-none btn btn-danger sm'
+                            className="btn btn-danger sm" 
                         ><i class="fa-solid fa-right-from-bracket m-2"></i>
                              Salir
                         </button>

@@ -1,5 +1,26 @@
-
 #header{
+    margin-top: -1.5rem;
+    background-color: #5b198ab5;
+}
+
+#sidebar{
+ font-size: medium;
+    background-color: #aea1b9cd;
+  position:relative;
+}
+
+#footer{
+    background-color: #5b198ab5;
+  
+}
+#btn_show_gestion{
+    width: 7rem;
+    height: 2.5rem;
+    margin-left: 2rem;
+}
+.d-block{
+   
+    height: 100%;
     background-color: #c52acc;
 }
 #btn-carga{
