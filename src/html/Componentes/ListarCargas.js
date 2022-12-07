@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-
-
+import { Modal } from "../../html/Componentes/Modal";
 import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ListarCargas() {
     const [data, setData] = useState([]);
     const [excel, setExcel] = useState()
     const [authLoading, setAuthLoading] = useState(true);
+
+    //modal
+    const [mostrarModal, setMostrarModal] = useState(false)
+    const handleOnCerrar = () => setMostrarModal(false)
+
+
+    // const abrirModal = event =>{
+    //     setMostrarModal(true)
+    //     console.log("abrir modal")
+    // }
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -114,7 +124,7 @@ function ListarCargas() {
                                     <td>{data.camp_6}%</td>
                                     <td>{data.camp_7}%</td>
                                     <td>{data.camp_9}%</td>
-                                    <td><button onClick={info(data.camp_1)} class="btn btn-success">Detalle</button></td>
+                                    <td><button onClick={""} data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success">Detalle</button></td>
 
                                 </tr>
                             ))}
@@ -122,6 +132,32 @@ function ListarCargas() {
                         </tbody>
 
                     </table>
+                    {/* <Modal onCierre={handleOnCerrar} visible={mostrarModal}/> */}
+
+
+
+
+
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-fullscreen">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Detalle</h5>
+
+                                </div>
+                                <div class="modal-body">
+                                    aca va el body del detalle
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    {/* <button type="button" class="btn btn-primary">Understood</button> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>
