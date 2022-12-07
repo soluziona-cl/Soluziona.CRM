@@ -5,11 +5,11 @@ import SideBar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 
 
-const Dashboard = () => {
+const RepoCarga = () => {
 
   return (
     <>
-    <div className=' bg-white'>
+    <div className='  bg-white'>
     <Header />
     <div className=' flex-lg-row'>
         <SideBar />
@@ -28,4 +28,4 @@ const Dashboard = () => {
 };
 
 
-export default Dashboard;
+export default RepoCarga;

@@ -18,13 +18,13 @@ function AdminCargas() {
 
     return (
         <>
-            <div className=' d-block'>
+            <div className='d-block'>
                 <Header />  
                 <div>
                     <SideBar />
                     <div className=' justify-content-center align-items-center'>
                         <Company_Campaing />
-                        <button className="btn btn-info form-control " id="btn_show_gestion" onClick={HideLogo}>Filtrar</button>
+                        <button className="btn btn-info form-control" id="btn_show_gestion" onClick={HideLogo}>Filtrar</button>
                     </div>
                     <div className=' justify-content-center  align-items-md-center'>
                         {filtrar && <ListarCargas />}
