@@ -3,7 +3,7 @@ import './App.css';
 import Dashboard from "./html/Dashboard";
 import Login from "./html/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SubirArchivos from "./html/SubirArchivos";
+import SubirArchivos from "./html/subirArchivos";
 import ListarCargas from "./html/AdminCargas";
 import RepoCarga from "./html/RepoCarga.js";
 import RepoAgentes from "./html/RepoAgentes.js";
