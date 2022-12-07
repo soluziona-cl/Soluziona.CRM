@@ -17,7 +17,7 @@ function Header() {
         <>  
             
             <div className="  px-4 top-0 " id="header">
-                <div className="d-flex flex-wrap justify-content-between align-items-center py-0 my-4 m-3 border-bottom ">
+                <div className="d-flex flex-wrap justify-content-between align-items-center py-0 my-4 m-3 ">
                     <div className="justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                         <span className="" style={{ color: 'white' }}>Control CRM Orkesta Procollect</span>
                     </div>

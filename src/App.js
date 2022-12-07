@@ -15,7 +15,7 @@ function App() {
     <Router>
         <Routes>
         <Route index path={rutaservidor} element={<Login />} />
-        <Route path={rutaservidor + "/login"} element={<Login />} />
+        {/* <Route path={rutaservidor + "/login"} element={<Login />} /> */}
         <Route path={rutaservidor + "/Dashboard"} element={<Dashboard />} />
         <Route path={rutaservidor + "/SubirArchivos"} element={<SubirArchivos />} />
         <Route path={rutaservidor + "/AdminCargas"} element={<ListarCargas />} />

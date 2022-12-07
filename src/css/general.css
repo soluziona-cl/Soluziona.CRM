@@ -6,13 +6,13 @@
 
 #sidebar{
  font-size: medium;
-    background-color: #aea1b9cd;
-  position:relative;
+    /* background-color: #aea1b9cd; */
+
 }
 
 #footer{
-    background-color: #5b198ab5;
-  
+    /* background-color: #5b198ab5; */
+    bottom: 0;
 }
 #btn_show_gestion{
     width: 7rem;
@@ -22,9 +22,13 @@
 .d-block{
    
     height: 100%;
-    background-color: #c52acc;
+    /* background-color: #c52acc; */
 }
 #btn-carga{
     height: 3rem;
     width: 7.5rem;
+}
+#back{
+    width: 3rem;
+    height: 3rem;
 }
