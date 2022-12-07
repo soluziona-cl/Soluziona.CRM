@@ -470,13 +470,11 @@ const RepoAgentes = () => {
 
                         }}
                       /></div>
-                    <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">  <button
-                      type="button"
-                      className="btn btn-success align-items-center justify-content-center mt-lg-4 mt-sm-2"
-                      value="Buscar"
+                    <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">  
+                    <button
+                      className="mb-0 btn btn-success"   
                       onClick={filtrar}
-                    >
-                      Buscar
+                    >Buscar
                     </button>
 
                     </div>
