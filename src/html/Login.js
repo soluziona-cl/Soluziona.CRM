@@ -141,7 +141,7 @@ const Login = () => {
                 <input type="password" className="form-control" id="formGroupExampleInput2" placeholder="Contraseña"
                   onChange={handleChangePassword} />
                 <div className="d-flex justify-content-center">
-                  <button type="button" className="btn btn-primary sm mt-3"
+                  <button type="button" id="btn-login" className="btn btn-primary sm mt-3"
                     onClick={inicio_sesion}>Ingresar</button>
 
                 </div>

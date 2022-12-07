@@ -124,7 +124,7 @@ function ListarCargas() {
                                     <td>{data.camp_6}%</td>
                                     <td>{data.camp_7}%</td>
                                     <td>{data.camp_9}%</td>
-                                    <td><button onClick={""} data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success">Detalle</button></td>
+                                    <td><button onClick={""} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success">Detalle</button></td>
 
                                 </tr>
                             ))}
@@ -139,7 +139,7 @@ function ListarCargas() {
 
 
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-fullscreen">
+                        <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="staticBackdropLabel">Detalle</h5>

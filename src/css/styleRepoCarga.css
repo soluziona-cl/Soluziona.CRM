@@ -1,0 +1,10 @@
+.rdt_TableCol{
+    background-color: #a06ec1;
+    font-size: large;
+}
+
+.rdt_TableHeader{
+    margin-top: 1%;
+    margin-bottom: 0.5%;
+    border-radius: 20px 20px 0px 0px;
+}
