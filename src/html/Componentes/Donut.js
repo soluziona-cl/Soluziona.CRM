@@ -95,12 +95,12 @@ function Donut() {
             trigger: 'item'
         },
         
-            title: {
-              text: 'Tráfico',
-              left: 'center',
-              position: 'center'
+            // title: {
+            //   text: 'Tráfico',
+            //   left: 'center',
+            //   position: 'center'
             
-            },
+            // },
         // Add legend
         series: [
             {
@@ -133,7 +133,7 @@ function Donut() {
         <>
             <ReactEcharts
                 option={option_donut}
-                style={{ width: "54rem", height: "54rem" }}
+                // style={{ width: "54rem", height: "54rem" }}
             ></ReactEcharts>
 
         </>
