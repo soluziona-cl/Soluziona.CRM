@@ -9,6 +9,8 @@ import RepoCarga from "./html/RepoCarga.js";
 import RepoAgentes from "./html/RepoAgentes.js";
 import RepoGestion from "./html/RepoGestion";
 import RepoCalidad from "./html/RepoCalidad";
+import AdminCargas2 from "./html/AdminCargas2";
+
 function App() {
 
   const rutaservidor = "/"; //Prueba
@@ -26,6 +28,7 @@ function App() {
         <Route path={rutaservidor + "/RepoAgentes"} element={<RepoAgentes />} />
         <Route path={rutaservidor + "/RepoCalidad"} element={<RepoCalidad />} />
         <Route path={rutaservidor + "/AdminCargas"} element={<ListarCargas />} />
+        <Route path={rutaservidor + "/AdminCargas2"} element={<AdminCargas2 />} />
         {/* <Route path="/" element={<Login />} /> */}
           {/* <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/ImportarArchivo" element={<ImportarArchivo />} /> */}
