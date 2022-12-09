@@ -127,17 +127,23 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
                     </thead>
                     <tbody>
                         {datafull.map((data, index) => (
-                            // no estoy segura si aquí también se cambia
+                        
                             <tr key={index}>
-                                <td>{data.fecha}</td>
-                                <td>{data.recibidas}</td>
-                                <td>{data.contestadas}</td>
-                                <td>{data.abandonadas}</td>
+                                <td>{data.RUT_PERSONA}</td>
+                                <td>{data.This_Phone_number}</td>
+                                <td>{data.Call_Disposition}</td>
+                                <td>{data.Call_Time}</td>
+                                <td>{data.Dialing_Duration}</td>
+                                <td>{data.Answered_Duration}</td>
+                                <td>{data.Agent}</td>
+                                <td>{data.Recording_file}</td>
+                                <td>{data.Global_Interaction_ID}</td>
+                                <td>{data.List_name}</td>
                                 <td>-</td>
-                                <td>{data.contestadas / data.recibidas}</td>
+                                {/* <td>{data.contestadas / data.recibidas}</td>
                                 <td>{data.abandonadas / data.contestadas}</td>
                                 <td>{secondsToString(parseInt(data.tmo))}</td>
-                                <td>{secondsToString(parseInt(data.tmo))}</td>
+                                <td>{secondsToString(parseInt(data.tmo))}</td> */}
                             </tr>
                         ))}
                     </tbody>
