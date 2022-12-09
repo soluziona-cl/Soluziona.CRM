@@ -112,7 +112,7 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Agente</th>
+                            <th>Agente USS</th>
                             <th>Realizadas</th>
                             <th>Conectadas</th>
                             <th>No Conectadas</th>
