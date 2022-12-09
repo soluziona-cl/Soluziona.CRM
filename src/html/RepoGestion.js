@@ -22,7 +22,9 @@ registerLocale('es', es)
 
 //con DataTable
 const ReporteGestion = () => {
-  const [mostrarGrid, setMostrarGrid, setMostrarGridInacap, setMostrarGridUSS] = useState(false);
+  const [mostrarGrid, setMostrarGrid ] = useState(false);
+  const [mostrarGridUSS, setMostrarGridUSS] = useState(false);
+  const [mostrarGridInacap, setMostrarGridInacap] = useState(false);
 
   const [startdateini, setStartDateIni] = useState(new Date());
   const [startdatefin, setStartDateFin] = useState(new Date());
@@ -60,20 +62,21 @@ console.log(document.getElementById("ddl_campana").value)
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
     
-
-    if(setStartCampana === 1 ){
-        console.log("mostrar inacap")}
+    if(setStartCampana == 1 ){
         setMostrarGridInacap(true);
-        if(setStartCampana === 2){
-          console.log("probando")
-          setMostrarGridUSS(true);
-          
-    }
+        console.log("mostrar inacap")
+      }
    // setMostrarGrid(true);
-   
-   
+   else if(setStartCampana == 2){
+          setMostrarGridUSS(true);   
+          console.log("mostrar USS") 
+    }
+    else{
+      setMostrarGridUSS(false);
+      setMostrarGridInacap(false);
+    }
+ 
   };
-
   // const FullTable = async (startdateini, startdatefin) => {
   //   const result = await axios.post(
   //     "https://app.soluziona.cl/API_desa/Soluziona.Dashboard.Salcobrand/api/Contact_CRM/CRM/Trafico/Inbound/Full/Fechas",
@@ -267,8 +270,8 @@ console.log(document.getElementById("ddl_campana").value)
                   <section className="w-fit flex flex-col justify-center items-end mt-2">
                     {/* <TablaFull /> */}
                     {/* {mostrarGrid !== false && <ReporteGestionTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />} */}
-                    {mostrarGrid !== true && <GestionInacap flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
-                    {mostrarGrid !== false && <GestionUSS flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                    {mostrarGridInacap !== false && <GestionInacap flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                    {mostrarGridUSS !== false && <GestionUSS flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
                   </section>
 
                 </div>

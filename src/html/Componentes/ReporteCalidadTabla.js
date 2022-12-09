@@ -6,7 +6,7 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 
-function ReporteCargaTabla({ flujo , campana , ini , fin }) {
+function ReporteCalidadTabla({ flujo , campana , ini , fin }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -29,7 +29,7 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
         return hour + ":" + minute + ":" + second;
     }
 
-    const handleOnExportCarga = () => {
+    const handleOnExportAgente = () => {
 
         //creates a new workbook
         let wb = XLSX.utils.book_new();
@@ -48,8 +48,8 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
         let ws = XLSX.utils.json_to_sheet(arr2);
         var today = new Date()
         let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-        XLSX.utils.book_append_sheet(wb, ws, "Carga");
-        XLSX.writeFile(wb, "Gestion_Carga_" + date + ".xlsx");
+        XLSX.utils.book_append_sheet(wb, ws, "Agente");
+        XLSX.writeFile(wb, "Gestion_Agente_" + date + ".xlsx");
     };
 
 
@@ -102,7 +102,7 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
         <>
             <section className="flex flex-row ">
                 <button
-                    onClick={handleOnExportCarga}
+                    onClick={handleOnExportAgente}
                     className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
                     <i className="fa-solid fa-file-excel mr-2"></i>Exportar
                 </button>
@@ -112,22 +112,20 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>RUT_PERSONA</th>
-                            <th>This Phone number</th>
-                            <th>Call Disposition</th>
-                            <th>Call Time</th>
-                            <th>Dialing Duration</th>
-                            <th>Answered Duration</th>
-                            <th>Agent</th>
-                            <th>Recording file</th>
-                            <th>Global Interaction ID</th>
-                            <th>List name</th>
-                          
+                            <th>Agente</th>
+                            <th>Realizadas</th>
+                            <th>Conectadas</th>
+                            <th>No Conectadas</th>
+                            <th>Compromisos de Pago</th>
+                            <th>Hablado</th>
+                            <th>Pausas</th>
+                            <th>En Espera</th>
+                            <th>TMO</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         {datafull.map((data, index) => (
-                            // no estoy segura si aquí también se cambia
                             <tr key={index}>
                                 <td>{data.fecha}</td>
                                 <td>{data.recibidas}</td>
@@ -147,4 +145,4 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
         </>
     )
 }
-export default ReporteCargaTabla
+export default ReporteCalidadTabla
