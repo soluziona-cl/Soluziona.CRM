@@ -112,17 +112,14 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Rut Persona</th>
-                            <th>Número Teléfono</th>
-                            <th>Estado de llamada</th>
-                            <th>Fecha de llamada</th>
-                            <th>Duración llamada</th>
-                            <th>Tiempo respuesta</th>
                             <th>Agente</th>
-                            <th>Grabación</th>
-                            <th>Interacción global</th>
-                            <th>Lista de nombres</th>
-                        
+                            <th>Realizadas</th>
+                            <th>Conectadas</th>
+                            <th>No Conectadas</th>
+                            <th>Compromisos de Pago</th>
+                            <th>Hablado</th>
+                            <th>Pausas</th>
+                            <th>En Espera</th>
                             <th>TMO</th>
 
                         </tr>
