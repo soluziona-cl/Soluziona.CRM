@@ -49,7 +49,7 @@ const Dashboard = () => {
                       </div>
                     </div>
                     <div class="col">
-                      <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                      <div class="card mb-4 rounded-3 shadow-sm ">
                         <div className="card-header">
                           <h4 className="my-0 font-weight-normal">Agentes Espera</h4>
                         </div>
