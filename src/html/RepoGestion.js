@@ -20,7 +20,7 @@ import ReporteGestionTabla from './Componentes/ReporteGestionTabla'
 registerLocale('es', es)
 
 //con DataTable
-const RepoAgentes = () => {
+const ReporteGestion = () => {
   const [mostrarGrid, setMostrarGrid] = useState(false);
 
   const [startdateini, setStartDateIni] = useState(new Date());
@@ -58,6 +58,12 @@ console.log(document.getElementById("ddl_campana").value)
 
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
+    
+    if(setStartCampana === 1 ){
+        console.log("mostrar inacap")
+    }else{
+      console.log("mostrar Uss")
+    }
     setMostrarGrid(true);
   
   };
@@ -274,4 +280,4 @@ console.log(document.getElementById("ddl_campana").value)
   );
 };
 
-export default RepoAgentes;
+export default ReporteGestion;
