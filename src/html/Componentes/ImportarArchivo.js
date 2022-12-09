@@ -99,7 +99,7 @@ function ImportarArchivo() {
                 <div className='col-3'><input type="file" onChange={handleFile} /></div>
             </div>
             <div className='row'>
-                <div className='col-sm-12 col-lg-1 mt-2'><button className='btn btn-success form-control' id="btn-carga" onClick={Flujo}><i className="fa-solid fa-upload m-2"></i>Subir</button></div>
+                <div className='col-sm-12 col-lg-3 mt-2'><button className='btn btn-success form-control' id="btn-carga" onClick={Flujo}><i className="fa-solid fa-upload m-2"></i>Subir</button></div>
             </div>
             {/* <button className='btn btn-danger' onClick={notify}></button> */}
         </>
