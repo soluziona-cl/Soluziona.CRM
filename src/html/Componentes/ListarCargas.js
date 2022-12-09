@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+import ListarCargasModalDetalle  from './ListarCargasModalDetalle';
+
 function ListarCargas() {
     const [data, setData] = useState([]);
     const [excel, setExcel] = useState()
@@ -12,9 +15,17 @@ function ListarCargas() {
 
     //modal
     const [mostrarModal, setMostrarModal] = useState(false)
-    const handleOnCerrar = () => setMostrarModal(false)
 
 
+    const handleOnCerrar = () =>{
+        setMostrarModal(false)
+
+    } 
+
+    const [mostrarModalDetalle, setMostrarModalDetalle] = useState(false)
+
+    const [modalCarga, setDataModalCarga] = useState('');
+ 
     // const abrirModal = event =>{
     //     setMostrarModal(true)
     //     console.log("abrir modal")
@@ -87,10 +98,15 @@ function ListarCargas() {
     }
 
 
-    const info = () => {
 
+    // const detalleModal = (carga) => {
 
-    }
+    //     alert(carga)
+    //     setDataModalCarga(carga)
+    //     setMostrarModal(true)
+
+    //     alert(modalCarga)
+    // }
 
     return (
         <>
@@ -114,7 +130,7 @@ function ListarCargas() {
                         </thead>
                         <tbody>
                             {data.map((data, index) => (
-                                <tr>
+                                <tr key={data.camp_2}>
                                     <td>{data.camp_1}</td>
                                     <td>{data.camp_2}</td>
                                     <td>{data.camp_3}</td>
@@ -124,7 +140,7 @@ function ListarCargas() {
                                     <td>{data.camp_6}%</td>
                                     <td>{data.camp_7}%</td>
                                     <td>{data.camp_9}%</td>
-                                    <td><button onClick={""} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success">Detalle</button></td>
+                                    <td><button onClick={() =>(setDataModalCarga(data.camp_2),setMostrarModal(true))} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success">Detalle</button></td>
 
                                 </tr>
                             ))}
@@ -135,9 +151,6 @@ function ListarCargas() {
                     {/* <Modal onCierre={handleOnCerrar} visible={mostrarModal}/> */}
 
 
-
-
-
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
@@ -146,11 +159,12 @@ function ListarCargas() {
 
                                 </div>
                                 <div class="modal-body">
-                                    aca va el body del detalle
+                                {mostrarModal !== false &&  <ListarCargasModalDetalle detalleModal={modalCarga}/>}
+                                   
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={() => handleOnCerrar()}>Cerrar</button>
                                     {/* <button type="button" class="btn btn-primary">Understood</button> */}
                                 </div>
                             </div>
