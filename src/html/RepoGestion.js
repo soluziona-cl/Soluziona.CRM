@@ -15,13 +15,14 @@ import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Company_Campaing from './Componentes/Company_Campaing';
 import ReporteGestionTabla from './Componentes/ReporteGestionTabla'
-
+import GestionInacap from "./Componentes/GestionInacap.js"
+import GestionUSS from "./Componentes/GestionUSS.js"
 
 registerLocale('es', es)
 
 //con DataTable
 const ReporteGestion = () => {
-  const [mostrarGrid, setMostrarGrid] = useState(false);
+  const [mostrarGrid, setMostrarGrid, setMostrarGridInacap, setMostrarGridUSS] = useState(false);
 
   const [startdateini, setStartDateIni] = useState(new Date());
   const [startdatefin, setStartDateFin] = useState(new Date());
@@ -59,13 +60,18 @@ console.log(document.getElementById("ddl_campana").value)
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
     
+
     if(setStartCampana === 1 ){
-        console.log("mostrar inacap")
-    }else{
-      console.log("mostrar Uss")
+        console.log("mostrar inacap")}
+        setMostrarGridInacap(true);
+        if(setStartCampana === 2){
+          console.log("probando")
+          setMostrarGridUSS(true);
+          
     }
-    setMostrarGrid(true);
-  
+   // setMostrarGrid(true);
+   
+   
   };
 
   // const FullTable = async (startdateini, startdatefin) => {
@@ -260,7 +266,9 @@ console.log(document.getElementById("ddl_campana").value)
                   </div>
                   <section className="w-fit flex flex-col justify-center items-end mt-2">
                     {/* <TablaFull /> */}
-                    {mostrarGrid !== false && <ReporteGestionTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                    {/* {mostrarGrid !== false && <ReporteGestionTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />} */}
+                    {mostrarGrid !== false && <GestionInacap flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                    {mostrarGrid !== false && <GestionUSS flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
                   </section>
 
                 </div>

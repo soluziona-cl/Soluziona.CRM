@@ -68,7 +68,6 @@ function Company_Campaing() {
         setOptionListDetalleEstado(false)
         setOptionListDetalleEstadoSelect(event)
         setSelectedLlamadaDetalle(event)
-        console.log(event)
 
     })
 
@@ -99,8 +98,6 @@ function Company_Campaing() {
                         onChange={(e) => (ChangeConectaDetalle(e.target.value))}
                     >
                         <option value="0">Campaña</option>
-                        {/* <option value="1">Inacap</option>
-                        <option value="2">Uss</option> */}
                         {optionListDetalle.map((item) => (
                             <option key={item.id} value={item.id}>
                                 {item.detalle}

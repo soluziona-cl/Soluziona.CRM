@@ -6,7 +6,7 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 
-function ReporteGestionTabla({ flujo , campana , ini , fin }) {
+function GestionUSS({ flujo , campana , ini , fin }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -145,4 +145,4 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
         </>
     )
 }
-export default ReporteGestionTabla
+export default GestionUSS
