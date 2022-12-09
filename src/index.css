@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+#sidebar-nav {
+  width: 160px;
+}
+
+
+#ini,#fin{
+  background: #216ca5;
+  width: 8rem;
+  font-size: bold;
+  color:white;
+  border-radius: 8%;
+}
+
