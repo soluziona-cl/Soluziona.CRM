@@ -176,30 +176,38 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
                 {/* <table className="table">
                     <thead>
                         <tr>
-                            <th>Agente</th>
-                            <th>Realizadas</th>
-                            <th>Conectadas</th>
-                            <th>No Conectadas</th>
-                            <th>Compromisos de Pago</th>
-                            <th>Hablado</th>
-                            <th>Pausas</th>
-                            <th>En Espera</th>
-                            <th>TMO</th>
-
+                            <th>RUT_PERSONA</th>
+                            <th>This Phone number</th>
+                            <th>Call Disposition</th>
+                            <th>Call Time</th>
+                            <th>Dialing Duration</th>
+                            <th>Answered Duration</th>
+                            <th>Agent</th>
+                            <th>Recording file</th>
+                            <th>Global Interaction ID</th>
+                            <th>List name</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
                         {datafull.map((data, index) => (
+                        
                             <tr key={index}>
-                                <td>{data.fecha}</td>
-                                <td>{data.recibidas}</td>
-                                <td>{data.contestadas}</td>
-                                <td>{data.abandonadas}</td>
+                                <td>{data.RUT_PERSONA}</td>
+                                <td>{data.This_Phone_number}</td>
+                                <td>{data.Call_Disposition}</td>
+                                <td>{data.Call_Time}</td>
+                                <td>{data.Dialing_Duration}</td>
+                                <td>{data.Answered_Duration}</td>
+                                <td>{data.Agent}</td>
+                                <td>{data.Recording_file}</td>
+                                <td>{data.Global_Interaction_ID}</td>
+                                <td>{data.List_name}</td>
                                 <td>-</td>
-                                <td>{data.contestadas / data.recibidas}</td>
+                                {/* <td>{data.contestadas / data.recibidas}</td>
                                 <td>{data.abandonadas / data.contestadas}</td>
                                 <td>{secondsToString(parseInt(data.tmo))}</td>
-                                <td>{secondsToString(parseInt(data.tmo))}</td>
+                                <td>{secondsToString(parseInt(data.tmo))}</td> */}
                             </tr>
                         ))}
                     </tbody>

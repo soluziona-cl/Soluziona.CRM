@@ -4,7 +4,7 @@ import "react-data-grid/lib/styles.css";
 
 import { format } from "date-fns";
 import Header from './Componentes/Header';
-import SideBar from './Componentes/Sidebar';
+import Sidebar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from 'date-fns/locale/es'
@@ -88,7 +88,7 @@ console.log(document.getElementById("ddl_campana").value)
         <div className="row flex-nowrap">
           <div className="col-auto px-0">
             <div id="sidebar" className="collapse collapse-horizontal show border-end">
-              <SideBar />
+              <Sidebar />
             </div>
           </div>
           <main className="col ps-md-2 pt-2">

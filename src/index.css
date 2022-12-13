@@ -14,8 +14,9 @@ code {
 
 
 #sidebar-nav {
-  width: 20rem;
-
+  width: 18rem;
+  font-size: large;
+  margin-bottom: 8rem;
 }
 
 
