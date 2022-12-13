@@ -53,31 +53,11 @@ const RepoCarga = () => {
   //metodos para editar
   const filtrar = (event) => {
 
-console.log(document.getElementById("ddl_company").value)
-console.log(document.getElementById("ddl_campana").value)
-
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
   
   };
-
-  // const FullTable = async (startdateini, startdatefin) => {
-  //   const result = await axios.post(
-  //     "https://app.soluziona.cl/API_desa/Soluziona.Dashboard.Salcobrand/api/Contact_CRM/CRM/Trafico/Inbound/Full/Fechas",
-  //     {
-  //       dato: format(startdateini, "yyyyMMdd"),
-  //       dato_1: format(startdatefin, "yyyyMMdd"),
-  //     }
-  //   );
-  //   setDataFull(result.data);
-  // };
-
-  // const FullTableIntervalo = (async (startdateini, startdatefin) => {
-  //   const result = await axios.post("https://app.soluziona.cl/API_desa/Soluziona.Dashboard.Salcobrand/api/Contact_CRM/CRM/Trafico/Inbound/Intervalo/Fechas", { dato: format(startdateini, "yyyyMMdd"), dato_1: format(startdatefin, "yyyyMMdd") })
-  //   setDataFullIntervalo(result.data);
-
-  // })
 
   
   return (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DataTable from 'react-data-table-component';
 import axios from "axios";
 import { Modal } from "./Modal";
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +7,7 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 
-function ReporteCargaTabla({ flujo , campana , ini , fin }) {
+function ReporteCargaTabla({ flujo, campana, ini, fin }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -35,14 +36,16 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
         let wb = XLSX.utils.book_new();
 
         var arr2 = datafull.map(v => ({
-            intervalo: v.intervalo,
-            recibidas: v.recibidas,
-            contestadas: v.contestadas,
-            abandonadas: v.abandonadas,
-            natencion: v.natencion,
-            nservicio: v.nservicio,
-            nabandono: 100 - v.natencion,
-            tmo: secondsToString(parseInt(v.tmo))
+            RUT_PERSONA: v.ruT_PERSONA,
+            This_Phone_number: v.this_Phone_number,
+            Call_Disposition: v.call_Disposition,
+            Call_Time: v.call_Time,
+            Dialing_Duration: v.dialing_Duration,
+            Answered_Duration: v.answered_Duration,
+            Agent: v.agent,
+            Recording_file: v.recording_file,
+            Global_Interaction_ID: v.global_Interaction_ID,
+            List_name: v.list_name
         }));
 
         let ws = XLSX.utils.json_to_sheet(arr2);
@@ -80,14 +83,10 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
 
     const Datos = (async () => {
 
-        console.log({ flujo })
-        console.log({ campana })
-        console.log({ ini })
-        console.log({ fin })
 
-
-
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full', { dato: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Resultado/Cargas',
+            { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin },
+            { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
@@ -96,6 +95,60 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
         }
 
     })
+
+
+    const columns = [
+        {
+            name: 'RUT_PERSONA',
+            selector: 'ruT_PERSONA',
+           
+        },
+        {
+            name: 'This_Phone_number',
+            selector: 'this_Phone_number',
+          
+        },
+        {
+            name: 'Call_Disposition',
+            selector: 'call_Disposition',
+          
+        },
+        {
+            name: 'Call_Time',
+            selector: 'call_Time',
+           
+        },
+        {
+            name: 'Dialing_Duration',
+            selector: 'dialing_Duration',
+           
+        },
+        {
+            name: 'Answered_Duration',
+            selector: 'answered_Duration',
+          
+        },
+        {
+            name: 'Agent',
+            selector: 'agent',
+          
+        },
+        {
+            name: 'Recording_file',
+            selector: 'recording_file',
+         
+        },
+        {
+            name: 'Global_Interaction_ID',
+            selector: 'global_Interaction_ID',
+          
+        },
+        {
+            name: 'List_name',
+            selector: 'list_name',
+         
+        },
+    ];
 
 
     return (
@@ -109,7 +162,18 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
             </section>
             <div className="container mt-2">
 
-                <table className="table">
+
+                <DataTable
+                    // title="Employees"
+                    columns={columns}
+                    data={datafull}
+                    pagination
+                    highlightOnHover
+                    responsive={true}
+                />
+
+
+                {/* <table className="table">
                     <thead>
                         <tr>
                             <th>RUT_PERSONA</th>
@@ -147,7 +211,7 @@ function ReporteCargaTabla({ flujo , campana , ini , fin }) {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table> */}
 
             </div>
         </>
