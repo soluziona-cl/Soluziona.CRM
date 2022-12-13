@@ -1,7 +1,7 @@
 import React from 'react';
 import Donut from './Componentes/Donut';
 import Header from './Componentes/Header';
-import SideBar from './Componentes/Sidebar';
+import Sidebar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 import Company_Campaing_Dash from './Componentes/Company_Campaing_Dash';
 
@@ -14,7 +14,7 @@ const Dashboard = () => {
         <div className="row flex-nowrap">
           <div className="col-auto px-0">
             <div id="sidebar" className="collapse collapse-horizontal show border-end">
-              <SideBar />
+              <Sidebar />
             </div>
           </div>
           <main className="col ps-md-2 pt-2">
