@@ -75,7 +75,7 @@ function Company_Campaing() {
     return (
         <>
             <div className="row mb-2">
-                <div class="page-header pt-3">
+                <div className="page-header pt-3">
                     <h3>Filtros</h3>
                 </div>
                 <div className="col-sm-12 col-lg-3">

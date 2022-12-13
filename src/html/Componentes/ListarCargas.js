@@ -151,21 +151,21 @@ function ListarCargas() {
                     {/* <Modal onCierre={handleOnCerrar} visible={mostrarModal}/> */}
 
 
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Detalle</h5>
+                    <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-xl">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="staticBackdropLabel">Detalle</h5>
 
                                 </div>
-                                <div class="modal-body">
+                                <div className="modal-body">
                                 {mostrarModal !== false &&  <ListarCargasModalDetalle detalleModal={modalCarga}/>}
                                    
                                 </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={() => handleOnCerrar()}>Cerrar</button>
-                                    {/* <button type="button" class="btn btn-primary">Understood</button> */}
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => handleOnCerrar()}>Cerrar</button>
+                                    {/* <button type="button" className="btn btn-primary">Understood</button> */}
                                 </div>
                             </div>
                         </div>

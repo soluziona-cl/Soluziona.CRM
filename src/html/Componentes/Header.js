@@ -26,7 +26,7 @@ function Header() {
                         <button 
                             onClick={handleLogout}
                             className="btn btn-danger sm" 
-                        ><i class="fa-solid fa-right-from-bracket m-2"></i>
+                        ><i className="fa-solid fa-right-from-bracket m-2"></i>
                              Salir
                         </button>
                     </div>
