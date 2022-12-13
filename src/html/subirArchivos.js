@@ -29,7 +29,7 @@ function SubirArchivos() {
                                 <Company_Campaing />
                                 <ImportarArchivo />
                             </div> */}
-                            <div class="card mb-4 rounded-3 shadow-sm">
+                            <div className="card mb-4 rounded-3 shadow-sm">
                                 <div className="card-header">
                                     <h4 className="my-0 font-weight-normal">Subir Archivos</h4>
                                 </div>

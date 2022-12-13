@@ -25,8 +25,8 @@ function Header() {
                     <div className=" my-2 position-absolute end-0 translate-middle">
                         <button 
                             onClick={handleLogout}
-                            className="btn btn-danger sm " 
-                        ><i class="fa-solid fa-right-from-bracket m-2"></i>
+                            className="btn btn-danger sm" 
+                        ><i className="fa-solid fa-right-from-bracket m-2"></i>
                              Salir
                         </button>
                     </div>

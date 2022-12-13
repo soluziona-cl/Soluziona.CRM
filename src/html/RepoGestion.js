@@ -22,7 +22,7 @@ registerLocale('es', es)
 
 //con DataTable
 const ReporteGestion = () => {
-  const [mostrarGrid, setMostrarGrid ] = useState(false);
+  const [mostrarGrid, setMostrarGrid] = useState(false);
   const [mostrarGridUSS, setMostrarGridUSS] = useState(false);
   const [mostrarGridInacap, setMostrarGridInacap] = useState(false);
 
@@ -56,45 +56,33 @@ const ReporteGestion = () => {
   //metodos para editar
   const filtrar = (event) => {
 
-console.log(document.getElementById("ddl_company").value)
-console.log(document.getElementById("ddl_campana").value)
+    console.log(document.getElementById("ddl_company").value)
+    console.log(document.getElementById("ddl_campana").value)
+
+    let campanas = document.getElementById("ddl_campana").value
+    console.table(campanas)
 
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
-    
-    if(setStartCampana == 1 ){
-        setMostrarGridInacap(true);
-        console.log("mostrar inacap")
-      }
-   // setMostrarGrid(true);
-   else if(setStartCampana == 2){
-          setMostrarGridUSS(true);   
-          console.log("mostrar USS") 
+
+    if (campanas == 1) {
+      setMostrarGridInacap(true);
+      setMostrarGridUSS(false);
+      console.log("mostrar inacap")
     }
-    else{
+    // setMostrarGrid(true);
+    else if (campanas == 2) {
+      setMostrarGridInacap(false);
+      setMostrarGridUSS(true);
+      console.log("mostrar USS")
+    }
+    else {
       setMostrarGridUSS(false);
       setMostrarGridInacap(false);
     }
- 
+
   };
-  // const FullTable = async (startdateini, startdatefin) => {
-  //   const result = await axios.post(
-  //     "https://app.soluziona.cl/API_desa/Soluziona.Dashboard.Salcobrand/api/Contact_CRM/CRM/Trafico/Inbound/Full/Fechas",
-  //     {
-  //       dato: format(startdateini, "yyyyMMdd"),
-  //       dato_1: format(startdatefin, "yyyyMMdd"),
-  //     }
-  //   );
-  //   setDataFull(result.data);
-  // };
 
-  // const FullTableIntervalo = (async (startdateini, startdatefin) => {
-  //   const result = await axios.post("https://app.soluziona.cl/API_desa/Soluziona.Dashboard.Salcobrand/api/Contact_CRM/CRM/Trafico/Inbound/Intervalo/Fechas", { dato: format(startdateini, "yyyyMMdd"), dato_1: format(startdatefin, "yyyyMMdd") })
-  //   setDataFullIntervalo(result.data);
-
-  // })
-
-  
   return (
     <>
 
@@ -257,12 +245,12 @@ console.log(document.getElementById("ddl_campana").value)
 
                         }}
                       /></div>
-                    <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">  
-                    <button
-                      className="mb-0 btn btn-success"   
-                      onClick={filtrar}
-                    >Buscar
-                    </button>
+                    <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                      <button
+                        className="mb-0 btn btn-success"
+                        onClick={filtrar}
+                      >Buscar
+                      </button>
 
                     </div>
 

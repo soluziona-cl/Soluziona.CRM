@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ListarCargasModalDetalle  from './ListarCargasModalDetalle';
 
-function ListarCargas() {
+function Carga_USS() {
     const [data, setData] = useState([]);
     const [excel, setExcel] = useState()
     const [authLoading, setAuthLoading] = useState(true);
@@ -115,7 +115,7 @@ function ListarCargas() {
                     <table id="tbl_acumulado_dia" className="table table-striped table-sm text-nowrap text-sm" width="100%">
                         <thead>
                             <tr>
-                                <th>Fecha carga</th>
+                                <th>Fecha carga USS</th>
                                 <th>Nombre</th>
                                 <th>Cargado</th>
                                 <th>Recorrido</th>
@@ -178,4 +178,4 @@ function ListarCargas() {
         </>
     )
 }
-export default ListarCargas
+export default Carga_USS

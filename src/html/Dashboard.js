@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Donut from './Componentes/Donut';
+import Barras from './Componentes/Barras';
+import Pie from './Componentes/Pie';
 import Header from './Componentes/Header';
 import Sidebar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 import Company_Campaing_Dash from './Componentes/Company_Campaing_Dash';
 
+import DashReporteCargaTabla from './Componentes/DashReporteCargaTabla';
+import DashReporteCargaTablaFilter from './Componentes/DashReporteCargaTablaFilter';
+import PieGestion from './Componentes/PieGestion';
+import DashReporteFechaPago from './Componentes/DashReporteFechaPago';
+
 const Dashboard = () => {
+
+
+  const [filtrar, Filtrar] = useState(false);
+  const [company, setCompany] = useState('');
+  const [carga, setCarga] = useState('');
+
+  const HideLogo = () => {
+    // setshowlogo(!showlogo);
+    setCompany(document.getElementById("ddl_company").value)
+    setCarga(document.getElementById("ddl_campana").value)
+
+    Filtrar(!filtrar)
+  }
+
 
   return (
     <>
@@ -27,81 +48,63 @@ const Dashboard = () => {
 
               <div className="row">
                 <div className="col-12">
-                  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                    <div class="col">
-                      <div class="card mb-4 rounded-3 shadow-sm">
+                  <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                    <div className="col-sm-12 col-lg-4">
+                      <div className="card mb-4 rounded-3 shadow-sm">
                         <div className="card-header">
                           <h4 className="my-0 font-weight-normal">Agentes Conectados</h4>
                         </div>
                         <div className="card-body">
-                          <Donut></Donut>
+                          <Pie></Pie>
                         </div>
                       </div>
                     </div>
-                    <div class="col">
-                      <div class="card mb-4 rounded-3 shadow-sm">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Agentes Hablando</h4>
-                        </div>
-                        <div className="card-body">
-                          <Donut></Donut>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="card mb-4 rounded-3 shadow-sm ">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Agentes Espera</h4>
-                        </div>
-                        <div className="card-body">
-                          <Donut></Donut>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-12">
-                  <div class="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                    <div class="col-sm-12 col-lg-4">
-                      <div class="card mb-4 rounded-3 shadow-sm">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Gestion de Cargas</h4>
-                        </div>
-                        <div className="card-body">
-                          <table className='table'>
-                            <thead>
-                              <tr>
-                                <td>Campaña</td>
-                                <td>Carga</td>
-                                <td>Recorrido</td>
-                                <td>Contactdo</td>
-                                <td>Acepta</td>
-                                <td>% Conta.</td>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>Campaña</td>
-                                <td>Carga</td>
-                                <td>Recorrido</td>
-                                <td>Contactdo</td>
-                                <td>Acepta</td>
-                                <td>% Conta.</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12 col-lg-8">
-                      <div class="card mb-4 rounded-3 shadow-sm">
+                    <div className="col-sm-12 col-lg-8">
+                      <div className="card mb-4 rounded-3 shadow-sm">
                         <div className="card-header">
                           <h4 className="my-0 font-weight-normal">Trafico Intervalo</h4>
                         </div>
                         <div className="card-body">
-                          <Donut></Donut>
+                          <Barras></Barras>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-12">
+                  <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
+                    <div className="col-sm-12 col-lg-4">
+                      <div className="card mb-4 rounded-3 shadow-sm">
+                        <div className="card-header">
+                          <h4 className="my-0 font-weight-normal">Gestion de Cargas</h4>
+                        </div>
+                        <div className="card-body">
+                          <div className="table-responsive overflow-x: hidden;">
+                            <DashReporteCargaTabla></DashReporteCargaTabla>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-sm-12 col-lg-4">
+                      <div className="card mb-4 rounded-3 shadow-sm">
+                        <div className="card-header">
+                          <h4 className="my-0 font-weight-normal">Compromiso de Pagos</h4>
+                        </div>
+                        <div className="card-body">                        
+                            <PieGestion></PieGestion>                        
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-sm-12 col-lg-4">
+                      <div className="card mb-4 rounded-3 shadow-sm">
+                        <div className="card-header">
+                          <h4 className="my-0 font-weight-normal">Fechas Compromiso</h4>
+                        </div>
+                        <div className="card-body">                        
+                            <DashReporteFechaPago></DashReporteFechaPago>                        
                         </div>
                       </div>
                     </div>
@@ -111,48 +114,26 @@ const Dashboard = () => {
               <div className="row">
 
                 <div className="col-12">
-                  <div class="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                    <div class="col-sm-12 col-lg-12">
-                      <div class="card mb-4 rounded-3 shadow-sm">
+                  <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
+                    <div className="col-sm-12 col-lg-12">
+                      <div className="card mb-4 rounded-3 shadow-sm">
                         <div className="card-header">
                           <h4 className="my-0 font-weight-normal">Gestion Ultimos 10 Dias</h4>
                           <hr />
                           <div className="row mt-2 bg-light align-items-center">
-
                             <Company_Campaing_Dash></Company_Campaing_Dash>
-
                             <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
                               <button
                                 className="mb-0 btn btn-success"
-                              // onClick={filtrar}
+                                onClick={HideLogo}
                               >Buscar
                               </button>
                             </div>
                           </div>
                         </div>
                         <div className="card-body">
-                          <table className='table'>
-                            <thead>
-                              <tr>
-                                <td>Fecha</td>
-                                <td>Carga</td>
-                                <td>Recorrido</td>
-                                <td>Contactdo</td>
-                                <td>Acepta</td>
-                                <td>% Conta.</td>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>Fecha</td>
-                                <td>Carga</td>
-                                <td>Recorrido</td>
-                                <td>Contactdo</td>
-                                <td>Acepta</td>
-                                <td>% Conta.</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                          {filtrar !== false &&
+                            <DashReporteCargaTablaFilter company={company} carga={carga}></DashReporteCargaTablaFilter>}
                         </div>
                       </div>
                     </div>
