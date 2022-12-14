@@ -208,10 +208,10 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
                                 <td>{data.abandonadas / data.contestadas}</td>
                                 <td>{secondsToString(parseInt(data.tmo))}</td>
                                 <td>{secondsToString(parseInt(data.tmo))}</td> */}
-                            </tr>
+                            {/* </tr>
                         ))}
                     </tbody>
-                </table> */}
+                </table> */} 
 
             </div>
         </>
