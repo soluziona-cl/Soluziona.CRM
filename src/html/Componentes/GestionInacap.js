@@ -7,6 +7,8 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 
+
+
 function GestionInacap({ flujo, campana, ini, fin }) {
 
     const [datafull, setData] = useState([]);
@@ -233,18 +235,19 @@ function GestionInacap({ flujo, campana, ini, fin }) {
 
     return (
         <>
-            <section className="flex flex-row ">
+            <section className=" float-end ">
                 <button
                     onClick={handleOnExportCarga}
-                    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
-                    <i className="fa-solid fa-file-excel mr-2"></i>Exportar
+                    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md text-white m-2 border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 ">
+                    <i className="fa-solid fa-file-excel mr-2"></i> Exportar
                 </button>
             </section>
-            <div className="container mt-2">
+            <div className=" mt-5 text-wrap">
 
 
                 <DataTable
                     // title="Employees"
+                    className='DataTable'
                     columns={columns}
                     data={datafull}
                     pagination

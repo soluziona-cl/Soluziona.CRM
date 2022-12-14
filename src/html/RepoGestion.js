@@ -255,7 +255,7 @@ const ReporteGestion = () => {
                     </div>
 
                   </div>
-                  <section className="w-fit flex flex-col justify-center items-end mt-2">
+                  <section className="mt-2">
                     {/* <TablaFull /> */}
                     {/* {mostrarGrid !== false && <ReporteGestionTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />} */}
                     {mostrarGridInacap !== false && <GestionInacap flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}

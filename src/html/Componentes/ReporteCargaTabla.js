@@ -6,6 +6,22 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
+import OnReady from './Loading';
+
+// let loading;
+
+// function loader() {
+//  loading = setTimeout(showPage, 3000);
+// }
+
+// function showPage() {
+//   document.getElementById("loader").style.display = "none";
+//   document.getElementById("DataTable").style.display = "block";
+// }
+
+
+
+
 
 function ReporteCargaTabla({ flujo, campana, ini, fin }) {
 
@@ -160,21 +176,22 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
                 <button
                     onClick={handleOnExportCarga}
                     className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
-                    <i className="fa-solid fa-file-excel mr-4"></i> Exportar
+                    <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
                 </button>
             </section>
-            <div className=" mt-5"  >
+{/* 
+            <button class="buttonload" id='loading'>
+  <i class="fa fa-spinner fa-spin"></i>Loading
+</button> */}
+{/* <OnReady /> */}
+            {/* <div className="page mt-5 "  > */}
+            <div className=" mt-5 "  >
 
-         
                 <DataTable
-                    // title="Employees"
                     columns={columns}
-                    style={{ color: 'red'}}
                     data={datafull}
                     pagination
                     highlightOnHover
-                   
-                   
                 />
 
 
@@ -219,6 +236,7 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
                 </table> */} 
 
             </div>
+            {/* <div id="loading"></div> */}
         </>
     )
 }
