@@ -80,20 +80,15 @@ function ReporteAgentesTabla({ flujo , campana , ini , fin }) {
 
     const Datos = (async () => {
 
-        console.log({ flujo })
-        console.log({ campana })
-        console.log({ ini })
-        console.log({ fin })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Agente/Intervalo',
+        { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin },
+        { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
+    if (result.status === 200) {
 
-
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full', { dato: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
-
-        if (result.status === 200) {
-
-            console.log(result.data)
-            setData(result.data);
-        }
+        console.log(result.data)
+        setData(result.data);
+    }
 
     })
 
