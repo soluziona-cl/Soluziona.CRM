@@ -232,7 +232,7 @@ const RepoCarga = () => {
                     </div>
 
                   </div>
-                  <section className="w-fit flex flex-col justify-center items-end mt-2">
+                  <section className=" col-lg-12 col-sm-8 mt-2">
                     {/* <TablaFull /> */}
                     {mostrarGrid !== false && <ReporteCargaTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
                   </section>
