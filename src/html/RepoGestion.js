@@ -56,11 +56,11 @@ const ReporteGestion = () => {
   //metodos para editar
   const filtrar = (event) => {
 
-    console.log(document.getElementById("ddl_company").value)
-    console.log(document.getElementById("ddl_campana").value)
+    // console.log(document.getElementById("ddl_company").value)
+    // console.log(document.getElementById("ddl_campana").value)
 
     let campanas = document.getElementById("ddl_campana").value
-    console.table(campanas)
+    // console.table(campanas)
 
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
@@ -68,13 +68,13 @@ const ReporteGestion = () => {
     if (campanas == 1) {
       setMostrarGridInacap(true);
       setMostrarGridUSS(false);
-      console.log("mostrar inacap")
+      // console.log("mostrar inacap")
     }
     // setMostrarGrid(true);
     else if (campanas == 2) {
       setMostrarGridInacap(false);
       setMostrarGridUSS(true);
-      console.log("mostrar USS")
+      // console.log("mostrar USS")
     }
     else {
       setMostrarGridUSS(false);

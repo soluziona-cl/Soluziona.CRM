@@ -53,9 +53,6 @@ const RepoAgentes = () => {
   //metodos para editar
   const filtrar = (event) => {
 
-console.log(document.getElementById("ddl_company").value)
-console.log(document.getElementById("ddl_campana").value)
-
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
