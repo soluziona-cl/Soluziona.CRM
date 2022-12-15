@@ -6,19 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
-import OnReady from './Loading';
-
-// let loading;
-
-// function loader() {
-//  loading = setTimeout(showPage, 3000);
-// }
-
-// function showPage() {
-//   document.getElementById("loader").style.display = "none";
-//   document.getElementById("DataTable").style.display = "block";
-// }
-
+import DotLoader from "react-spinners/DotLoader";
 
 
 
@@ -71,8 +59,17 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
         XLSX.writeFile(wb, "Gestion_Carga_" + date + ".xlsx");
     };
 
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+    setLoading(true)
+    setTimeout(()=> {
+       setLoading(false)
+    }, 3000)
+   }, [])
+
 
     useEffect(() => {
+        
         const token = getToken();
 
         if (!token) {
@@ -85,12 +82,12 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
             .then(response => {
 
                 setUserSession(sesiones.sgui, sesiones.sid_usuario);
-                setAuthLoading(false);
-
+                setAuthLoading(true);
+                
 
             }).catch(error => {
                 removeUserSession();
-                setAuthLoading(false);
+                setAuthLoading(true);
             });
 
         Datos()
@@ -117,126 +114,77 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
         {
             name: 'RUT_PERSONA',
             selector: 'ruT_PERSONA',
-           
         },
         {
             name: 'This_Phone_number',
             selector: 'this_Phone_number',
-          
         },
         {
             name: 'Call_Disposition',
             selector: 'call_Disposition',
-          
         },
         {
             name: 'Call_Time',
             selector: 'call_Time',
-           
         },
         {
             name: 'Dialing_Duration',
             selector: 'dialing_Duration',
-           
         },
         {
             name: 'Answered_Duration',
             selector: 'answered_Duration',
-          
         },
         {
             name: 'Agent',
             selector: 'agent',
-          
         },
         {
             name: 'Recording_file',
             selector: 'recording_file',
-         
         },
         {
             name: 'Global_Interaction_ID',
             selector: 'global_Interaction_ID',
-          
         },
         {
             name: 'List_name',
             selector: 'list_name',
-         
         },
-         
     ];
  
 
-    return (
-          
+    return (  
         <>
             <section className=" float-end">
-                
                 <button
                     onClick={handleOnExportCarga}
                     className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
                     <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
                 </button>
             </section>
-{/* 
-            <button class="buttonload" id='loading'>
-  <i class="fa fa-spinner fa-spin"></i>Loading
-</button> */}
-{/* <OnReady /> */}
-            {/* <div className="page mt-5 "  > */}
+
+         
+            {loading ? (
+            <DotLoader
+            className='loading'
+            color={'#5b198ab5'}
+            loading={loading}
+            size={100}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
             <div className=" mt-5 "  >
 
-                <DataTable
-                    columns={columns}
-                    data={datafull}
-                    pagination
-                    highlightOnHover
-                />
-
-
-                {/* <table className="table">
-                    <thead>
-                        <tr>
-                            <th>RUT_PERSONA</th>
-                            <th>This Phone number</th>
-                            <th>Call Disposition</th>
-                            <th>Call Time</th>
-                            <th>Dialing Duration</th>
-                            <th>Answered Duration</th>
-                            <th>Agent</th>
-                            <th>Recording file</th>
-                            <th>Global Interaction ID</th>
-                            <th>List name</th>
-                          
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {datafull.map((data, index) => (
-                        
-                            <tr key={index}>
-                                <td>{data.RUT_PERSONA}</td>
-                                <td>{data.This_Phone_number}</td>
-                                <td>{data.Call_Disposition}</td>
-                                <td>{data.Call_Time}</td>
-                                <td>{data.Dialing_Duration}</td>
-                                <td>{data.Answered_Duration}</td>
-                                <td>{data.Agent}</td>
-                                <td>{data.Recording_file}</td>
-                                <td>{data.Global_Interaction_ID}</td>
-                                <td>{data.List_name}</td>
-                                <td>-</td>
-                                {/* <td>{data.contestadas / data.recibidas}</td>
-                                <td>{data.abandonadas / data.contestadas}</td>
-                                <td>{secondsToString(parseInt(data.tmo))}</td>
-                                <td>{secondsToString(parseInt(data.tmo))}</td> */}
-                            {/* </tr>
-                        ))}
-                    </tbody>
-                </table> */} 
-
-            </div>
-            {/* <div id="loading"></div> */}
+            <DataTable
+                columns={columns}
+                data={datafull}
+                pagination
+                highlightOnHover
+            />
+        </div>
+        )}
         </>
     )
 }

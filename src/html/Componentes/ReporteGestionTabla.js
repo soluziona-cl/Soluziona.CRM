@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
+import DotLoader from "react-spinners/DotLoader";
 
 function ReporteGestionTabla({ flujo , campana , ini , fin }) {
 
@@ -52,6 +53,13 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
         XLSX.writeFile(wb, "Gestion_Gestion_" + date + ".xlsx");
     };
 
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+    setLoading(true)
+    setTimeout(()=> {
+       setLoading(false)
+    }, 3000)
+   }, [])
 
     useEffect(() => {
         const token = getToken();
@@ -107,6 +115,16 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
                     <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
                 </button>
             </section>
+            {loading ? (
+            <DotLoader
+            className='loading'
+            color={'#9836d6'}
+            loading={loading}
+            size={100}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
             <div className=" mt-5">
 
                 <table className="table">
@@ -141,7 +159,7 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
                     </tbody>
                 </table>
 
-            </div>
+            </div>)}
         </>
     )
 }

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
+import DotLoader from "react-spinners/DotLoader";
 
 
 
@@ -74,6 +75,15 @@ function GestionInacap({ flujo, campana, ini, fin }) {
         XLSX.utils.book_append_sheet(wb, ws, "Carga");
         XLSX.writeFile(wb, "Gestion_Carga_" + date + ".xlsx");
     };
+
+
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+    setLoading(true)
+    setTimeout(()=> {
+       setLoading(false)
+    }, 5000)
+   }, [])
 
 
     useEffect(() => {
@@ -242,9 +252,18 @@ function GestionInacap({ flujo, campana, ini, fin }) {
                     <i className="fa-solid fa-file-excel mr-2"></i> Exportar
                 </button>
             </section>
+
+            {loading ? (
+            <DotLoader
+            className='loading'
+            color={'#5b198ab5'}
+            loading={loading}
+            size={100}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
             <div className=" mt-5 text-wrap">
-
-
                 <DataTable
                     // title="Employees"
                     className='DataTable'
@@ -254,49 +273,8 @@ function GestionInacap({ flujo, campana, ini, fin }) {
                     highlightOnHover
                     responsive={true}
                 />
-
-
-                {/* <table className="table">
-                    <thead>
-                        <tr>
-                            <th>RUT_PERSONA</th>
-                            <th>This Phone number</th>
-                            <th>Call Disposition</th>
-                            <th>Call Time</th>
-                            <th>Dialing Duration</th>
-                            <th>Answered Duration</th>
-                            <th>Agent</th>
-                            <th>Recording file</th>
-                            <th>Global Interaction ID</th>
-                            <th>List name</th>
-                          
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {datafull.map((data, index) => (
-                        
-                            <tr key={index}>
-                                <td>{data.RUT_PERSONA}</td>
-                                <td>{data.This_Phone_number}</td>
-                                <td>{data.Call_Disposition}</td>
-                                <td>{data.Call_Time}</td>
-                                <td>{data.Dialing_Duration}</td>
-                                <td>{data.Answered_Duration}</td>
-                                <td>{data.Agent}</td>
-                                <td>{data.Recording_file}</td>
-                                <td>{data.Global_Interaction_ID}</td>
-                                <td>{data.List_name}</td>
-                                <td>-</td>
-                                {/* <td>{data.contestadas / data.recibidas}</td>
-                                <td>{data.abandonadas / data.contestadas}</td>
-                                <td>{secondsToString(parseInt(data.tmo))}</td>
-                                <td>{secondsToString(parseInt(data.tmo))}</td> */}
-                {/* </tr>
-                        ))}
-                    </tbody>
-                </table> */}
-
             </div>
+              )}
         </>
     )
 }
