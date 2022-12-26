@@ -22,11 +22,13 @@ function DashReporteCargaTablaFilter({ company, carga }) {
     useEffect(() => {
         const token = getToken();
 
+        const rutaservidor = "/Orkesta/Procollect/CRM"
         if (!token) {
             // console.log('Vacio')
-            navigate("/Login");
+            navigate(rutaservidor);
             return;
         }
+
 
         axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {

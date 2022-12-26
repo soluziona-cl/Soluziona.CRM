@@ -55,10 +55,10 @@ function ReporteCalidadTabla({ flujo , campana , ini , fin }) {
 
     useEffect(() => {
         const token = getToken();
-
+        const rutaservidor = "/Orkesta/Procollect/CRM"
         if (!token) {
             // console.log('Vacio')
-            navigate("/Login");
+            navigate(rutaservidor);
             return;
         }
 

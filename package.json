@@ -1,5 +1,6 @@
 {
   "name": "procollet_orkestav3",
+  "homepage": "/Orkesta/Procollect/CRM/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

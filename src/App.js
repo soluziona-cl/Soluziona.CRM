@@ -13,7 +13,8 @@ import AdminCargas2 from "./html/AdminCargas2";
 
 function App() {
 
-  const rutaservidor = "/"; //Prueba
+    // const rutaservidor="/"; //Pruebas
+    const rutaservidor = "/Orkesta/Procollect/CRM"; //Produccion
 
   return (
     <Router>

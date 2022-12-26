@@ -17,7 +17,7 @@ import Company_Campaing from './Componentes/Company_Campaing';
 import ReporteCargaTabla from './Componentes/ReporteCargaTabla'
 
 
-registerLocale('es', es)
+  registerLocale('es', es)
 
 //con DataTable
 const RepoCarga = () => {
@@ -232,9 +232,12 @@ const RepoCarga = () => {
                     </div>
 
                   </div>
-                  <section className=" col-lg-12 col-sm-8 mt-2">
+                  <section className="col-lg-12 col-sm-8 mt-2">
                     {/* <TablaFull /> */}
+                    <div className=" mt-5 "  >
                     {mostrarGrid !== false && <ReporteCargaTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                    </div>
+                    
                   </section>
 
                 </div>

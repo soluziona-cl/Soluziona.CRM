@@ -34,12 +34,13 @@ function ListarCargas() {
     const navigate = useNavigate();
     useEffect(() => {
         const token = getToken();
-
+        const rutaservidor = "/Orkesta/Procollect/CRM"
         if (!token) {
             // console.log('Vacio')
-            navigate("/Login");
+            navigate(rutaservidor);
             return;
         }
+
 
         axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {
@@ -110,7 +111,7 @@ function ListarCargas() {
 
     return (
         <>
-            <div className=" container-lg">
+            <div className="col-lg-12 col-sm-8 mt-2">
                 <div className=" flex-column ">
                     <table id="tbl_acumulado_dia" className="table table-striped table-sm text-nowrap text-sm" width="100%">
                         <thead>
@@ -141,7 +142,8 @@ function ListarCargas() {
                                     <td>{data.camp_7}%</td>
                                     <td>{data.camp_9}%</td>
                                     <td><button onClick={() =>(setDataModalCarga(data.camp_2),setMostrarModal(true))} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success">Detalle</button></td>
-
+                                    <td><button onClick={() =>(setDataModalCarga(data.camp_2),setMostrarModal(true))} className="btn btn-success">Activar</button></td>
+                                    <td><button onClick={() =>(setDataModalCarga(data.camp_2),setMostrarModal(true))} className="btn btn-danger">Bloquear</button></td>
                                 </tr>
                             ))}
 

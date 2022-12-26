@@ -61,29 +61,30 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
 
     const [loading, setLoading] = useState(false)
     useEffect(() => {
-    setLoading(true)
-    setTimeout(()=> {
-       setLoading(false)
-    }, 3000)
-   }, [])
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    }, [])
 
 
     useEffect(() => {
-        
-        const token = getToken();
 
+        const token = getToken();
+        const rutaservidor = "/Orkesta/Procollect/CRM"
         if (!token) {
             // console.log('Vacio')
-            navigate("/Login");
+            navigate(rutaservidor);
             return;
         }
+
 
         axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {
 
                 setUserSession(sesiones.sgui, sesiones.sid_usuario);
                 setAuthLoading(true);
-                
+
 
             }).catch(error => {
                 removeUserSession();
@@ -152,9 +153,9 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
             selector: 'list_name',
         },
     ];
- 
 
-    return (  
+
+    return (
         <>
             <section className=" float-end">
                 <button
@@ -164,27 +165,30 @@ function ReporteCargaTabla({ flujo, campana, ini, fin }) {
                 </button>
             </section>
 
-         
-            {loading ? (
-            <DotLoader
-            className='loading'
-            color={'#5b198ab5'}
-            loading={loading}
-            size={100}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        ) : (
-            <div className=" mt-5 "  >
 
-            <DataTable
-                columns={columns}
-                data={datafull}
-                pagination
-                highlightOnHover
-            />
-        </div>
-        )}
+            {loading ? (
+                <div className="d-flex justify-content-center mt-3">
+                    <DotLoader
+                        className='loading'
+                        color={'#5b198ab5'}
+                        loading={loading}
+                        size={60}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
+
+            ) : (
+                <div className=" mt-5 "  >
+
+                    <DataTable
+                        columns={columns}
+                        data={datafull}
+                        pagination
+                        highlightOnHover
+                    />
+                </div>
+            )}
         </>
     )
 }

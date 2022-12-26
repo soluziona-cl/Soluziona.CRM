@@ -28,11 +28,13 @@ function ListarCargasModalDetalle({detalleModal}) {
     useEffect(() => {
         const token = getToken();
 
+        const rutaservidor = "/Orkesta/Procollect/CRM"
         if (!token) {
             // console.log('Vacio')
-            navigate("/Login");
+            navigate(rutaservidor);
             return;
         }
+
 
           DetalleModal()
     }, []);
