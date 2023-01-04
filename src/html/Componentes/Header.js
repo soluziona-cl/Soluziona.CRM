@@ -11,22 +11,22 @@ function Header() {
         navigate(rutaservidor);
     };
 
-    const rutaservidor = "/";
-    // const rutaservidor = "/Orkesta_CallSouth_Salcobrand";
-
+   // const rutaservidor="/"; //Pruebas
+   const rutaservidor = "/Orkesta/Procollect/CRM"; //Produccion
+   
     return (
         <>  
             
-            <div className="  px-4 top-0 " id="header">
-                <div className="d-flex flex-wrap justify-content-between align-items-center py-0 my-4 m-3">
-                    <div className="justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+            <div className=" top-0 " id="header">
+                <div className=" justify-content-around align-content-around  py-0 my-4 m-3">
+                    <div className=" align-content-around justify-content-around   " id="mobile-menu-2">
                         <span className="" style={{ color: 'white' }}>Control CRM Orkesta Procollect</span>
                     </div>
-                    <div className="flex items-center">
+                    <div className=" my-2 position-absolute end-0 translate-middle">
                         <button 
                             onClick={handleLogout}
                             className="btn btn-danger sm" 
-                        ><i class="fa-solid fa-right-from-bracket m-2"></i>
+                        ><i className="fa-solid fa-right-from-bracket m-2"></i>
                              Salir
                         </button>
                     </div>

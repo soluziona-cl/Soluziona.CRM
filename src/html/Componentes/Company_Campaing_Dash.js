@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import { useNavigate } from 'react-router-dom';
 
-function Company_Campaing() {
+function Company_Campaing_Dash() {
     const [selectLlamada, setSelectedLlamada] = useState('');
     const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState('');
 
@@ -74,39 +74,36 @@ function Company_Campaing() {
 
     return (
         <>
-            <div className="row mb-2">
-                <div className="page-header pt-3">
-                    <h3>Filtros</h3>
-                </div>
-                <div className="col-sm-12 col-lg-3">
-                    <select className="form-control form-select" id="ddl_company"
-                        disabled={false}
-                        // value={select}
-                        onChange={(e) => (ChangeConecta(e.target.value))}>
-                        <option value="0">Compañia</option>
-                        {optionList.map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {item.detalle}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="col-sm-12 col-lg-3 mt-sm-2 mt-lg-0">
-                    <select className="form-control form-select" id="ddl_campana"
-                        disabled={optionListDetalleEstado}
-                        value={optionListDetalleEstadoSelect}
-                        onChange={(e) => (ChangeConectaDetalle(e.target.value))}
-                    >
-                        <option value="0">Campaña</option>
-                        {optionListDetalle.map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {item.detalle}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+
+            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                <select className="form-control form-select" id="ddl_company"
+                    disabled={false}
+                    // value={select}
+                    onChange={(e) => (ChangeConecta(e.target.value))}>
+                    <option value="0">Compañia</option>
+                    {optionList.map((item) => (
+                        <option key={item.id} value={item.id}>
+                            {item.detalle}
+                        </option>
+                    ))}
+                </select>
             </div>
+            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                <select className="form-control form-select" id="ddl_campana"
+                    disabled={optionListDetalleEstado}
+                    value={optionListDetalleEstadoSelect}
+                    onChange={(e) => (ChangeConectaDetalle(e.target.value))}
+                >
+                    <option value="0">Campaña</option>
+                    {optionListDetalle.map((item) => (
+                        <option key={item.id} value={item.id}>
+                            {item.detalle}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
         </>
     )
 }
-export default Company_Campaing
+export default Company_Campaing_Dash

@@ -1,13 +1,9 @@
 #header{
-    margin-top: -1.5rem;
+    /* margin-top: -1.5rem; */
+    height:5rem;
     background-color: #5b198ab5;
 }
 
-#sidebar{
- font-size: medium;
-    /* background-color: #aea1b9cd; */
-
-}
 
 #footer{
     /* background-color: #5b198ab5; */
@@ -23,11 +19,22 @@
     height: 100%;
     /* background-color: #c52acc; */
 }
-#btn-carga{
+/* #btn-carga{
     height: 3rem;
     width: 7.5rem;
-}
+} */
 #back{
     width: 3rem;
     height: 3rem;
 }
+
+
+.loading {
+    display: flex;
+    text-align: center;
+  justify-content: center;
+  align-items: center;
+    width: 100vw;
+    height: 100vh;
+    
+  }

@@ -60,16 +60,15 @@ const Login = () => {
 
         console.log(login);
         if (id === "-1") {
-          console.log("NOP");
+          // console.log("NOP");
           alert("credenciales erróneas");
         } else {
 
           setUserSession(login.token, login.id_usuario);
-          navigate("/subirArchivos");
-          
+          // navigate("/subirArchivos");         
 
           //navigate("/Orkesta_CallSouth_Salcobrand/Dashboard");
-          navigate("/Dashboard");
+          navigate("/Orkesta/Procollect/CRM/Dashboard");
         }
       })
       .catch((error) => {
