@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+// import { Link } from 'react-router';
+
 import { getToken, removeUserSession, setUserSession } from './Common';
 
 //toast
@@ -78,14 +80,14 @@ function ImportarArchivo() {
         formData.append('postedFile', excel)
 
         await axios.post(url, formData, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
-        .then(function(response) {
-            toast(response.data.flujo)
-          })
-        .catch(function(error) {
-            toast('Archivo No Valido. Verificar Formato')
+            .then(function (response) {
+                toast(response.data.flujo)
+            })
+            .catch(function (error) {
+                toast('Archivo No Valido. Verificar Formato')
 
-          })
-      
+            })
+
     })
 
     if (authLoading && getToken()) {
@@ -97,10 +99,14 @@ function ImportarArchivo() {
     return (
         <>
             <ToastContainer />
-            <div className='row'>
+            <div className='row mt-3'>
+                <Link to="/Orkesta/Procollect/CRM/Formato_Inacap.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Inacap</Link>
+                <Link to="/Orkesta/Procollect/CRM/Formato_USS.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato USS</Link>
+            </div>
+            <div className='row mt-5'>
                 <div className='col-3'><input type="file" onChange={handleFile} /></div>
             </div>
-            <div className='row'>
+            <div className='row mt-5'>
                 <div className='col-sm-12 col-lg-3 mt-2'><button className='btn btn-success form-control' id="btn-carga" onClick={Flujo}><i className="fa-solid fa-upload m-2"></i>Subir</button></div>
             </div>
             {/* <button className='btn btn-danger' onClick={notify}></button> */}
