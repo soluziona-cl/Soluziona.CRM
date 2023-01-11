@@ -31,7 +31,7 @@ function Barras() {
         }
 
 
-        axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {
 
                 setUserSession(sesiones.sgui, sesiones.sid_usuario);
@@ -47,9 +47,9 @@ function Barras() {
 
     }, []);
 
-    const Datos = (async () => {
+    const Datos = (async() => {
 
-        axios.post("https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Inbound/Intervalo/Now", { dato: '' }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        axios.post("https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Panel/Inbound/Intervalo/Now", { dato: '' }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then((response) => {
 
                 var arrr = response.data;
@@ -119,89 +119,91 @@ function Barras() {
 
         // Add series
         series: [{
-            name: 'Recorrido',
-            type: 'bar',
-            data: recibidas,
-            itemStyle: {
-                normal: {
-                    label: {
-                        show: true,
-                        textStyle: {
-                            fontWeight: 500
+                name: 'Recorrido',
+                type: 'bar',
+                data: recibidas,
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                            textStyle: {
+                                fontWeight: 500
+                            }
                         }
                     }
+                },
+                markPoint: {
+                    data: [
+                        { type: 'max', name: 'Max' },
+                        { type: 'min', name: 'Min' }
+                    ]
+                },
+                markLine: {
+                    data: [{ type: 'average', name: 'Promedio' }]
                 }
             },
-            markPoint: {
-                data: [
-                    { type: 'max', name: 'Max' },
-                    { type: 'min', name: 'Min' }
-                ]
-            },
-            markLine: {
-                data: [{ type: 'average', name: 'Promedio' }]
-            }
-        },
-        {
-            name: 'Contactado',
-            type: 'bar',
-            data: contestadas,
-            itemStyle: {
-                normal: {
-                    label: {
-                        show: true,
-                        textStyle: {
-                            fontWeight: 500
+            {
+                name: 'Contactado',
+                type: 'bar',
+                data: contestadas,
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                            textStyle: {
+                                fontWeight: 500
+                            }
                         }
                     }
+                },
+                markPoint: {
+                    data: [
+                        { type: 'max', name: 'Max' },
+                        { type: 'min', name: 'Min' }
+                    ]
+                },
+                markLine: {
+                    data: [{ type: 'average', name: 'Promedio' }]
                 }
             },
-            markPoint: {
-                data: [
-                    { type: 'max', name: 'Max' },
-                    { type: 'min', name: 'Min' }
-                ]
-            },
-            markLine: {
-                data: [{ type: 'average', name: 'Promedio' }]
-            }
-        },
-        {
-            name: 'Acepta',
-            type: 'bar',
-            data: acepta,
-            itemStyle: {
-                normal: {
-                    label: {
-                        show: true,
-                        textStyle: {
-                            fontWeight: 500
+            {
+                name: 'Acepta',
+                type: 'bar',
+                data: acepta,
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                            textStyle: {
+                                fontWeight: 500
+                            }
                         }
                     }
+                },
+                markPoint: {
+                    data: [
+                        { type: 'max', name: 'Max' },
+                        { type: 'min', name: 'Min' }
+                    ]
+                },
+                markLine: {
+                    data: [{ type: 'average', name: 'Promedio' }]
                 }
-            },
-            markPoint: {
-                data: [
-                    { type: 'max', name: 'Max' },
-                    { type: 'min', name: 'Min' }
-                ]
-            },
-            markLine: {
-                data: [{ type: 'average', name: 'Promedio' }]
             }
-        }
         ]
 
 
     }
-    return (
-        <>
-            <ReactEcharts
-                option={opction_multibar}
-            // style={{ width: "80rem", height: "30rem" }}
-            ></ReactEcharts>
+    return ( <
+        >
+        <
+        ReactEcharts option = { opction_multibar }
+        // style={{ width: "80rem", height: "30rem" }}
+        >
+        < /ReactEcharts>
 
-        </>
+        <
+        />
     );
 }
 

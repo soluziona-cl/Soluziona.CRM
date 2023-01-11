@@ -6,7 +6,7 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 
-function ReporteAgentesTabla({ flujo , campana , ini , fin }) {
+function ReporteAgentesTabla({ flujo, campana, ini, fin }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -55,14 +55,14 @@ function ReporteAgentesTabla({ flujo , campana , ini , fin }) {
 
     useEffect(() => {
         const token = getToken();
-        const rutaservidor = "/Orkesta/Procollect/CRM"
+        const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
         if (!token) {
             // console.log('Vacio')
             navigate(rutaservidor);
             return;
         }
 
-        axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {
 
                 setUserSession(sesiones.sgui, sesiones.sid_usuario);
@@ -78,66 +78,74 @@ function ReporteAgentesTabla({ flujo , campana , ini , fin }) {
 
     }, []);
 
-    const Datos = (async () => {
+    const Datos = (async() => {
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Agente/Intervalo',
-        { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin },
-        { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Panel/Agente/Intervalo', { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
-    if (result.status === 200) {
+        if (result.status === 200) {
 
-        console.log(result.data)
-        setData(result.data);
-    }
+            console.log(result.data)
+            setData(result.data);
+        }
 
     })
 
 
-    return (
-        <>
-            <section className="float-end ">
-                <button
-                    onClick={handleOnExportAgente}
-                    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary text-white rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
-                    <i className="fa-solid fa-file-excel mr-2"></i> Exportar
-                </button>
-            </section>
-            <div className="mt-5">
+    return ( <
+        >
+        <
+        section className = "float-end " >
+        <
+        button onClick = { handleOnExportAgente }
+        className = "inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary text-white rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700" >
+        <
+        i className = "fa-solid fa-file-excel mr-2" > < /i> Exportar <
+        /button> <
+        /section> <
+        div className = "mt-5" >
 
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Agente</th>
-                            <th>Realizadas</th>
-                            <th>Conectadas</th>
-                            <th>No Conectadas</th>
-                            <th>Compromisos de Pago</th>
-                            <th>Hablado</th>
-                            <th>Pausas</th>
-                            <th>En Espera</th>
-                            <th>TMO</th>
+        <
+        table className = "table" >
+        <
+        thead >
+        <
+        tr >
+        <
+        th > Agente < /th> <
+        th > Realizadas < /th> <
+        th > Conectadas < /th> <
+        th > No Conectadas < /th> <
+        th > Compromisos de Pago < /th> <
+        th > Hablado < /th> <
+        th > Pausas < /th> <
+        th > En Espera < /th> <
+        th > TMO < /th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {datafull.map((data, index) => (
-                            <tr key={index}>
-                                <td>{data.fecha}</td>
-                                <td>{data.recibidas}</td>
-                                <td>{data.contestadas}</td>
-                                <td>{data.abandonadas}</td>
-                                <td>-</td>
-                                <td>{data.contestadas / data.recibidas}</td>
-                                <td>{data.abandonadas / data.contestadas}</td>
-                                <td>{secondsToString(parseInt(data.tmo))}</td>
-                                <td>{secondsToString(parseInt(data.tmo))}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+        <
+        /tr> <
+        /thead> <
+        tbody > {
+            datafull.map((data, index) => ( <
+                tr key = { index } >
+                <
+                td > { data.fecha } < /td> <
+                td > { data.recibidas } < /td> <
+                td > { data.contestadas } < /td> <
+                td > { data.abandonadas } < /td> <
+                td > - < /td> <
+                td > { data.contestadas / data.recibidas } < /td> <
+                td > { data.abandonadas / data.contestadas } < /td> <
+                td > { secondsToString(parseInt(data.tmo)) } < /td> <
+                td > { secondsToString(parseInt(data.tmo)) } < /td> <
+                /tr>
+            ))
+        } <
+        /tbody> <
+        /table>
 
-            </div>
-        </>
+        <
+        /div> <
+        />
     )
 }
 export default ReporteAgentesTabla

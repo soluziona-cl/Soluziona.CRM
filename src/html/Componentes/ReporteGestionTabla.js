@@ -63,14 +63,14 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
 
     useEffect(() => {
         const token = getToken();
-        const rutaservidor = "/Orkesta/Procollect/CRM"
+        const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
         if (!token) {
             // console.log('Vacio')
             navigate(rutaservidor);
             return;
         }
 
-        axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {
 
                 setUserSession(sesiones.sgui, sesiones.sid_usuario);
@@ -95,7 +95,7 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
 
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full', { dato: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full', { dato: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 

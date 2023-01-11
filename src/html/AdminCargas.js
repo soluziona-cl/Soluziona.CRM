@@ -34,7 +34,7 @@ function AdminCargas() {
 
     const Company = (async (company) => {
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Flujo_Company', { dato: company }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Flujo_Company', { dato: company }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
             setOptionList(result.data)
@@ -54,7 +54,7 @@ function AdminCargas() {
             setSelectedLlamada('0')
         }
         else {
-            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Campaign', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Campaign', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
             setSelectedLlamada(event)
 

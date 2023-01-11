@@ -47,7 +47,7 @@ function ListarCargas() {
     const navigate = useNavigate();
     useEffect(() => {
         const token = getToken();
-        const rutaservidor = "/Orkesta/Procollect/CRM"
+        const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
         if (!token) {
             // console.log('Vacio')
             navigate(rutaservidor);
@@ -55,7 +55,7 @@ function ListarCargas() {
         }
 
 
-        axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {
 
                 setUserSession(sesiones.sgui, sesiones.sid_usuario);
@@ -106,7 +106,7 @@ function ListarCargas() {
     const Buscar = (async () => {
 
         var flujo = document.getElementById("ddl_campana").value;
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full', { dato: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full', { dato: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
@@ -126,7 +126,7 @@ function ListarCargas() {
     const Liberar = (async (liberar) => {
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargasAdmin/CargasDetalleResumenDashDetalleActivar', { dato_2: liberar }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DetalleCargasAdmin/CargasDetalleResumenDashDetalleActivar', { dato_2: liberar }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
@@ -153,7 +153,7 @@ function ListarCargas() {
 
 
         console.log(bloquear)
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargasAdmin/CargasDetalleResumenDashDetalleBlock', { dato_2: bloquear }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DetalleCargasAdmin/CargasDetalleResumenDashDetalleBlock', { dato_2: bloquear }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 

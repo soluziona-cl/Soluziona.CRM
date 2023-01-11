@@ -42,7 +42,7 @@ function ListarCargasModalDetalle({ detalleModal }) {
     useEffect(() => {
         const token = getToken();
 
-        const rutaservidor = "/Orkesta/Procollect/CRM"
+        const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
         if (!token) {
             // console.log('Vacio')
             navigate(rutaservidor);
@@ -51,16 +51,16 @@ function ListarCargasModalDetalle({ detalleModal }) {
 
         // console.log(sesiones.stoken)
         DetalleModal()
-        // componentDidMount()
+            // componentDidMount()
     }, []);
 
-    const DetalleModal = (async () => {
+    const DetalleModal = (async() => {
 
 
         console.log(detalleModal)
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargasAdmin/CargasDetalleResumenDashDetalle', { dato: detalleModal }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DetalleCargasAdmin/CargasDetalleResumenDashDetalle', { dato: detalleModal }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
@@ -71,11 +71,11 @@ function ListarCargasModalDetalle({ detalleModal }) {
 
     })
 
-    const liberarRegistros = (async (codigo) => {
+    const liberarRegistros = (async(codigo) => {
 
         // console.log(codigo)
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargasAdmin/CargasDetalleResumenDashDetalleLiberar', { dato: codigo, dato_2: detalleModal }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DetalleCargasAdmin/CargasDetalleResumenDashDetalleLiberar', { dato: codigo, dato_2: detalleModal }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
@@ -99,7 +99,7 @@ function ListarCargasModalDetalle({ detalleModal }) {
         // if (!$.fn.DataTable.isDataTable("#tbl_detalle_cargas")) {
         //     $(document).ready(function () {
 
-        setTimeout(function () {
+        setTimeout(function() {
             $("#tbl_detalle_cargas").DataTable({
                 destroy: true,
                 language: {
@@ -115,35 +115,51 @@ function ListarCargasModalDetalle({ detalleModal }) {
         // }
     }
 
-    return (
-        <>
+    return ( <
+        >
 
-            <ToastContainer />
-            <table id="tbl_detalle_cargas" className="table-striped table-sm text-nowrap text-sm" width="100%">
-                <thead>
-                    <tr>
-                        <th>Llamado</th>
-                        <th>Llamado Detalle</th>
-                        <th>Cantidad</th>
-                        <th></th>
+        <
+        ToastContainer / >
+        <
+        table id = "tbl_detalle_cargas"
+        className = "table-striped table-sm text-nowrap text-sm"
+        width = "100%" >
+        <
+        thead >
+        <
+        tr >
+        <
+        th > Llamado < /th> <
+        th > Llamado Detalle < /th> <
+        th > Cantidad < /th> <
+        th > < /th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((data, index) => (
-                        <tr key={index + 1}>
-                            <td>{data.llamado}</td>
-                            <td>{data.detalle}</td>
-                            <td>{data.candidad}</td>
-                            <td><button onClick={() => liberarRegistros(data.codigo)} className="btn btn-primary">Liberar</button></td>
-                        </tr>
-                    ))}
+        <
+        /tr> <
+        /thead> <
+        tbody > {
+            data.map((data, index) => ( <
+                tr key = { index + 1 } >
+                <
+                td > { data.llamado } < /td> <
+                td > { data.detalle } < /td> <
+                td > { data.candidad } < /td> <
+                td > < button onClick = {
+                    () => liberarRegistros(data.codigo) }
+                className = "btn btn-primary" > Liberar < /button></td >
+                <
+                /tr>
+            ))
+        }
 
-                </tbody>
+        <
+        /tbody>
 
-            </table>
+        <
+        /table>
 
-        </>
+        <
+        />
     )
 }
 export default ListarCargasModalDetalle

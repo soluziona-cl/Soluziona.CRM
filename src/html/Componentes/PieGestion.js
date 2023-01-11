@@ -23,7 +23,7 @@ function PieGestion() {
 
     useEffect(() => {
         const token = getToken();
-        const rutaservidor = "/Orkesta/Procollect/CRM"
+        const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
         if (!token) {
             // console.log('Vacio')
             navigate(rutaservidor);
@@ -31,7 +31,7 @@ function PieGestion() {
         }
 
 
-        axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {
 
                 setUserSession(sesiones.sgui, sesiones.sid_usuario);
@@ -47,8 +47,8 @@ function PieGestion() {
 
     }, []);
 
-    const Datos = (async () => {
-        await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Gestion/Cargas', { dato: null }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+    const Datos = (async() => {
+        await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Panel/Gestion/Cargas', { dato: null }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then((response) => {
 
                 var arrr = response.data;
@@ -91,39 +91,40 @@ function PieGestion() {
             show: false
         },
         // Add legend
-        series: [
-            {
-                type: 'pie',
-                left: '25%',
-                top: 10,
-                bottom: 30,
-                width: '50%',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                emphasis: {
-                    focus: 'self'
-                },
-                label: {
-                    formatter: (params) => params.name + '\n' + params.value + ' /' + params.percent + '%',
-                    show: true,
-                    position: "outside"
-                },
+        series: [{
+            type: 'pie',
+            left: '25%',
+            top: 10,
+            bottom: 30,
+            width: '50%',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            emphasis: {
+                focus: 'self'
+            },
+            label: {
+                formatter: (params) => params.name + '\n' + params.value + ' /' + params.percent + '%',
+                show: true,
+                position: "outside"
+            },
 
-                data: valores
-            }
-        ]
+            data: valores
+        }]
 
 
 
     }
-    return (
-        <>
-            <ReactEcharts
-                option={option_donut}
-            // style={{ width: "400px", height: "400px" }}
-            ></ReactEcharts>
+    return ( <
+        >
+        <
+        ReactEcharts option = { option_donut }
+        // style={{ width: "400px", height: "400px" }}
+        >
+        <
+        /ReactEcharts>
 
-        </>
+        <
+        />
     );
 }
 

@@ -22,7 +22,7 @@ function DashReporteCargaTablaFilter({ company, carga }) {
     useEffect(() => {
         const token = getToken();
 
-        const rutaservidor = "/Orkesta/Procollect/CRM"
+        const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
         if (!token) {
             // console.log('Vacio')
             navigate(rutaservidor);
@@ -30,7 +30,7 @@ function DashReporteCargaTablaFilter({ company, carga }) {
         }
 
 
-        axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Session_check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(response => {
 
                 setUserSession(sesiones.sgui, sesiones.sid_usuario);
@@ -46,9 +46,9 @@ function DashReporteCargaTablaFilter({ company, carga }) {
 
     }, []);
 
-    const Datos = (async () => {
+    const Datos = (async() => {
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Gestion/Cargas/Top', { dato: company , dato_1: carga }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Panel/Gestion/Cargas/Top', { dato: company, dato_1: carga }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
@@ -59,38 +59,46 @@ function DashReporteCargaTablaFilter({ company, carga }) {
     })
 
 
-    return (
-        <>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Nombre</th>
-                        <th>Cargados</th>
-                        <th>Realizadas</th>
-                        <th>Conectadas</th>
-                        <th>No Conectadas</th>
-                        <th>Compromisos de Pago</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {datafull.map((data, index) => (
-                        <tr key={index}>
-                            <td>{data.fecha_carga_base}</td>
-                            <td>{data.nombre_carga}</td>
-                            <td>{data.cargados}</td>
-                            <td>{data.realizadas}</td>
-                            <td>{data.conectadas}</td>
-                            <td>{data.no_conectadas}</td>
-                            <td>{data.compromisospago}</td>
+    return ( <
+        >
+        <
+        table className = "table" >
+        <
+        thead >
+        <
+        tr >
+        <
+        th > Fecha < /th> <
+        th > Nombre < /th> <
+        th > Cargados < /th> <
+        th > Realizadas < /th> <
+        th > Conectadas < /th> <
+        th > No Conectadas < /th> <
+        th > Compromisos de Pago < /th> <
+        /tr> <
+        /thead> <
+        tbody > {
+            datafull.map((data, index) => ( <
+                tr key = { index } >
+                <
+                td > { data.fecha_carga_base } < /td> <
+                td > { data.nombre_carga } < /td> <
+                td > { data.cargados } < /td> <
+                td > { data.realizadas } < /td> <
+                td > { data.conectadas } < /td> <
+                td > { data.no_conectadas } < /td> <
+                td > { data.compromisospago } < /td>
 
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                <
+                /tr>
+            ))
+        } <
+        /tbody> <
+        /table>
 
 
-        </>
+        <
+        />
     )
 }
 export default DashReporteCargaTablaFilter
