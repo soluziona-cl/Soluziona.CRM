@@ -8,7 +8,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteTelefonicoAcumuladoTabla({ flujo, campana, ini, fin }) {
+
+
+function ReporteTelefonicoAcumuladoTabla({ flujo, periodo, nombre }) {
+
+
+    const getTotals = (data, key) => {
+        let total = 0;
+        data.forEach(item => {
+            total += parseInt(item[key]);
+        });
+        return total;
+    };
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -95,13 +106,26 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, campana, ini, fin }) {
     const Datos = (async () => {
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Resultado/Cargas',
-            { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin },
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/Telefonia/Acumulado',
+            { dato: flujo, dato_1: periodo },
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
-            console.log(result.data)
+            // console.log(result.data)
+
+            // result.data.unshift({
+            //     mes: "totals",
+            //     recibidas: getTotals(result.data, "recibidas"),
+            //     three: getTotals(result.data, "three"),
+            //     four: getTotals(result.data, "four"),
+            //     five: getTotals(result.data, "five"),
+            //     six: "",
+            //     seven: "",
+            //     eight: "",
+            //     nine:"",
+            // });
+
             setData(result.data);
         }
 
@@ -142,7 +166,7 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, campana, ini, fin }) {
 
     const columns = [
         {
-            name: 'Mes',
+            name: <div className="text-wrap">Mes</div>,
             selector: row => row.mes,
             center: true
         },
@@ -156,7 +180,7 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, campana, ini, fin }) {
             selector: row => row.atendidas,
             center: true
         },
-         {
+        {
             name: <div className="text-wrap">Llamadas Atentidas 15"</div>,
             selector: row => row.atendidas15,
             center: true
@@ -195,6 +219,9 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, campana, ini, fin }) {
 
                     <div className="col-sm-12 col-md-12 col-lg-12 text-center">
                         <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header">
+                                <h4 className="my-0 font-weight-normal">Trafico Acumulado {periodo} - {nombre}</h4>
+                            </div>
                             <div className="card-body">
                                 <section className=" float-end">
                                     <button

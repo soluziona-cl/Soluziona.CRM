@@ -24,11 +24,14 @@ const RepoTelefonicoAcumulado = () => {
   const [mostrarGrid, setMostrarGrid] = useState(false);
   const [mostrarGrid2, setMostrarGrid2] = useState(false);
 
+  const [optionList, setOptionList] = useState([]);
+
   const [startdateini, setStartDateIni] = useState(new Date());
   const [startdatefin, setStartDateFin] = useState(new Date());
   const [company, setStartCompany] = useState('');
   const [campana, setStartCampana] = useState('');
-
+  const [periodo, setPeriodo] = useState('');
+  const [flujo, setFlujo] = useState('');
   const years = range(2022, getYear(new Date()) + 2, 1);
   const months = [
     "Enero",
@@ -45,11 +48,10 @@ const RepoTelefonicoAcumulado = () => {
     "Diciembre",
   ];
 
-  // useEffect(() => {
-  //   FullTable()
-  //   // IntervaleFullTable()
+  useEffect(() => {
+    setOptionList([{"id":2023,"detalle":"2023"}])
 
-  // }, []);
+  }, []);
 
   //metodos para editar
   const filtrar = (event) => {
@@ -60,6 +62,8 @@ const RepoTelefonicoAcumulado = () => {
     setMostrarGrid2(false);
 
 
+    setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+
   };
 
   const filtrar2 = (event) => {
@@ -69,6 +73,7 @@ const RepoTelefonicoAcumulado = () => {
     setMostrarGrid(false);
     setMostrarGrid2(true);
 
+    setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
 
   };
 
@@ -109,8 +114,9 @@ const RepoTelefonicoAcumulado = () => {
                               <select className="form-control form-select" id="ddl_company"
                                 disabled={false}
                                 // value={select}
-                                onChange={(e) => (ChangeConecta(e.target.value))}>
-                                <option value="0">Compañia</option>
+                                onChange={(e) => (setPeriodo(e.target.value))}
+                                >
+                                <option value="0">Periodo</option>
                                 {optionList.map((item) => (
                                   <option key={item.id} value={item.id}>
                                     {item.detalle}
@@ -136,8 +142,8 @@ const RepoTelefonicoAcumulado = () => {
               <section className="col-lg-12 col-md-12 col-sm-12 mt-2">
                 {/* <TablaFull /> */}
                 <div className="mt-2">
-                  {mostrarGrid !== false && <ReporteTelefonicoAcumuladoTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
-                  {mostrarGrid2 !== false && <ReporteTelefonicoAcumuladoTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                  {mostrarGrid !== false && <ReporteTelefonicoAcumuladoTabla flujo={campana} periodo={periodo}  nombre={flujo}/>}
+                  {mostrarGrid2 !== false && <ReporteTelefonicoAcumuladoTabla flujo={campana} periodo={periodo} nombre={flujo}/>}
 
                 </div>
 
