@@ -107,83 +107,132 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, campana, ini, fin }) {
 
     })
 
+    const customStyles = {
+        rows: {
+            style: {
+                minHeight: '30px', // override the row height
+                maxHeight: '50px',
+                border: '1px solid #a9dff0',
+                borderRadius: '3px'
+            },
+            striped: {
+                backgroundColor: '#a9dff0',
+            },
+        },
+        headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                backgroundColor: '#a9dff0',
+
+            },
+        },
+        cells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for data cells
+                paddingRight: '8px',
+                fontSize: '12px',
+
+            },
+
+        },
+
+    };
+
 
     const columns = [
         {
-            name: 'MES',
-            selector: '',
+            name: 'Mes',
+            selector: row => row.mes,
+            center: true
         },
         {
-            name: 'Llamadas Recibidas',
-            selector: '',
-             style: { 'whiteSpace': 'unset' }
+            name: <div className="text-wrap">Llamadas Recibidas</div>,
+            selector: row => row.recibidas,
+            center: true
         },
         {
-            name: 'Llamadas Atendidas',
-            selector: '',
+            name: <div className="text-wrap">Atendidas</div>,
+            selector: row => row.atendidas,
+            center: true
+        },
+         {
+            name: <div className="text-wrap">Llamadas Atentidas 15"</div>,
+            selector: row => row.atendidas15,
+            center: true
         },
         {
-            name: 'Llamadas Atentidas 15"',
-            selector: '',
+            name: <div className="text-wrap">Llamadas Abandonadas</div>,
+            selector: row => row.abandonadas,
+            center: true
         },
         {
-            name: ' Llamadas Abandonadas',
-            selector: '',
+            name: <div className="text-wrap">Nivel de Atención (%)</div>,
+            selector: row => row.n_atencion,
+            center: true
         },
         {
-            name: ' Nivel de Atención (%)',
-            selector: '',
+            name: <div className="text-wrap">Nivel de Servicio (%)</div>,
+            selector: row => row.n_servicio,
+            center: true
         },
         {
-            name: ' Nivel de Servicio (%)',
-            selector: '',
+            name: <div className="text-wrap">Minutos In</div>,
+            selector: row => row.minutos,
+            center: true
         },
         {
-            name: 'Minutos In',
-            selector: '',
-        },
-        {
-            name: 'TMO IN',
-            selector: '',
-        },
-       
+            name: <div className="text-wrap">TMO IN</div>,
+            selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
+            center: true
+        }
     ];
-
 
     return (
         <>
-            <section className=" float-end">
-                <button
-                    onClick={handleOnExportCarga}
-                    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
-                    <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
-                </button>
-            </section>
+            <div className="row">
+                <div className="col-12">
 
+                    <div className="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-body">
+                                <section className=" float-end">
+                                    <button
+                                        onClick={handleOnExportCarga}
+                                        className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
+                                        <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
+                                    </button>
+                                </section>
+                                {loading ? (
+                                    <div className="d-flex justify-content-center mt-3">
+                                        <DotLoader
+                                            className='loading'
+                                            color={'#5b198ab5'}
+                                            loading={loading}
+                                            size={60}
+                                            aria-label="Loading Spinner"
+                                            data-testid="loader"
+                                        />
+                                    </div>
 
-            {loading ? (
-                <div className="d-flex justify-content-center mt-3">
-                    <DotLoader
-                        className='loading'
-                        color={'#5b198ab5'}
-                        loading={loading}
-                        size={60}
-                        aria-label="Loading Spinner"
-                        data-testid="loader"
-                    />
+                                ) : (
+                                    <div className=" mt-5 "  >
+
+                                        <DataTable
+                                            columns={columns}
+                                            data={datafull}
+                                            customStyles={customStyles}
+                                            striped
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-            ) : (
-                <div className=" mt-5 "  >
-
-                    <DataTable
-                        columns={columns}
-                        data={datafull}
-                        highlightOnHover
-                    />
-                </div>
-            )}
-            
+            </div>
         </>
     )
 }
