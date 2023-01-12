@@ -71,49 +71,38 @@ function Company_Campaing_Dash() {
     })
 
 
-    return ( <
-        >
+    return ( 
+        <>
 
-        <
-        div className = "col-sm-12 col-lg-3 mt-lg-0 mt-sm-2" >
-        <
-        select className = "form-control form-select"
-        id = "ddl_company"
-        disabled = { false }
-        // value={select}
-        onChange = {
-            (e) => (ChangeConecta(e.target.value)) } >
-        <
-        option value = "0" > Compañia < /option> {
-            optionList.map((item) => ( <
-                option key = { item.id }
-                value = { item.id } > { item.detalle } <
-                /option>
-            ))
-        } <
-        /select> <
-        /div> <
-        div className = "col-sm-12 col-lg-3 mt-lg-0 mt-sm-2" >
-        <
-        select className = "form-control form-select"
-        id = "ddl_campana"
-        disabled = { optionListDetalleEstado }
-        value = { optionListDetalleEstadoSelect }
-        onChange = {
-            (e) => (ChangeConectaDetalle(e.target.value)) } >
-        <
-        option value = "0" > Campaña < /option> {
-            optionListDetalle.map((item) => ( <
-                option key = { item.id }
-                value = { item.id } > { item.detalle } <
-                /option>
-            ))
-        } <
-        /select> <
-        /div>
+            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                <select className="form-control form-select" id="ddl_company"
+                    disabled={false}
+                    // value={select}
+                    onChange={(e) => (ChangeConecta(e.target.value))}>
+                    <option value="0">Compañia</option>
+                    {optionList.map((item) => (
+                        <option key={item.id} value={item.id}>
+                            {item.detalle}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                <select className="form-control form-select" id="ddl_campana"
+                    disabled={optionListDetalleEstado}
+                    value={optionListDetalleEstadoSelect}
+                    onChange={(e) => (ChangeConectaDetalle(e.target.value))}
+                >
+                    <option value="0">Campaña</option>
+                    {optionListDetalle.map((item) => (
+                        <option key={item.id} value={item.id}>
+                            {item.detalle}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
-        <
-        />
+        </>
     )
 }
 export default Company_Campaing_Dash

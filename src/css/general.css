@@ -38,3 +38,5 @@
     height: 100vh;
     
   }
+
+  .text-wrap { white-space: normal; }

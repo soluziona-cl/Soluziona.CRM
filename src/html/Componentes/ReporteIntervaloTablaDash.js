@@ -1,3 +1,4 @@
+import "../../css/styleLogin.css"
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from "axios";
@@ -8,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteIntervaloTablaDash({ flujo, campana, ini, fin }) {
+function ReporteIntervaloTablaDash({ flujo}) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -95,64 +96,116 @@ function ReporteIntervaloTablaDash({ flujo, campana, ini, fin }) {
     const Datos = (async () => {
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Resultado/Cargas',
-            { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin },
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/Intervalo/Acumulado',
+            { dato: flujo},
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
             console.log(result.data)
             setData(result.data);
+            // setData([{
+            //     "fecha": "3/18/2022",
+            //     "llamadas_dimensionadas": 83,
+            //     "recibidas": 87,
+            //     "atendidas": 86,
+            //     "sobre_bajo_trafico": 91,
+            //     "debio_atender": 92,
+            //     "n_atencion_e": 99,
+            //     "n_atencion_o": 85,
+            //     "agentes": 85,
+            //     "TMO": 94,
+            //     "agentes_r": 94
+            //   }]);
         }
 
     })
 
 
+    const customStyles = {
+        rows: {
+            style: {
+                minHeight: '50px', // override the row height
+                maxHeight:'60px',
+                border: '2px solid #a9dff0',
+                borderRadius: '3px'
+            },
+        },
+        headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                backgroundColor: '#a9dff0',
+                
+            },
+        },
+        cells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for data cells
+                paddingRight: '8px',
+                fontSize: '20px',
+              
+                        
+            },
+        },
+    };
+
+
     const columns = [
         {
-            name: 'Hora',
-            selector: '',
+            name: 'Fecha',
+            selector: row => row.fecha,
+            center:true
         },
         {
-            name: 'Llamadas dimensionadas a recibir',
-            selector: '',
-             style: { 'whiteSpace': 'unset' }
+            name: <div className="text-wrap">Llamadas dimensionadas a recibir</div> ,
+            selector: row => row.llamadas_dimensionadas,
+            center:true
         },
         {
-            name: 'Call_DisRecibidas',
-            selector: '',
+            name:  <div className="text-wrap">Call DisRecibidas</div> ,
+            selector: row => row.recibidas,
+            center:true
         },
         {
-            name: 'Atendidas',
-            selector: '',
+            name: <div className="text-wrap">Atendidas</div>,
+            selector: row => row.atendidas,
+            center:true
         },
         {
-            name: '% sobre o bajo tráfico',
-            selector: '',
+            name: <div className="text-wrap">Sobre o bajo tráfico</div>,
+            selector: row => row.sobre_bajo_trafico,
+            center:true
         },
         {
-            name: 'Debió atender',
-            selector: '',
+            name: <div className="text-wrap">Debió atender</div>,
+            selector: row => row.debio_atender,
+            center:true
         },
         {
-            name: 'Nivel de atención esperado',
-            selector: '',
+            name: <div className="text-wrap">Nivel de atención esperado</div>,
+            selector: row => row.n_atencion_e,
+            center:true
         },
         {
-            name: 'Nivel de atención obtenido',
-            selector: '',
+            name: <div className="text-wrap">Nivel de atención obtenido</div>,
+            selector: row => row.n_atencion_o,
+            center:true
         },
         {
-            name: 'Ejecutivos conectados',
-            selector: '',
+            name: <div className="text-wrap">Ejecutivos conectados</div>,
+            selector: row => row.agentes,
+            center:true
         },
         {
-            name: 'TMO',
-            selector: '',
+            name: <div className="text-wrap">TMO</div>,
+            selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
+            center:true
         },
         {
-            name: 'Ejecutivos Requeridos',
-            selector: '',
+            name: <div className="text-wrap">Ejecutivos Requeridos</div>,
+            selector: row => row.agentes_r,
+            center:true
         },
     ];
 
@@ -173,12 +226,15 @@ function ReporteIntervaloTablaDash({ flujo, campana, ini, fin }) {
                 </div>
 
             ) : (
-                <div className=" mt-5 "  >
+                <div className="mt-1">
 
                     <DataTable
                         columns={columns}
                         data={datafull}
-                        highlightOnHover
+                        // highlightOnHover
+                        
+                        customStyles={customStyles}
+                        
                     />
                 </div>
             )}

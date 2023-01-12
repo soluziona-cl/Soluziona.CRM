@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteIntervaloTabla({ flujo, ini, fin }) {
+function ReporteIntervaloTablaDetalle({ flujo, campana, ini, fin }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -52,8 +52,8 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
         let ws = XLSX.utils.json_to_sheet(arr2);
         var today = new Date()
         let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-        XLSX.utils.book_append_sheet(wb, ws, "Reporte_Intervalo_Resumen");
-        XLSX.writeFile(wb, "Reporte_Intervalo_Resumen" + date + ".xlsx");
+        XLSX.utils.book_append_sheet(wb, ws, "Carga");
+        XLSX.writeFile(wb, "Reporte_Intervalo_Detalle" + date + ".xlsx");
     };
 
     const [loading, setLoading] = useState(false)
@@ -95,7 +95,7 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
     const Datos = (async () => {
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/Intervalo/Acumulado/Reporte',
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/Intervalo/Detalle/Reporte',
             { dato: flujo, dato_1: ini, dato_2: fin },
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
@@ -126,8 +126,11 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
             style: {
                 minHeight: '30px', // override the row height
                 maxHeight: '50px',
-                border: '2px solid #a9dff0',
+                border: '1px solid #a9dff0',
                 borderRadius: '3px'
+            },
+            striped: {
+                backgroundColor: '#a9dff0',
             },
         },
         headCells: {
@@ -142,17 +145,19 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
             style: {
                 paddingLeft: '8px', // override the cell padding for data cells
                 paddingRight: '8px',
-                fontSize: '16px',
-
+                fontSize: '12px',
 
             },
+
         },
+
     };
+
 
     const columns = [
         {
-            name: 'Fecha',
-            selector: row => row.fecha,
+            name: 'Intervalo',
+            selector: row => row.intervalo,
             center: true
         },
         {
@@ -213,47 +218,47 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
 
             <div className="row">
                 <div className="col-12">
-                   
-                        <div className="col-sm-12 col-md-12 col-lg-12 text-center">
-                            <div className="card mb-4 rounded-3 shadow-sm">
-                                <div className="card-header">
-                                    <h4 className="my-0 font-weight-normal">Trafico Acumulado Dia</h4>
-                                </div>
-                                <div className="card-body">
-                                    <section className=" float-end">
-                                        <button
-                                            onClick={handleOnExportCarga}
-                                            className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
-                                            <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
-                                        </button>
-                                    </section>
-                                    {loading ? (
-                                        <div className="d-flex justify-content-center mt-3">
-                                            <DotLoader
-                                                className='loading'
-                                                color={'#5b198ab5'}
-                                                loading={loading}
-                                                size={60}
-                                                aria-label="Loading Spinner"
-                                                data-testid="loader"
-                                            />
-                                        </div>
 
-                                    ) : (
-                                        <div className=" mt-5 "  >
+                    <div className="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header">
+                                <h4 className="my-0 font-weight-normal">Trafico Detalle Dia</h4>
+                            </div>
+                            <div className="card-body">
+                                <section className=" float-end">
+                                    <button
+                                        onClick={handleOnExportCarga}
+                                        className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
+                                        <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
+                                    </button>
+                                </section>
+                                {loading ? (
+                                    <div className="d-flex justify-content-center mt-3">
+                                        <DotLoader
+                                            className='loading'
+                                            color={'#5b198ab5'}
+                                            loading={loading}
+                                            size={60}
+                                            aria-label="Loading Spinner"
+                                            data-testid="loader"
+                                        />
+                                    </div>
 
-                                            <DataTable
-                                                columns={columns}
-                                                data={datafull}
-                                                customStyles={customStyles}
-                                                noDataComponent="Los Filtros No Contiene Datos" //or your component
-                                            />
-                                        </div>
-                                    )}
-                                </div>
+                                ) : (
+                                    <div className=" mt-5 "  >
+
+                                        <DataTable
+                                            columns={columns}
+                                            data={datafull}
+                                            customStyles={customStyles}
+                                            striped
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
-                   
+                    </div>
+
                 </div>
 
             </div>
@@ -261,4 +266,4 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
         </>
     )
 }
-export default ReporteIntervaloTabla
+export default ReporteIntervaloTablaDetalle

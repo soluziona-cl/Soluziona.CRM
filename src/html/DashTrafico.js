@@ -7,11 +7,15 @@ import Sidebar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 import DashReporteCargaTabla from './Componentes/DashReporteCargaTabla';
 import ReporteIntervaloTablaDash from './Componentes/ReporteIntervaloTablaDash';
-
+import ReporteIntervaloDetalleTablaDash from './Componentes/ReporteIntervaloDetalleTablaDash';
+import DashBarras from './Componentes/DashBarras';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import DashBarrasTMO from './Componentes/DashBarrasTMO';
 
 const DashTrafico = () => {
 
-
+  const [key, setKey] = useState('trafico');
   const [filtrar, Filtrar] = useState(false);
   const [company, setCompany] = useState('');
   const [carga, setCarga] = useState('');
@@ -51,7 +55,7 @@ const DashTrafico = () => {
                           <h4 className="my-0 font-weight-normal">Trafico Dia</h4>
                         </div>
                         <div className="card-body">
-                          <ReporteIntervaloTablaDash flujo='1' campana='1' ini='20230101' fin='20230106' ></ReporteIntervaloTablaDash>
+                          <ReporteIntervaloTablaDash flujo='0130' ></ReporteIntervaloTablaDash>
                         </div>
                       </div>
                     </div>
@@ -68,7 +72,21 @@ const DashTrafico = () => {
                           <h4 className="my-0 font-weight-normal">Evolucion Dia</h4>
                         </div>
                         <div className="card-body">
-                          <Barras></Barras>
+                          <Tabs
+                            id="controlled-tab-example"
+                            activeKey={key}
+                            onSelect={(k) => setKey(k)}
+                            className="mb-3">
+                            <Tab eventKey="trafico" title="Trafico">
+                              <DashBarras flujo='0130'></DashBarras>
+                            </Tab>
+                            <Tab eventKey="tmo" title="TMO">
+                              <DashBarrasTMO flujo='0130'></DashBarrasTMO>
+                            </Tab>
+
+                          </Tabs>
+
+
                           {/* {filtrar !== false &&
                             <DashReporteCargaTablaFilter company={company} carga={carga}></DashReporteCargaTablaFilter>} */}
                         </div>
@@ -88,7 +106,7 @@ const DashTrafico = () => {
                           <h4 className="my-0 font-weight-normal">Detalle Intervalo</h4>
                         </div>
                         <div className="card-body">
-                          <ReporteIntervaloTablaDash flujo='1' campana='1' ini='20230101' fin='20230106' ></ReporteIntervaloTablaDash>
+                          <ReporteIntervaloDetalleTablaDash flujo='0130' ></ReporteIntervaloDetalleTablaDash>
                         </div>
                       </div>
                     </div>

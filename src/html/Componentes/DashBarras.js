@@ -6,7 +6,7 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 
 //TODO variable global para pasar por Json el rol del usuario en el metodo guardar nuevo
 
-function Barras() {
+function DashBarras({flujo}) {
 
     const [data, setData] = useState([]);
     const [etiquetas, setEtiquetas] = useState([]);
@@ -49,27 +49,41 @@ function Barras() {
 
     const Datos = (async() => {
 
-        axios.post("https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Panel/Inbound/Intervalo/Now", { dato: '' }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
-            .then((response) => {
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/Intervalo/Detalle',
+        { dato: flujo },
+        { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
-                var arrr = response.data;
-                // console.log(arrr)
-                setData(arrr)
+    if (result.status === 200) {
 
-            })
+        console.log(result.data)
+          setData(result.data);
+        // setData([
+        //     {"intervalo":"08:30","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"09:00","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"09:30","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"10:00","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"10:30","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"11:00","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"11:30","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"12:00","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"12:30","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
+        //     {"intervalo":"13:00","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94}
+            
+        //     ]);
+    }
 
     })
 
     let columns = []
     let recibidas = []
     let contestadas = []
-    let acepta = []
+    // let acepta = []
 
     data.forEach((element) => {
 
         recibidas.push(parseInt(element.recibidas))
-        contestadas.push(parseInt(element.contestadas))
-        acepta.push(parseInt(element.natencion))
+        contestadas.push(parseInt(element.atendidas))
+        // acepta.push(parseInt(element.natencion))
         columns.push(element.intervalo)
     });
 
@@ -89,7 +103,8 @@ function Barras() {
 
         // Add legend
         legend: {
-            data: ['Recorrido', 'Contactado', 'Acepta']
+            // data: ['Recorrido', 'Contactado', 'Acepta']
+            data: ['Ingresadas', 'Contestadas']
         },
         toolbox: {
             show: true,
@@ -98,8 +113,8 @@ function Barras() {
 
 
         // Add custom colors
-        color: ['#666EE8', '#20A464', '#FFFF00'],
-
+        // color: ['#666EE8', '#20A464', '#FFFF00'],
+        color: ['#666EE8', '#20A464'],
         // Enable drag recalculate
         calculable: true,
 
@@ -113,13 +128,15 @@ function Barras() {
         yAxis: [{
             type: 'value',
             min: 0,
-            max: 25,
+            max: function (value) {
+                return value.max + 20;
+            },
             name: 'Cantidad'
         }],
 
         // Add series
         series: [{
-                name: 'Recorrido',
+                name: 'Ingresadas',
                 type: 'bar',
                 data: recibidas,
                 itemStyle: {
@@ -143,33 +160,9 @@ function Barras() {
                 }
             },
             {
-                name: 'Contactado',
+                name: 'Contestadas',
                 type: 'bar',
                 data: contestadas,
-                itemStyle: {
-                    normal: {
-                        label: {
-                            show: true,
-                            textStyle: {
-                                fontWeight: 500
-                            }
-                        }
-                    }
-                },
-                markPoint: {
-                    data: [
-                        { type: 'max', name: 'Max' },
-                        { type: 'min', name: 'Min' }
-                    ]
-                },
-                markLine: {
-                    data: [{ type: 'average', name: 'Promedio' }]
-                }
-            },
-            {
-                name: 'Acepta',
-                type: 'bar',
-                data: acepta,
                 itemStyle: {
                     normal: {
                         label: {
@@ -204,4 +197,4 @@ function Barras() {
     );
 }
 
-export default Barras
+export default DashBarras
