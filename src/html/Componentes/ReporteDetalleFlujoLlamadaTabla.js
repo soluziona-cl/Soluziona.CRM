@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteDetalleFlujoLlamadaTabla({ flujo, campana, ini, fin }) {
+function ReporteDetalleFlujoLlamadaTabla({ flujo, ini, fin,nombre }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -52,8 +52,8 @@ function ReporteDetalleFlujoLlamadaTabla({ flujo, campana, ini, fin }) {
         let ws = XLSX.utils.json_to_sheet(arr2);
         var today = new Date()
         let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-        XLSX.utils.book_append_sheet(wb, ws, "Carga");
-        XLSX.writeFile(wb, "Gestion_Carga_" + date + ".xlsx");
+        XLSX.utils.book_append_sheet(wb, ws, "Reporte_Intervalo_Resumen");
+        XLSX.writeFile(wb, "Reporte_Intervalo_Resumen" + date + ".xlsx");
     };
 
     const [loading, setLoading] = useState(false)
@@ -95,76 +95,210 @@ function ReporteDetalleFlujoLlamadaTabla({ flujo, campana, ini, fin }) {
     const Datos = (async () => {
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Resultado/Cargas',
-            { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin },
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/Flujo/Detalle',
+            { dato: flujo, dato_1: ini, dato_2: fin },
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
             console.log(result.data)
             setData(result.data);
+            // setData([{
+            //     "fecha": "3/18/2022",
+            //     "llamadas_dimensionadas": 83,
+            //     "recibidas": 87,
+            //     "atendidas": 86,
+            //     "sobre_bajo_trafico": 91,
+            //     "debio_atender": 92,
+            //     "n_atencion_e": 99,
+            //     "n_atencion_o": 85,
+            //     "agentes": 85,
+            //     "TMO": 94,
+            //     "agentes_r": 94
+            //   }]);
         }
 
     })
 
 
-    const columns = [
-        { name: 'Id Llamada', selector: '', },
-        { name: 'DNIS', selector: '', },
-        { name: 'ANI', selector: '', },
-        { name: 'Rut', selector: '', },
-        { name: 'Fecha', selector: '', },
-        { name: 'Hora Inicio', selector: '', },
-        { name: 'Hora Termino', selector: '', },
-        { name: 'Flujo Llamada', selector: '', },
-        { name: 'Tipo Cliente', selector: '', },
-        { name: 'Opcion IVR', selector: '', },
-        { name: 'Grupo', selector: '', },
-        { name: 'Ejecutivo', selector: '', },
-        { name: 'Solo Autoatención', selector: '', },
-        { name: 'Ivr Time', selector: '', },
-        { name: 'Wait Time', selector: '', },
-        { name: 'Answer Time', selector: '', },
-        { name: 'Tiempo Total', selector: '', },
-        { name: 'Tiempo IN', selector: '', },
+    const customStyles = {
+        rows: {
+            style: {
+                minHeight: '30px', // override the row height
+                maxHeight: '50px',
+                border: '2px solid #a9dff0',
+                borderRadius: '3px'
+            },
+        },
+        headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                backgroundColor: '#a9dff0',
+                fontSize: '16px',
 
+            },
+        },
+        cells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for data cells
+                paddingRight: '8px',
+                fontSize: '16px',
+
+
+            },
+        },
+    };
+
+    const columns = [
+        {
+            name: 'Id Llamada',
+            selector: row => row.idllamada,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">DNIS</div>,
+            selector: row => row.dnis,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">ANI</div>,
+            selector: row => row.ani,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">RUT</div>,
+            selector: row => row.rut,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Fecha</div>,
+            selector: row => row.fecha,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Hora Inicio</div>,
+            selector: row => row.horainicio,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Hora Termino</div>,
+            selector: row => row.horatermino,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Flujo Llamada</div>,
+            selector: row => row.flujollamada,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Tipo Cliente</div>,
+            selector: row => row.agentes,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Tipo Cliente</div>,
+            selector: row => row.tipocliente,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Opcion IVR</div>,
+            selector: row => row.opcionivr,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Grupo</div>,
+            selector: row => row.grupo,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Ejecutivo</div>,
+            selector: row => row.ejecutivo,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Solo Autoatención</div>,
+            selector: row => row.soloautoatencion,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Ivr Time</div>,
+            selector: row => row.ivrtime,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Wait Time</div>,
+            selector: row => row.waittime,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Answer Time</div>,
+            selector: row => row.answertime,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Tiempo Total</div>,
+            selector: row => row.tiempototal,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Tiempo IN</div>,
+            selector: row => row.tiempoin,
+            center: true
+        },
 
     ];
 
 
     return (
         <>
-            <section className=" float-end">
-                <button
-                    onClick={handleOnExportCarga}
-                    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
-                    <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
-                </button>
-            </section>
 
+            <div className="row">
+                <div className="col-12">
+                   
+                        <div className="col-sm-12 col-md-12 col-lg-12 text-center">
+                            <div className="card mb-4 rounded-3 shadow-sm">
+                                <div className="card-header">
+                                    <h4 className="my-0 font-weight-normal">Detalle Flujo Llamada - {nombre}</h4>
+                                </div>
+                                <div className="card-body">
+                                    <section className=" float-end">
+                                        <button
+                                            onClick={handleOnExportCarga}
+                                            className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
+                                            <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
+                                        </button>
+                                    </section>
+                                    {loading ? (
+                                        <div className="d-flex justify-content-center mt-3">
+                                            <DotLoader
+                                                className='loading'
+                                                color={'#5b198ab5'}
+                                                loading={loading}
+                                                size={60}
+                                                aria-label="Loading Spinner"
+                                                data-testid="loader"
+                                            />
+                                        </div>
 
-            {loading ? (
-                <div className="d-flex justify-content-center mt-3">
-                    <DotLoader
-                        className='loading'
-                        color={'#5b198ab5'}
-                        loading={loading}
-                        size={60}
-                        aria-label="Loading Spinner"
-                        data-testid="loader"
-                    />
+                                    ) : (
+                                        <div className=" mt-5 "  >
+
+                                            <DataTable
+                                                columns={columns}
+                                                data={datafull}
+                                                customStyles={customStyles}
+                                                noDataComponent="Los Filtros No Contiene Datos" //or your component
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                   
                 </div>
 
-            ) : (
-                <div className=" mt-5 "  >
-
-                    <DataTable
-                        columns={columns}
-                        data={datafull}
-                        highlightOnHover
-                    />
-                </div>
-            )}
+            </div>
 
         </>
     )
