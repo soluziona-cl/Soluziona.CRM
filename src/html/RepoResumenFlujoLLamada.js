@@ -16,18 +16,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Company_Campaing from './Componentes/Company_Campaing';
 import ReporteResumenFlujoLlamadaTabla from "./Componentes/ReporteResumenFlujoLlamadaTabla";
 
-
-  registerLocale('es', es)
+registerLocale('es', es)
 
 //con DataTable
 const RepoResumenFlujoLLamada = () => {
   const [mostrarGrid, setMostrarGrid] = useState(false);
+  const [mostrarGrid2, setMostrarGrid2] = useState(false);
 
   const [startdateini, setStartDateIni] = useState(new Date());
   const [startdatefin, setStartDateFin] = useState(new Date());
   const [company, setStartCompany] = useState('');
   const [campana, setStartCampana] = useState('');
-
+  const [flujo, setFlujo] = useState('');
   const years = range(2022, getYear(new Date()) + 2, 1);
   const months = [
     "Enero",
@@ -44,11 +44,7 @@ const RepoResumenFlujoLLamada = () => {
     "Diciembre",
   ];
 
-  // useEffect(() => {
-  //   FullTable()
-  //   // IntervaleFullTable()
 
-  // }, []);
 
   //metodos para editar
   const filtrar = (event) => {
@@ -56,10 +52,27 @@ const RepoResumenFlujoLLamada = () => {
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
-  
+    setMostrarGrid2(false);
+    setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+
   };
 
-  
+  const filtrar2 = (event) => {
+
+    setStartCompany(document.getElementById("ddl_company").value)
+    setStartCampana(document.getElementById("ddl_campana").value)
+    setMostrarGrid(false);
+    setMostrarGrid2(true);
+
+    setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+  };
+
+
+  // const onClick = useCallback(event => {
+  //   console.log('Clicked Item : ', event.currentTarget);
+  // }, [item]);
+
+
   return (
     <>
 
@@ -81,178 +94,180 @@ const RepoResumenFlujoLLamada = () => {
               <div className="row">
                 <div className="col-12">
                   <Company_Campaing />
-                  <div className="page-header col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                    <h3>Rango de Fechas de Carga (Desde - Hasta)</h3>
-                  </div>
-                  <div className="row mt-2 bg-light align-items-center">
-
-                    <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                      <DatePicker
-                        id="ini"
-                        locale='es'
-                        className="form-control rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                        //  customInput={<ExampleCustomInput />}
-                        renderCustomHeader={({
-                          date,
-                          changeYear,
-                          changeMonth,
-                          decreaseMonth,
-                          increaseMonth,
-                          prevMonthButtonDisabled,
-                          nextMonthButtonDisabled,
-                        }) => (
-                          <div
-                            style={{
-                              margin: 10,
-                              display: "flex",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <button
-                              onClick={decreaseMonth}
-                              disabled={prevMonthButtonDisabled}
-                            >
-                              {"<"}
-                            </button>
-                            <select
-                              value={getYear(date)}
-                              onChange={({ target: { value } }) => changeYear(value)}
-                            >
-                              {years.map((option) => (
-                                <option key={option} value={option}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-
-                            <select
-                              value={months[getMonth(date)]}
-                              onChange={({ target: { value } }) =>
-                                changeMonth(months.indexOf(value))
-                              }
-                            >
-                              {months.map((option) => (
-                                <option key={option} value={option}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-
-                            <button
-                              onClick={increaseMonth}
-                              disabled={nextMonthButtonDisabled}
-                            >
-                              {">"}
-                            </button>
-                          </div>
-                        )}
-                        selected={startdateini}
-                        dateFormat="dd/MM/yyyy"
-                        maxDate={new Date()}
-                        onChange={(date) => {
-                          setStartDateIni(date);
-
-                        }}
-                      /></div>
-                    <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                      <DatePicker
-                        id="fin"
-                        locale='es'
-                        className="form-control rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                        //  customInput={<ExampleCustomInput />}
-                        renderCustomHeader={({
-                          date,
-                          changeYear,
-                          changeMonth,
-                          decreaseMonth,
-                          increaseMonth,
-                          prevMonthButtonDisabled,
-                          nextMonthButtonDisabled,
-                        }) => (
-                          <div
-                            style={{
-                              margin: 10,
-                              display: "flex",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <button
-                              onClick={decreaseMonth}
-                              disabled={prevMonthButtonDisabled}
-                            >
-                              {"<"}
-                            </button>
-                            <select
-                              value={getYear(date)}
-                              onChange={({ target: { value } }) => changeYear(value)}
-                            >
-                              {years.map((option) => (
-                                <option key={option} value={option}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-
-                            <select
-                              value={months[getMonth(date)]}
-                              onChange={({ target: { value } }) =>
-                                changeMonth(months.indexOf(value))
-                              }
-                            >
-                              {months.map((option) => (
-                                <option key={option} value={option}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-
-                            <button
-                              onClick={increaseMonth}
-                              disabled={nextMonthButtonDisabled}
-                            >
-                              {">"}
-                            </button>
-                          </div>
-                        )}
-                        selected={startdatefin}
-                        dateFormat="dd/MM/yyyy"
-                        maxDate={new Date()}
-                        onChange={(date) => {
-                          setStartDateFin(date);
-
-                        }}
-                      /></div>
-                    <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">  
-                    <button
-                      className="mb-0 btn btn-success"   
-                      onClick={filtrar}
-                    >Buscar
-                    </button>
-
-                    </div>
-
-                  </div>
-                  <section className="col-lg-12 col-sm-8 mt-2">
-                    {/* <TablaFull /> */}
-                    <div className=" mt-5 "  >
-                    {mostrarGrid !== false && <ReporteResumenFlujoLlamadaTabla flujo={company} campana={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
-                    </div>
-                    
-                  </section>
-
                 </div>
               </div>
+              <div className="row">
+                <div className="col-12">
+                  <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
+                    <div className="col-sm-12 col-md-12 col-lg-8">
+                      <div className="card mb-4 rounded-3">
+                        <div className="card-body">
+                          <div className="row mt-2 align-items-center">
+                            <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
+                              <DatePicker
+                                id="ini"
+                                locale='es'
+                                className="form-control rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                                //  customInput={<ExampleCustomInput />}
+                                renderCustomHeader={({
+                                  date,
+                                  changeYear,
+                                  changeMonth,
+                                  decreaseMonth,
+                                  increaseMonth,
+                                  prevMonthButtonDisabled,
+                                  nextMonthButtonDisabled,
+                                }) => (
+                                  <div
+                                    style={{
+                                      margin: 10,
+                                      display: "flex",
+                                      justifyContent: "center",
+                                    }}
+                                  >
+                                    <button
+                                      onClick={decreaseMonth}
+                                      disabled={prevMonthButtonDisabled}
+                                    >
+                                      {"<"}
+                                    </button>
+                                    <select
+                                      value={getYear(date)}
+                                      onChange={({ target: { value } }) => changeYear(value)}
+                                    >
+                                      {years.map((option) => (
+                                        <option key={option} value={option}>
+                                          {option}
+                                        </option>
+                                      ))}
+                                    </select>
+
+                                    <select
+                                      value={months[getMonth(date)]}
+                                      onChange={({ target: { value } }) =>
+                                        changeMonth(months.indexOf(value))
+                                      }
+                                    >
+                                      {months.map((option) => (
+                                        <option key={option} value={option}>
+                                          {option}
+                                        </option>
+                                      ))}
+                                    </select>
+
+                                    <button
+                                      onClick={increaseMonth}
+                                      disabled={nextMonthButtonDisabled}
+                                    >
+                                      {">"}
+                                    </button>
+                                  </div>
+                                )}
+                                selected={startdateini}
+                                dateFormat="dd/MM/yyyy"
+                                maxDate={new Date()}
+                                onChange={(date) => {
+                                  setStartDateIni(date);
+
+                                }}
+                              /></div>
+                            <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
+                              <DatePicker
+                                id="fin"
+                                locale='es'
+                                className="form-control rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                                //  customInput={<ExampleCustomInput />}
+                                renderCustomHeader={({
+                                  date,
+                                  changeYear,
+                                  changeMonth,
+                                  decreaseMonth,
+                                  increaseMonth,
+                                  prevMonthButtonDisabled,
+                                  nextMonthButtonDisabled,
+                                }) => (
+                                  <div
+                                    style={{
+                                      margin: 10,
+                                      display: "flex",
+                                      justifyContent: "center",
+                                    }}
+                                  >
+                                    <button
+                                      onClick={decreaseMonth}
+                                      disabled={prevMonthButtonDisabled}
+                                    >
+                                      {"<"}
+                                    </button>
+                                    <select
+                                      value={getYear(date)}
+                                      onChange={({ target: { value } }) => changeYear(value)}
+                                    >
+                                      {years.map((option) => (
+                                        <option key={option} value={option}>
+                                          {option}
+                                        </option>
+                                      ))}
+                                    </select>
+
+                                    <select
+                                      value={months[getMonth(date)]}
+                                      onChange={({ target: { value } }) =>
+                                        changeMonth(months.indexOf(value))
+                                      }
+                                    >
+                                      {months.map((option) => (
+                                        <option key={option} value={option}>
+                                          {option}
+                                        </option>
+                                      ))}
+                                    </select>
+
+                                    <button
+                                      onClick={increaseMonth}
+                                      disabled={nextMonthButtonDisabled}
+                                    >
+                                      {">"}
+                                    </button>
+                                  </div>
+                                )}
+                                selected={startdatefin}
+                                dateFormat="dd/MM/yyyy"
+                                maxDate={new Date()}
+                                onChange={(date) => {
+                                  setStartDateFin(date);
+
+                                }}
+                              /></div>
+                            <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
+
+                              {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
+                              {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <section className="col-lg-12 col-md-12 col-sm-12 mt-2">
+                {/* <TablaFull /> */}
+                <div className="mt-2">
+                  {mostrarGrid !== false && <ReporteResumenFlujoLlamadaTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} nombre={flujo} />}
+                  {mostrarGrid2 !== false && <ReporteResumenFlujoLlamadaTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} nombre={flujo} />}
+                 
+                </div>
+
+              </section>
             </div>
-
-
           </main>
-
         </div>
         <Footer />
       </div>
-
-
-
     </>
   );
 };

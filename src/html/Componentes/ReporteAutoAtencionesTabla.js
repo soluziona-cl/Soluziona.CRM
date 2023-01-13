@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from "axios";
-import { Modal } from "./Modal";
 import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteAutoAtencionesTabla({ flujo, campana, ini, fin }) {
+
+
+function ReporteAutoAtencionesTabla({ flujo, periodo, nombre }) {
+
+
+    const getTotals = (data, key) => {
+        let total = 0;
+        data.forEach(item => {
+            total += parseInt(item[key]);
+        });
+        return total;
+    };
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -37,7 +47,7 @@ function ReporteAutoAtencionesTabla({ flujo, campana, ini, fin }) {
         let wb = XLSX.utils.book_new();
 
         var arr2 = datafull.map(v => ({
-            RUT_PERSONA: v.ruT_PERSONA,
+            "Mes": v.mes,
             This_Phone_number: v.this_Phone_number,
             Call_Disposition: v.call_Disposition,
             Call_Time: v.call_Time,
@@ -95,72 +105,198 @@ function ReporteAutoAtencionesTabla({ flujo, campana, ini, fin }) {
     const Datos = (async () => {
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Resultado/Cargas',
-            { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin },
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/AutoAtencion',
+            { dato: flujo, dato_1: periodo },
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
-            console.log(result.data)
+            // console.log(result.data)
+
+            result.data.push({
+                mes: "Acum.",
+                licencia: getTotals(result.data, "licencia"),
+                saldo: getTotals(result.data, "saldo"),
+                pagopension: getTotals(result.data, "pagopension"),
+                sucursales: getTotals(result.data, "sucursales"),
+                callcenter:  getTotals(result.data, "callcenter"),
+                formapago:  getTotals(result.data, "formapago"),
+                derivaprepago:  getTotals(result.data, "derivaprepago"),
+                parques: getTotals(result.data, "parques"),
+                creditovigente: getTotals(result.data, "creditovigente"),
+                bonogobierno: getTotals(result.data, "bonogobierno"),
+                tam: getTotals(result.data, "tam"),
+                transferencia: getTotals(result.data, "transferencia"),
+                afaestado: getTotals(result.data, "afaestado"),
+                afadocumentos: getTotals(result.data, "afadocumentos"),
+            });
+
             setData(result.data);
         }
 
     })
 
+    const customStyles = {
+        rows: {
+            style: {
+                minHeight: '30px', // override the row height
+                maxHeight: '50px',
+                border: '1px solid #a9dff0',
+                borderRadius: '3px'
+            },
+            striped: {
+                backgroundColor: '#a9dff0',
+            },
+        },
+        headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                backgroundColor: '#a9dff0',
+                fontSize: '16px',
+
+            },
+        },
+        cells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for data cells
+                paddingRight: '8px',
+                fontSize: '16px',
+
+            },
+
+        },
+
+    };
+
 
     const columns = [
-        { name: 'MES', selector: '', },
-        { name: 'Auto atención Licencias Médicas', selector: '', },
-        { name: 'Auto atención Saldo Favor', selector: '', },
-        { name: 'Fecha y lugar de pago pensión', selector: '', },
-        { name: 'Apertura y horario de atención Sucursales', selector: '', },
-        { name: 'Horario de atención Call Center FH', selector: '', },
-        { name: 'Cambio forma de pago', selector: '', },
-        { name: 'Deriva Prepago', selector: '', },
-        { name: 'Grabación de Parques', selector: '', },
-        { name: 'Info. Crédito vigente', selector: '', },
-        { name: 'Bono Gobierno Deriva (101)', selector: '', },
-        { name: 'TAM', selector: '', },
-        { name: 'Autorización para pagos de LM con transferencias electrónicas', selector: '', },
-        { name: 'AFA Estado', selector: '', },
-        { name: 'AFA documentos', selector: '', },
+        {
+            name: <div className="text-wrap">Mes</div>,
+            selector: row => row.mes,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Auto atención Licencias Médicas</div>,
+            selector: row => row.licencia,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Auto atención Saldo Favor</div>,
+            selector: row => row.saldo,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Fecha y lugar de pago pensión</div>,
+            selector: row => row.pagopension,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Apertura y horario de atención Sucursales</div>,
+            selector: row => row.sucursales,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Horario de atención Call Center FH</div>,
+            selector: row => row.callcenter,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Cambio forma de pago</div>,
+            selector: row => row.formapago,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Deriva Prepago</div>,
+            selector: row => row.derivaprepago,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Grabación de Parques</div>,
+            selector: row => row.parques,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Info. Crédito vigente</div>,
+            selector: row => row.creditovigente,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Bono Gobierno Deriva (101)</div>,
+            selector: row => row.bonogobierno,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">TAM</div>,
+            selector: row => row.tam,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Autorización para pagos de LM con transferencias electrónicas</div>,
+            selector: row => row.transferencia,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">AFA Estado</div>,
+            selector: row => row.afaestado,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">AFA documentos</div>,
+            selector: row => row.afadocumentos,
+            center: true
+        },
+       
     ];
-
 
     return (
         <>
-            <section className=" float-end">
-                <button
-                    onClick={handleOnExportCarga}
-                    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
-                    <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
-                </button>
-            </section>
+            <div className="row">
+                <div className="col-12">
 
+                    <div className="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header">
+                                <h4 className="my-0 font-weight-normal">AutoAtenciones {periodo} - {nombre}</h4>
+                            </div>
+                            <div className="card-body">
+                                <section className=" float-end">
+                                    <button
+                                        onClick={handleOnExportCarga}
+                                        className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
+                                        <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
+                                    </button>
+                                </section>
+                                {loading ? (
+                                    <div className="d-flex justify-content-center mt-3">
+                                        <DotLoader
+                                            className='loading'
+                                            color={'#5b198ab5'}
+                                            loading={loading}
+                                            size={60}
+                                            aria-label="Loading Spinner"
+                                            data-testid="loader"
+                                        />
+                                    </div>
 
-            {loading ? (
-                <div className="d-flex justify-content-center mt-3">
-                    <DotLoader
-                        className='loading'
-                        color={'#5b198ab5'}
-                        loading={loading}
-                        size={60}
-                        aria-label="Loading Spinner"
-                        data-testid="loader"
-                    />
+                                ) : (
+                                    <div className=" mt-5 "  >
+
+                                        <DataTable
+                                            columns={columns}
+                                            data={datafull}
+                                            customStyles={customStyles}
+                                            striped
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-            ) : (
-                <div className=" mt-5 "  >
-
-                    <DataTable
-                        columns={columns}
-                        data={datafull}
-                        highlightOnHover
-                    />
-                </div>
-            )}
-
+            </div>
         </>
     )
 }
