@@ -112,19 +112,19 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, periodo, nombre }) {
 
         if (result.status === 200) {
 
-            // console.log(result.data)
+            console.log(result.data)
 
-            // result.data.unshift({
-            //     mes: "totals",
-            //     recibidas: getTotals(result.data, "recibidas"),
-            //     three: getTotals(result.data, "three"),
-            //     four: getTotals(result.data, "four"),
-            //     five: getTotals(result.data, "five"),
-            //     six: "",
-            //     seven: "",
-            //     eight: "",
-            //     nine:"",
-            // });
+            result.data.push({//aqui
+                mes: "totales",
+                recibidas: getTotals(result.data, "recibidas"),
+                atendidas: getTotals(result.data, "atendidas"),
+                atendidas15: getTotals(result.data, "atendidas15"),
+                abandonadas: getTotals(result.data, "abandonadas"),
+                six: "",
+                seven: "",
+                eight: "",
+                nine:"",
+            });
 
             setData(result.data);
         }
@@ -160,21 +160,36 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, periodo, nombre }) {
             },
 
         },
+        
 
     };
-
 
     const columns = [
         {
             name: <div className="text-wrap">Mes</div>,
             selector: row => row.mes,
-            center: true
+            center: true,
+
+            conditionalCellStyles: [
+                {
+                    when: row => row.mes == "totales",
+                    style: {
+                        backgroundColor: 'rgba(63, 195, 128, 0.9)',
+                        color: 'white',
+                        '&:hover': {
+                            cursor: 'pointer',
+                        },
+                    },
+                },
+               
+            ],
+            
         },
         {
             name: <div className="text-wrap">Llamadas Recibidas</div>,
             selector: row => row.recibidas,
             center: true
-        },
+        }, 
         {
             name: <div className="text-wrap">Atendidas</div>,
             selector: row => row.atendidas,
@@ -209,8 +224,11 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, periodo, nombre }) {
             name: <div className="text-wrap">TMO IN</div>,
             selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
             center: true
+
         }
     ];
+
+    //const columnreversed = columns.reverse();
 
     return (
         <>
@@ -250,6 +268,8 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, periodo, nombre }) {
                                             data={datafull}
                                             customStyles={customStyles}
                                             striped
+                                            onColumnOrderChange={cols => console.log(cols)}
+                                            
                                         />
                                     </div>
                                 )}
