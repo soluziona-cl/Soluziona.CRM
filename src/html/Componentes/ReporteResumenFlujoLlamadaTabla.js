@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteResumenFlujoLlamadaTabla({ flujo, campana, ini, fin }) {
+function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin,nombre }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -95,7 +95,7 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, campana, ini, fin }) {
 
 
         const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Resultado/Cargas',
-            { dato: flujo, dato_1: campana, dato_2: ini, dato_3: fin },
+            { dato: flujo, dato_1: ini, dato_2: fin},
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
@@ -106,54 +106,137 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, campana, ini, fin }) {
 
     })
 
+const customStyles = {
+        rows: {
+            style: {
+                minHeight: '30px', // override the row height
+                maxHeight: '50px',
+                border: '1px solid #a9dff0',
+                borderRadius: '3px'
+            },
+            striped: {
+                backgroundColor: '#a9dff0',
+            },
+        },
+        headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                backgroundColor: '#a9dff0',
+
+            },
+        },
+        cells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for data cells
+                paddingRight: '8px',
+                fontSize: '12px',
+
+            },
+
+        },
+
+    };
+
 
     const columns = [
-        { name: 'Tipo Cliente', selector: '', },
-        { name: 'Opcion Autoatencion1', selector: '', },
-        { name: 'Total', selector: '', },
-        { name: '01-05-2022', selector: '', },
-        { name: '02-05-2022', selector: '', },
-        { name: '03-05-2022', selector: '', },
-        { name: '04-05-2022', selector: '', },
-        { name: '05-05-2022', selector: '', },
-        { name: '06-05-2022', selector: '', },
-
+        {
+            name: <div className="text-wrap">Tipo Cliente</div>,
+            selector: row => row.mes,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Opcion Autoatencion1</div>,
+            selector: row => row.recibidas,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Total</div>,
+            selector: row => row.atendidas,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Llamadas Atendidas 15"</div>,
+            selector: row => row.atendidas15,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Llamadas Abandonadas</div>,
+            selector: row => row.abandonadas,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Nivel de Atención (%)</div>,
+            selector: row => row.n_atencion,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Nivel de Servicio (%)</div>,
+            selector: row => row.n_servicio,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Minutos In</div>,
+            selector: row => row.minutos,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">TMO IN</div>,
+            selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
+            center: true
+        }
     ];
 
 
     return (
         <>
-            <section className=" float-end">
-                <button
-                    onClick={handleOnExportCarga}
-                    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
-                    <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
-                </button>
-            </section>
+            <div className="row">
+                <div className="col-12">
 
+                    <div className="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header">
+                                <h4 className="my-0 font-weight-normal">Resumen Flujo LLamado - {nombre}</h4>
+                            </div>
+                            <div className="card-body">
+                                <section className=" float-end">
+                                    <button
+                                        onClick={handleOnExportCarga}
+                                        className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
+                                        <i className="fa-solid fa-file-excel mr-2"></i>  Exportar
+                                    </button>
+                                </section>
+                                {loading ? (
+                                    <div className="d-flex justify-content-center mt-3">
+                                        <DotLoader
+                                            className='loading'
+                                            color={'#5b198ab5'}
+                                            loading={loading}
+                                            size={60}
+                                            aria-label="Loading Spinner"
+                                            data-testid="loader"
+                                        />
+                                    </div>
 
-            {loading ? (
-                <div className="d-flex justify-content-center mt-3">
-                    <DotLoader
-                        className='loading'
-                        color={'#5b198ab5'}
-                        loading={loading}
-                        size={60}
-                        aria-label="Loading Spinner"
-                        data-testid="loader"
-                    />
+                                ) : (
+                                    <div className=" mt-5 "  >
+
+                                        <DataTable
+                                            columns={columns}
+                                            data={datafull}
+                                            customStyles={customStyles}
+                                            striped
+                                            noDataComponent="Los Filtros No Contiene Datos" //or your component
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-            ) : (
-                <div className=" mt-5 "  >
-
-                    <DataTable
-                        columns={columns}
-                        data={datafull}
-                        highlightOnHover
-                    />
-                </div>
-            )}
+            </div>
 
         </>
     )
