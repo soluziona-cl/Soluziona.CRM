@@ -6,7 +6,7 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 //TODO variable global para pasar por Json el rol del usuario en el metodo guardar nuevo
 
 
-function PieGestion() {
+function PieGestion({company}) {
     //funciones para mostrar los botones
 
     const [data, setData] = useState([]);
@@ -48,7 +48,9 @@ function PieGestion() {
     }, []);
 
     const Datos = (async () => {
-        await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Gestion/Cargas', { dato: null }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Gestion/Cargas',
+        { dato: null , dato_1: company }, 
+          { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then((response) => {
 
                 var arrr = response.data;

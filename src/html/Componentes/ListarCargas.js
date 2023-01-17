@@ -3,9 +3,9 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import DotLoader from "react-spinners/DotLoader";
 import { ToastContainer, toast } from "react-toastify";
-
+import DataTable from 'react-data-table-component';
 
 
 import "jquery/dist/jquery.min.js";
@@ -21,7 +21,7 @@ import $ from "jquery";
 
 import ListarCargasModalDetalle from './ListarCargasModalDetalle';
 
-function ListarCargas() {
+function ListarCargas({company}) {
     const [data, setData] = useState([]);
     const [excel, setExcel] = useState()
     const [authLoading, setAuthLoading] = useState(true);
@@ -29,7 +29,13 @@ function ListarCargas() {
 
     //modal
     const [mostrarModal, setMostrarModal] = useState(false)
-
+    const sesiones = {
+        sgui: localStorage.getItem("localgui"),
+        scliente: localStorage.getItem("localcliente"),
+        sid: localStorage.getItem("localid"),
+        sid_usuario: localStorage.getItem("localid_usuario"),
+        stoken: localStorage.getItem("token")
+    };
 
     const handleOnCerrar = () => {
         setMostrarModal(false)
@@ -45,6 +51,7 @@ function ListarCargas() {
     // }
 
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         const token = getToken();
         const rutaservidor = "/Orkesta/Procollect/CRM"
@@ -68,23 +75,17 @@ function ListarCargas() {
             });
 
         Buscar()
-        componentDidMount()
+        // componentDidMount()
 
     }, []);
 
 
-    const sesiones = {
-        sgui: localStorage.getItem("localgui"),
-        scliente: localStorage.getItem("localcliente"),
-        sid: localStorage.getItem("localid"),
-        sid_usuario: localStorage.getItem("localid_usuario"),
-        stoken: localStorage.getItem("token")
-    };
+   
 
     // 
     const componentDidMount = () => {
-        // if (!$.fn.DataTable.isDataTable("#tbl_acumulado_dia")) {
-        //     $(document).ready(function () {
+        if (!$.fn.DataTable.isDataTable("#tbl_acumulado_dia")) {
+            $(document).ready(function () {
         setTimeout(function () {
             $("#tbl_acumulado_dia").DataTable({
                 destroy: true,
@@ -98,28 +99,23 @@ function ListarCargas() {
                 dom: "frtip"
 
             });
-        }, 1000);
-        //     });
-        // }
+        }, 2000);
+            });
+        }
     }
 
     const Buscar = (async () => {
 
-        var flujo = document.getElementById("ddl_campana").value;
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full', { dato: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+   
 
-        if (result.status === 200) {
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full',        { dato: company },         { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
-            console.log(result.data)
-            setData(result.data);
-            // var arrr = result.data;
+       if (result.status === 200) {
 
-            // arrr.forEach((element) => {
-            //     console.log(element.id);
+           console.log(result.data)
+           setData(result.data);
+       }
 
-            // });
-
-        }
 
     })
 
@@ -182,6 +178,151 @@ function ListarCargas() {
 
     }
 
+    const Detalle = (async (detalle) => {
+
+        setLoading(true);
+         const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/DetalleCargas/CargasDetalleResumenDash/Full/Detalle',
+             { dato: detalle, dato_1: document.getElementById("ddl_campana").value },
+             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+ 
+         if (result.status === 200) {
+ 
+             console.log(result.data)
+             // toast(<a href='https://app.siptelchile.cl/Api_Correo/Procollect/Resultante_Carga_UGM_20230117__20230116.xlsx'>Descargar Archivo</a>)
+             // Buscar()
+             // setData(result.data);
+             var arrr = result.data;
+ 
+             arrr.forEach((element) => {
+                 toast(<a href={element.message} target="_blank">Descargar Archivo {element.message}</a>)
+                 // console.log(element.id);
+ 
+             });
+ 
+             setLoading(false);
+ 
+         } else {
+ 
+             setLoading(false);
+             toast('Archivo No Generado')
+             // Buscar()
+         }
+     })
+
+    const customStyles = {
+        rows: {
+            style: {
+                minHeight: '60px', // override the row height
+                maxHeight:'70px',
+                border: '2px solid #a9dff0',
+                borderRadius: '3px'
+            },
+        },
+        headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                backgroundColor: '#a9dff0',
+                
+            },
+        },
+        cells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for data cells
+                paddingRight: '8px',
+                fontSize: '16px',
+              
+                        
+            },
+        },
+    };
+
+
+    const columns = [
+        {
+            name: 'Fecha carga',
+            selector: row => row.camp_1,
+            center:true
+        },
+        {
+            name: <div className="text-wrap">Nombre</div> ,
+            selector: row => row.camp_2,
+            center:true
+        },
+        {
+            name:  <div className="text-wrap">Cargado</div> ,
+            selector: row => row.camp_3,
+            center:true
+        },
+        {
+            name: <div className="text-wrap">Recorrido</div>,
+            selector: row => row.camp_3,
+            center:true
+        },
+        {
+            name: <div className="text-wrap">Conecta</div>,
+            selector: row => row.camp_4,
+            center:true
+        },
+        {
+            name: <div className="text-wrap">No Conecta</div>,
+            selector: row => row.camp_5,
+            center:true
+        },
+        {
+            name: <div className="text-wrap">Porcentaje Recorrido</div>,
+            selector: row => row.camp_6,
+            center:true
+        },
+        {
+            name: <div className="text-wrap">Porcentaje No Recorrido</div>,
+            selector: row => row.camp_7,
+            center:true
+        },
+        {
+            name: <div className="text-wrap">Porcentaje Contactabilidad</div>,
+            selector: row => row.camp_9,
+            center:true
+        }
+        // ,
+        // {
+        //     name: <div className="text-wrap"></div>,
+        //     cell: (row) => <button onClick={() => (setDataModalCarga(row.camp_2), setMostrarModal(true), setListId(row.camp_2))} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success mt-4">Admin</button>,
+        //     center:true,
+        //     button: true,
+        // },
+        // {
+        //     name: <div className="text-wrap"></div>,
+        //     cell: (row) => <button onClick={() => (Liberar(row.camp_2))} className="btn btn-success mt-4">Activar</button>,
+        //     center:true,
+        //     button: true,
+        // },
+        // {
+        //     name: <div className="text-wrap"></div>,
+        //     cell: (row) =><button onClick={() => (Bloquear(row.camp_2))} className="btn btn-danger  mt-4">Bloquear</button>,
+        //     center:true,
+        //     button: true,
+        // },
+        // {
+        //     name: <div className="text-wrap"></div>,
+        //     cell: (row) =><button onClick={() => (Detalle(row.camp_2))} className="btn btn-danger  mt-4">Descargar</button>,
+        //     center:true,
+        //     button: true,
+        // }
+        ,
+        {
+            name: <div className="text-wrap">Accion</div>,
+            cell: (row) =><select className='form-control form-select'>
+                <option>Seleccione Accion</option>
+                <option><button onClick={() => (Liberar(row.camp_2))} className="btn btn-success mt-4">Activar</button></option>
+                <option><button onClick={() => (setDataModalCarga(row.camp_2), setMostrarModal(true), setListId(row.camp_2))} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success mt-4">Admin</button></option>
+                <option><button onClick={() => (Bloquear(row.camp_2))} className="btn btn-danger  mt-4">Bloquear</button></option>
+                <option><button onClick={() => (Detalle(row.camp_2))} className="btn btn-danger  mt-4">Descargar</button></option>
+            </select>,
+            center:true,
+            button: true,
+        }
+    ];
 
 
     // const detalleModal = (carga) => {
@@ -197,51 +338,38 @@ function ListarCargas() {
         <>
           
           <ToastContainer />
-                <table id="tbl_acumulado_dia" className="table table-striped table-sm text-nowrap text-sm" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Fecha carga</th>
-                            <th>Nombre</th>
-                            <th>Cargado</th>
-                            <th>Recorrido</th>
-                            <th>Conecta</th>
-                            <th>No Conecta</th>
-                            <th>Porcentaje Recorrido</th>
-                            <th>Porcentaje No Recorrido</th>
-                            <th>Porcentaje Contactabilidad</th>
-                            <th>Accion</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((data, index) => (
-                            <tr key={data.camp_2}>
-                                <td>{data.camp_1}</td>
-                                <td>{data.camp_2}</td>
-                                <td>{data.camp_3}</td>
-                                <td>{data.camp_3}</td>
-                                <td>{data.camp_4}</td>
-                                <td>{data.camp_5}</td>
-                                <td>{data.camp_6}%</td>
-                                <td>{data.camp_7}%</td>
-                                <td>{data.camp_9}%</td>
-                                <td>
-                                    <div className="d-flex bd-highlight">
-                                        <div className="p-2 flex-fill bd-highlight"><button onClick={() => (setDataModalCarga(data.camp_2), setMostrarModal(true), setListId(data.camp_2))} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success">Detalle</button></div>
-                                        <div className="p-2 flex-fill bd-highlight"><button onClick={() => (Liberar(data.camp_2))} className="btn btn-success">Activar</button></div>
-                                        <div className="p-2 flex-fill bd-highlight"><button onClick={() => (Bloquear(data.camp_2))} className="btn btn-danger">Bloquear</button></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
+          {loading ? (
+                <div className="d-flex justify-content-center mt-3">
+                    <DotLoader
+                        className='loading'
+                        color={'#5b198ab5'}
+                        loading={loading}
+                        size={60}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
 
-                    </tbody>
+            ) : (
+                <div className="mt-1">
 
-                </table>
+                    <DataTable
+                        columns={columns}
+                        data={data}
+                        // highlightOnHover
+                        pagination
+                        customStyles={customStyles}
+                        
+                    />
+                </div>
+            )}
+
+                
                 {/* <Modal onCierre={handleOnCerrar} visible={mostrarModal}/> */}
 
 
-                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog modal-xl">
                         <div className="modal-content">
                             <div className="modal-header">

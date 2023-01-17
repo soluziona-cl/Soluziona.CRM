@@ -6,7 +6,7 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 
 //TODO variable global para pasar por Json el rol del usuario en el metodo guardar nuevo
 
-function Barras() {
+function Barras({company}) {
 
     const [data, setData] = useState([]);
     const [etiquetas, setEtiquetas] = useState([]);
@@ -49,7 +49,9 @@ function Barras() {
 
     const Datos = (async () => {
 
-        axios.post("https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Inbound/Intervalo/Now", { dato: '' }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        axios.post("https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Panel/Inbound/Intervalo/Now",
+         { dato: company }, 
+         { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then((response) => {
 
                 var arrr = response.data;

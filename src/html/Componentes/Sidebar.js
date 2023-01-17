@@ -39,10 +39,10 @@ const SideBar = () => {
       <div className="dropdown ">
         <a className="d-flex align-items-center  list-group-item border-end-0   d-inline-block text-truncate link-dark text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown" id="navbarDropdownReportes" aria-expanded="false"><i className="fa-solid fa-bars"></i><span className="ms-1 d-none d-sm-inline  ">Reportes</span></a>
         <ul className="dropdown-menu   text-small shadow" aria-labelledby="navbarDropdownReportes">
-        <Link  to={rutaservidor + '/RepoCarga'}   className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Carga</span></div></Link>
+        {/* <Link  to={rutaservidor + '/RepoCarga'}   className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Carga</span></div></Link> */}
         <Link  to={rutaservidor + '/RepoGestion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Gestión</span></div></Link>
         <Link  to={rutaservidor + '/RepoAgentes'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Agentes</span></div></Link>
-        <Link  to={rutaservidor + '/RepoCalidad'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Calidad</span></div></Link>
+        {/* <Link  to={rutaservidor + '/RepoCalidad'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Calidad</span></div></Link> */}
           {/* <li><a className="dropdown-item border-end-0 d-inline-block text-truncate" href={rutaservidor + "/RepoCarga"}> Reportes de Carga</a></li>
           <li><a className="dropdown-item border-end-0 d-inline-block text-truncate" href={rutaservidor + "/RepoGestion"}> Reportes de Gestión</a></li>
           <li><a className="dropdown-item border-end-0 d-inline-block text-truncate" href={rutaservidor + "/RepoAgentes"}>Reportes de Agentes</a></li>

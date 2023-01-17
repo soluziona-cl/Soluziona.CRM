@@ -15,17 +15,39 @@ import DashReporteFechaPago from './Componentes/DashReporteFechaPago';
 const Dashboard = () => {
 
 
-  const [filtrar, Filtrar] = useState(false);
-  const [company, setCompany] = useState('');
+  const [mostrarGrid, setMostrarGrid] = useState(false);
+  const [mostrarGrid2, setMostrarGrid2] = useState(false);
   const [carga, setCarga] = useState('');
 
-  const HideLogo = () => {
-    // setshowlogo(!showlogo);
-    setCompany(document.getElementById("ddl_company").value)
-    setCarga(document.getElementById("ddl_campana").value)
+  const [company, setStartCompany] = useState('');
+  const [campana, setStartCampana] = useState('');
+  // const HideLogo = () => {
+  //   // setshowlogo(!showlogo);
+  //   setCompany(document.getElementById("ddl_company").value)
+  //   setCarga(document.getElementById("ddl_campana").value)
 
-    Filtrar(!filtrar)
-  }
+  //   Filtrar(!filtrar)
+  // }
+
+  const filtrar = (event) => {
+
+    setStartCompany(document.getElementById("ddl_company").value)
+    setStartCampana(document.getElementById("ddl_campana").value)
+    setMostrarGrid(true);
+    setMostrarGrid2(false);
+    // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+
+  };
+
+  const filtrar2 = (event) => {
+
+    setStartCompany(document.getElementById("ddl_company").value)
+    setStartCampana(document.getElementById("ddl_campana").value)
+    setMostrarGrid(false);
+    setMostrarGrid2(true);
+
+    // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+  };
 
 
   return (
@@ -41,7 +63,26 @@ const Dashboard = () => {
           <main className="col ps-md-2 pt-2">
             <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" className="border rounded-3 p-1 text-decoration-none"><i className="fa-solid fa-bars py-2 p-1"></i> Menu</a>
             <div className="page-header pt-3">
-              <h2>Dashboard</h2>
+              <div className="row mt-2 bg-light align-items-center">
+
+                <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                  <h2>Dashboard</h2>
+                </div>
+                <Company_Campaing_Dash></Company_Campaing_Dash>
+
+                <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                  {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
+                  {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+
+
+                  {/* <button
+                    className="mb-0 btn btn-success"
+                    onClick={HideLogo}
+                  >Filtrar
+                  </button> */}
+                </div>
+              </div>
+
             </div>
             <hr />
             <div className="row">
@@ -55,7 +96,8 @@ const Dashboard = () => {
                           <h4 className="my-0 font-weight-normal">Agentes Conectados</h4>
                         </div>
                         <div className="card-body">
-                          <Pie></Pie>
+                          {mostrarGrid !== false && <Pie company={campana}></Pie>}
+                          {mostrarGrid2 !== false && <Pie company={campana}></Pie>}
                         </div>
                       </div>
                     </div>
@@ -65,7 +107,9 @@ const Dashboard = () => {
                           <h4 className="my-0 font-weight-normal">Trafico Intervalo</h4>
                         </div>
                         <div className="card-body">
-                          <Barras></Barras>
+                          {mostrarGrid !== false && <Barras company={campana}></Barras>}
+                          {mostrarGrid2 !== false && <Barras company={campana}></Barras>}
+
                         </div>
                       </div>
                     </div>
@@ -82,7 +126,10 @@ const Dashboard = () => {
                         </div>
                         <div className="card-body">
                           <div className="table-responsive overflow-x: hidden;">
-                            <DashReporteCargaTabla></DashReporteCargaTabla>
+                            {mostrarGrid !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
+                            {mostrarGrid2 !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
+
+
                           </div>
 
                         </div>
@@ -93,8 +140,10 @@ const Dashboard = () => {
                         <div className="card-header">
                           <h4 className="my-0 font-weight-normal">Compromiso de Pagos</h4>
                         </div>
-                        <div className="card-body">                        
-                            <PieGestion></PieGestion>                        
+                        <div className="card-body">
+                          {mostrarGrid !== false && <PieGestion company={campana}></PieGestion>}
+                          {mostrarGrid2 !== false && <PieGestion company={campana}></PieGestion>}
+
                         </div>
                       </div>
                     </div>
@@ -103,8 +152,11 @@ const Dashboard = () => {
                         <div className="card-header">
                           <h4 className="my-0 font-weight-normal">Fechas Compromiso</h4>
                         </div>
-                        <div className="card-body">                        
-                            <DashReporteFechaPago></DashReporteFechaPago>                        
+                        <div className="card-body">
+                          {mostrarGrid !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
+                          {mostrarGrid2 !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
+
+
                         </div>
                       </div>
                     </div>
@@ -120,20 +172,10 @@ const Dashboard = () => {
                         <div className="card-header">
                           <h4 className="my-0 font-weight-normal">Gestion Ultimos 10 Dias</h4>
                           <hr />
-                          <div className="row mt-2 bg-light align-items-center">
-                            <Company_Campaing_Dash></Company_Campaing_Dash>
-                            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                              <button
-                                className="mb-0 btn btn-success"
-                                onClick={HideLogo}
-                              >Buscar
-                              </button>
-                            </div>
-                          </div>
                         </div>
                         <div className="card-body">
-                          {filtrar !== false &&
-                            <DashReporteCargaTablaFilter company={company} carga={carga}></DashReporteCargaTablaFilter>}
+                          {mostrarGrid !== false && <DashReporteCargaTablaFilter company={company} carga={campana}></DashReporteCargaTablaFilter>}
+                          {mostrarGrid2 !== false && <DashReporteCargaTablaFilter company={company} carga={campana}></DashReporteCargaTablaFilter>}
                         </div>
                       </div>
                     </div>

@@ -3,13 +3,16 @@ import axios from 'axios';
 import Header from './Componentes/Header';
 import SideBar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
-
+import Company_Campaing_Dash from './Componentes/Company_Campaing_Dash';
 import ListarCargas from './Componentes/ListarCargas';
 
 
 
 function AdminCargas() {
-    const [filtrar, Filtrar] = useState(false);
+
+    const [mostrarGrid, setMostrarGrid] = useState(false);
+    const [mostrarGrid2, setMostrarGrid2] = useState(false);
+    const [company, setStartCompany] = useState('');
 
     const [campana, setStartCampana] = useState('');
 
@@ -28,65 +31,27 @@ function AdminCargas() {
         stoken: localStorage.getItem("token")
     };
 
-    useEffect(() => {
-        Company(sesiones.sid)
-    }, []);
+    const filtrar = (event) => {
 
-    const Company = (async (company) => {
+        setStartCompany(document.getElementById("ddl_company").value)
+        setStartCampana(document.getElementById("ddl_campana").value)
+        setMostrarGrid(true);
+        setMostrarGrid2(false);
+        // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Flujo_Company', { dato: company }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+    };
 
-        if (result.status === 200) {
-            setOptionList(result.data)
+    const filtrar2 = (event) => {
 
-            // console.log(result.data)
-            //  console.log(optionList)
+        setStartCompany(document.getElementById("ddl_company").value)
+        setStartCampana(document.getElementById("ddl_campana").value)
+        setMostrarGrid(false);
+        setMostrarGrid2(true);
 
-        }
-
-    })
-
-    const ChangeConecta = (async (event) => {
-
-        if (event === '0') {
-            setOptionListDetalleEstado(true)
-            setOptionListDetalleEstadoSelect('0')
-            setSelectedLlamada('0')
-        }
-        else {
-            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Campaign', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
-
-            setSelectedLlamada(event)
-
-            if (result.status === 200) {
-
-                setOptionListDetalle(result.data)
-                setOptionListDetalleEstado(false)
-
-            }
-        }
+        // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+    };
 
 
-    })
-
-    const ChangeConectaDetalle = (async (event) => {
-
-        setOptionListDetalleEstado(false)
-        setOptionListDetalleEstadoSelect(event)
-        setSelectedLlamadaDetalle(event)
-
-
-        if (filtrar === true) {
-            Filtrar(false)
-            HideLogo()
-        }
-
-
-    })
-    const HideLogo = () => {
-        // setshowlogo(!showlogo);
-        Filtrar(!filtrar)
-    }
     return (
         <>
 
@@ -100,68 +65,57 @@ function AdminCargas() {
                     </div>
                     <main className="col ps-md-2 pt-2">
                         <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" className="border rounded-3 p-1 text-decoration-none"><i className="fa-solid fa-bars py-2 p-1"></i> Menu</a>
+
                         <div className="page-header pt-3">
-                            <h2>Administrador de Cargas</h2>
+                            <div className="row mt-2 bg-light align-items-center">
+
+                                <div className="col-sm-12 col-lg-4 mt-lg-0 mt-sm-2">
+                                    <h2>Administrador de Cargas</h2>
+                                </div>
+
+                            </div>
+
                         </div>
                         <hr />
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="row mb-2">
-                                    <div className="col-12 ">
-                                        <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                                            <div className="col-sm-12 col-lg-12">
-                                                <div className="card mb-4 rounded-3 shadow-sm">
-                                                    <div className="card-header">
-                                                        <div className="row mt-2 bg-light align-items-center">
-                                                            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                                                                <select className="form-control form-select" id="ddl_company"
-                                                                    disabled={false}
-                                                                    // value={select}
-                                                                    onChange={(e) => (ChangeConecta(e.target.value))}>
-                                                                    <option value="0">Compañia</option>
-                                                                    {optionList.map((item) => (
-                                                                        <option key={item.id} value={item.id}>
-                                                                            {item.detalle}
-                                                                        </option>
-                                                                    ))}
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                                                                <select className="form-control form-select" id="ddl_campana"
-                                                                    disabled={optionListDetalleEstado}
-                                                                    value={optionListDetalleEstadoSelect}
-                                                                    onChange={(e) => (ChangeConectaDetalle(e.target.value))}
-                                                                >
-                                                                    <option value="0">Campaña</option>
-                                                                    {optionListDetalle.map((item) => (
-                                                                        <option key={item.id} value={item.id}>
-                                                                            {item.detalle}
-                                                                        </option>
-                                                                    ))}
-                                                                </select>
-                                                            </div>
-                                                            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                                                                <button className="mb-0 btn btn-success" id="btn_show_gestion" onClick={HideLogo}>Filtrar</button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="card-body bg-white mt-2">
-                                                            <div className=' justify-content-center  align-items-md-center'>
-                                                                <div className="table-responsive mt-2">
-                                                                    {filtrar && <ListarCargas />}
+                        <div className='row'>
+                            <div className="row mt-2 bg-light align-items-center">
 
-                                                                </div>
+                                <Company_Campaing_Dash></Company_Campaing_Dash>
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                                    {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
+                                    {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
                                 </div>
                             </div>
                         </div>
+                        <div className="row mt-3">
+
+                            <div className="col-12">
+                                <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
+                                    <div className="col-sm-12 col-lg-12">
+                                        <div className="card mb-4 rounded-3 shadow-sm">
+                                            <div className="card-header">
+                                                <h4 className="my-0 font-weight-normal">Cargas</h4>
+                                                {/* <hr /> */}
+                                            </div>
+                                            <div className="card-body">
+                                                <div key='123456'>
+                                                    {mostrarGrid !== false && <ListarCargas company={campana} />}
+                                                </div>
+                                                <div key='789578'>
+                                                    {mostrarGrid2 !== false && <ListarCargas company={campana} />}
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
                     </main>
 
                 </div>

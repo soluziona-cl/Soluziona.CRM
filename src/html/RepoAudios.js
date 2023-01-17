@@ -487,8 +487,6 @@ const RepoAudios = () => {
                     </div>
                     }
                     {mostrarfilter5 !== false && <div className="col-sm-12 col-lg-1 mt-lg-0 mt-sm-2">  <input id="search_rut" className="form-control" placeholder="Rut sin DV"></input></div>}
-
-
                     <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
                       <button
                         className="mb-0 btn btn-success"
