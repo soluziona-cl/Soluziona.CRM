@@ -61,7 +61,7 @@ function ReporteIntervaloDetalleTablaDash({ flujo, campana, ini, fin }) {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-        }, 3000)
+        }, 2000)
     }, [])
 
 

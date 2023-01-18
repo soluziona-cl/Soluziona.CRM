@@ -256,7 +256,7 @@ const RepoResumenFlujoLLamada = () => {
 
               <section className="col-lg-12 col-md-12 col-sm-12 mt-2">
                 {/* <TablaFull /> */}
-                <div className="mt-2">
+                <div className="mt-2 mb-2">
                   {mostrarGrid !== false && <ReporteResumenFlujoLlamadaTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} nombre={flujo} />}
                   {mostrarGrid2 !== false && <ReporteResumenFlujoLlamadaTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} nombre={flujo} />}
                  

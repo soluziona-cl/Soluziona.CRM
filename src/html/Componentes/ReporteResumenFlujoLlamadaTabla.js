@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin,nombre }) {
+function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -36,23 +36,87 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin,nombre }) {
         let wb = XLSX.utils.book_new();
 
         var arr2 = datafull.map(v => ({
-            RUT_PERSONA: v.ruT_PERSONA,
-            This_Phone_number: v.this_Phone_number,
-            Call_Disposition: v.call_Disposition,
-            Call_Time: v.call_Time,
-            Dialing_Duration: v.dialing_Duration,
-            Answered_Duration: v.answered_Duration,
-            Agent: v.agent,
-            Recording_file: v.recording_file,
-            Global_Interaction_ID: v.global_Interaction_ID,
-            List_name: v.list_name
+            Tipo_Cliente:v.detalle.split("|")[0],
+            Detalle:v.detalle.split("|")[1],
+            Total:((parseInt((v._1 === null) ? 0 : v._1) +
+            parseInt((v._2 === null) ? 0 : v._2) +
+            parseInt((v._3 === null) ? 0 : v._3) +
+            parseInt((v._4 === null) ? 0 : v._4) +
+            parseInt((v._5 === null) ? 0 : v._5) +
+            parseInt((v._6 === null) ? 0 : v._6) +
+            parseInt((v._7 === null) ? 0 : v._7) +
+            parseInt((v._8 === null) ? 0 : v._8) +
+            parseInt((v._9 === null) ? 0 : v._9) +
+            parseInt((v._10 === null) ? 0 : v._10) +
+            parseInt((v._11 === null) ? 0 : v._11) +
+            parseInt((v._12 === null) ? 0 : v._12) +
+            parseInt((v._13 === null) ? 0 : v._13) +
+            parseInt((v._14 === null) ? 0 : v._14) +
+            parseInt((v._15 === null) ? 0 : v._15) +
+            parseInt((v._16 === null) ? 0 : v._16) +
+            parseInt((v._17 === null) ? 0 : v._17) +
+            parseInt((v._18 === null) ? 0 : v._18) +
+            parseInt((v._19 === null) ? 0 : v._19) +
+            parseInt((v._20 === null) ? 0 : v._20) +
+            parseInt((v._21 === null) ? 0 : v._21) +
+            parseInt((v._22 === null) ? 0 : v._22) +
+            parseInt((v._23 === null) ? 0 : v._23) +
+            parseInt((v._24 === null) ? 0 : v._24) +
+            parseInt((v._25 === null) ? 0 : v._25) +
+            parseInt((v._26 === null) ? 0 : v._26) +
+            parseInt((v._27 === null) ? 0 : v._27) +
+            parseInt((v._28 === null) ? 0 : v._28) +
+            parseInt((v._29 === null) ? 0 : v._29) +
+            parseInt((v._30 === null) ? 0 : v._30) +
+            parseInt((v._31 === null) ? 0 : v._31))),
+           _1:v._1,
+           _2:v._2,
+           _3:v._3,
+           _4:v._4,
+           _5:v._5,
+           _6:v._6,
+           _7:v._7,
+           _8:v._8,
+           _9:v._9,
+           _10:v._10,
+           _11:v._11,
+           _12:v._12,
+           _13:v._13,
+           _14:v._14,
+           _15:v._15,
+           _16:v._16,
+           _17:v._17,
+           _18:v._18,
+           _19:v._19,
+           _20:v._20,
+           _21:v._21,
+           _22:v._22,
+           _23:v._23,
+           _24:v._24,
+           _25:v._25,
+           _26:v._26,
+           _27:v._27,
+           _28:v._28,
+           _29:v._29,
+           _30:v._30,
+           _31:v._31,
+            // RUT_PERSONA: v.ruT_PERSONA,
+            // This_Phone_number: v.this_Phone_number,
+            // Call_Disposition: v.call_Disposition,
+            // Call_Time: v.call_Time,
+            // Dialing_Duration: v.dialing_Duration,
+            // Answered_Duration: v.answered_Duration,
+            // Agent: v.agent,
+            // Recording_file: v.recording_file,
+            // Global_Interaction_ID: v.global_Interaction_ID,
+            // List_name: v.list_name
         }));
 
         let ws = XLSX.utils.json_to_sheet(arr2);
         var today = new Date()
         let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
         XLSX.utils.book_append_sheet(wb, ws, "Carga");
-        XLSX.writeFile(wb, "Gestion_Carga_" + date + ".xlsx");
+        XLSX.writeFile(wb, "ReporteFlujoLlamada_" + date + ".xlsx");
     };
 
     const [loading, setLoading] = useState(false)
@@ -94,19 +158,66 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin,nombre }) {
     const Datos = (async () => {
 
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Resultado/Cargas',
-            { dato: flujo, dato_1: ini, dato_2: fin},
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/FLujo/Acumulado',
+            { dato: flujo, dato_1: ini, dato_2: fin },
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
 
-            console.log(result.data)
+            // console.log(result.data)
+
+            result.data.push({
+                detalle: "Acumulado|",
+                _1: getTotals(result.data, "_1"),
+                _2: getTotals(result.data, "_2"),
+                _3: getTotals(result.data, "_3"),
+                _4: getTotals(result.data, "_4"),
+                _5: getTotals(result.data, "_5"),
+                _6: getTotals(result.data, "_6"),
+                _7: getTotals(result.data, "_7"),
+                _8: getTotals(result.data, "_8"),
+                _9: getTotals(result.data, "_9"),
+                _10: getTotals(result.data, "_10"),
+                _11: getTotals(result.data, "_11"),
+                _12: getTotals(result.data, "_12"),
+                _13: getTotals(result.data, "_13"),
+                _14: getTotals(result.data, "_14"),
+                _15: getTotals(result.data, "_15"),
+                _16: getTotals(result.data, "_16"),
+                _17: getTotals(result.data, "_17"),
+                _18: getTotals(result.data, "_18"),
+                _19: getTotals(result.data, "_19"),
+                _20: getTotals(result.data, "_20"),
+                _21: getTotals(result.data, "_21"),
+                _22: getTotals(result.data, "_22"),
+                _23: getTotals(result.data, "_23"),
+                _24: getTotals(result.data, "_24"),
+                _25: getTotals(result.data, "_25"),
+                _26: getTotals(result.data, "_26"),
+                _27: getTotals(result.data, "_27"),
+                _28: getTotals(result.data, "_28"),
+                _29: getTotals(result.data, "_29"),
+                _30: getTotals(result.data, "_30"),
+                _31: getTotals(result.data, "_31"),
+
+            });
+
+
             setData(result.data);
+
+            console.log(result.data)
         }
 
     })
 
-const customStyles = {
+    const getTotals = (data, key) => {
+        let total = 0;
+        data.forEach(item => {
+            total += (item[key] === null) ? 0 : parseInt(item[key]);
+        });
+        return total;
+    };
+    const customStyles = {
         rows: {
             style: {
                 minHeight: '30px', // override the row height
@@ -131,7 +242,6 @@ const customStyles = {
                 paddingLeft: '8px', // override the cell padding for data cells
                 paddingRight: '8px',
                 fontSize: '12px',
-
             },
 
         },
@@ -142,55 +252,90 @@ const customStyles = {
     const columns = [
         {
             name: <div className="text-wrap">Tipo Cliente</div>,
-            selector: row => row.mes,
+            selector: row => row.detalle.split("|")[0],
             center: true
         },
         {
-            name: <div className="text-wrap">Opcion Autoatencion1</div>,
-            selector: row => row.recibidas,
-            center: true
-        },
+            name: <div className="text-wrap">Detalle</div>,
+            selector: row => row.detalle.split("|")[1],
+            center: true,
+            wrap: true,
+        }
+        ,
         {
             name: <div className="text-wrap">Total</div>,
-            selector: row => row.atendidas,
-            center: true
-        },
-        {
-            name: <div className="text-wrap">Llamadas Atendidas 15"</div>,
-            selector: row => row.atendidas15,
-            center: true
-        },
-        {
-            name: <div className="text-wrap">Llamadas Abandonadas</div>,
-            selector: row => row.abandonadas,
-            center: true
-        },
-        {
-            name: <div className="text-wrap">Nivel de Atención (%)</div>,
-            selector: row => row.n_atencion,
-            center: true
-        },
-        {
-            name: <div className="text-wrap">Nivel de Servicio (%)</div>,
-            selector: row => row.n_servicio,
-            center: true
-        },
-        {
-            name: <div className="text-wrap">Minutos In</div>,
-            selector: row => row.minutos,
-            center: true
-        },
-        {
-            name: <div className="text-wrap">TMO IN</div>,
-            selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
+            selector: row => (parseInt((row._1 === null) ? 0 : row._1) +
+                parseInt((row._2 === null) ? 0 : row._2) +
+                parseInt((row._3 === null) ? 0 : row._3) +
+                parseInt((row._4 === null) ? 0 : row._4) +
+                parseInt((row._5 === null) ? 0 : row._5) +
+                parseInt((row._6 === null) ? 0 : row._6) +
+                parseInt((row._7 === null) ? 0 : row._7) +
+                parseInt((row._8 === null) ? 0 : row._8) +
+                parseInt((row._9 === null) ? 0 : row._9) +
+                parseInt((row._10 === null) ? 0 : row._10) +
+                parseInt((row._11 === null) ? 0 : row._11) +
+                parseInt((row._12 === null) ? 0 : row._12) +
+                parseInt((row._13 === null) ? 0 : row._13) +
+                parseInt((row._14 === null) ? 0 : row._14) +
+                parseInt((row._15 === null) ? 0 : row._15) +
+                parseInt((row._16 === null) ? 0 : row._16) +
+                parseInt((row._17 === null) ? 0 : row._17) +
+                parseInt((row._18 === null) ? 0 : row._18) +
+                parseInt((row._19 === null) ? 0 : row._19) +
+                parseInt((row._20 === null) ? 0 : row._20) +
+                parseInt((row._21 === null) ? 0 : row._21) +
+                parseInt((row._22 === null) ? 0 : row._22) +
+                parseInt((row._23 === null) ? 0 : row._23) +
+                parseInt((row._24 === null) ? 0 : row._24) +
+                parseInt((row._25 === null) ? 0 : row._25) +
+                parseInt((row._26 === null) ? 0 : row._26) +
+                parseInt((row._27 === null) ? 0 : row._27) +
+                parseInt((row._28 === null) ? 0 : row._28) +
+                parseInt((row._29 === null) ? 0 : row._29) +
+                parseInt((row._30 === null) ? 0 : row._30) +
+                parseInt((row._31 === null) ? 0 : row._31)),
             center: true
         }
+        ,
+        { name: <div className="text-wrap">{ini.substring(0, 6)}01</div>, selector: row => row._1, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}02</div>, selector: row => row._2, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}03</div>, selector: row => row._3, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}04</div>, selector: row => row._4, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}05</div>, selector: row => row._5, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}06</div>, selector: row => row._6, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}07</div>, selector: row => row._7, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}08</div>, selector: row => row._8, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}09</div>, selector: row => row._9, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}10</div>, selector: row => row._10, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}11</div>, selector: row => row._11, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}12</div>, selector: row => row._12, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}13</div>, selector: row => row._13, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}14</div>, selector: row => row._14, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}15</div>, selector: row => row._15, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}16</div>, selector: row => row._16, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}17</div>, selector: row => row._17, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}18</div>, selector: row => row._18, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}19</div>, selector: row => row._19, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}20</div>, selector: row => row._20, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}21</div>, selector: row => row._21, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}22</div>, selector: row => row._22, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}23</div>, selector: row => row._23, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}24</div>, selector: row => row._24, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}25</div>, selector: row => row._25, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}26</div>, selector: row => row._26, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}27</div>, selector: row => row._27, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}28</div>, selector: row => row._28, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}29</div>, selector: row => row._29, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}30</div>, selector: row => row._30, center: true },
+        { name: <div className="text-wrap">{ini.substring(0, 6)}31</div>, selector: row => row._31, center: true },
+
     ];
 
 
     return (
         <>
-            <div className="row">
+            <div className="row mb-3">
                 <div className="col-12">
 
                     <div className="col-sm-12 col-md-12 col-lg-12 text-center">
@@ -199,7 +344,7 @@ const customStyles = {
                                 <h4 className="my-0 font-weight-normal">Resumen Flujo LLamado - {nombre}</h4>
                             </div>
                             <div className="card-body">
-                                <section className=" float-end">
+                                <section className=" float-start">
                                     <button
                                         onClick={handleOnExportCarga}
                                         className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
@@ -219,7 +364,7 @@ const customStyles = {
                                     </div>
 
                                 ) : (
-                                    <div className=" mt-5 "  >
+                                    <div className=" mt-5 mb-5 "  >
 
                                         <DataTable
                                             columns={columns}

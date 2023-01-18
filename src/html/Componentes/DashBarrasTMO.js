@@ -3,6 +3,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
+import DotLoader from "react-spinners/DotLoader";
 
 //TODO variable global para pasar por Json el rol del usuario en el metodo guardar nuevo
 
@@ -19,6 +20,15 @@ function DashBarrasTMO({ flujo }) {
         sid_usuario: localStorage.getItem("localid_usuario"),
         stoken: localStorage.getItem("token")
     };
+
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000)
+    }, [])
+
 
     useEffect(() => {
         const token = getToken();
@@ -102,11 +112,13 @@ function DashBarrasTMO({ flujo }) {
             data: ['TMO']
         },
         toolbox: {
-            show: true,
-
-        },
-
-
+            feature: {
+            //   dataView: { show: true, readOnly: false },
+              magicType: { show: true, type: ['line', 'bar'] },
+            //   restore: { show: true },
+            //   saveAsImage: { show: true }
+            }
+          },
         // Add custom colors
         // color: ['#666EE8', '#20A464', '#FFFF00'],
         color: ['#666EE8', '#20A464'],
@@ -159,10 +171,23 @@ function DashBarrasTMO({ flujo }) {
 
     }
     return (<>
+    {loading ? (
+                <div className="d-flex justify-content-center mt-3">
+                    <DotLoader
+                        className='loading'
+                        color={'#5b198ab5'}
+                        loading={loading}
+                        size={60}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
+
+            ) : (
         <ReactEcharts option={opction_multibar}
         // style={{ width: "80rem", height: "30rem" }}
         >
-        </ReactEcharts>
+        </ReactEcharts>)}
 
     </>
     );
