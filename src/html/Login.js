@@ -65,10 +65,15 @@ const Login = () => {
         } else {
 
           setUserSession(login.token, login.id_usuario);
-          // navigate("/subirArchivos");         
 
-          //navigate("/Orkesta_CallSouth_Salcobrand/Dashboard");
-          navigate("/Orkesta/Procollect/CRM/Dashboard");
+          if (id === '1') {
+            navigate("/Orkesta/Procollect/CRM/Dashboard");
+            return
+          }
+          if (id === '2') {
+            navigate("/Orkesta/Procollect/CRM/DashboardAgente");
+            return
+          }
         }
       })
       .catch((error) => {

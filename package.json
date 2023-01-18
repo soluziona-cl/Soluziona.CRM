@@ -19,6 +19,7 @@
     "echarts-for-react": "^3.0.2",
     "jquery": "^3.6.3",
     "react": "^18.2.0",
+    "react-animated-css": "^1.2.1",
     "react-bootstrap": "^2.6.0",
     "react-data-grid": "^7.0.0-beta.20",
     "react-data-table-component": "^7.5.3",

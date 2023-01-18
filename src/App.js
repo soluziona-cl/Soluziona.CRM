@@ -10,6 +10,7 @@ import RepoAgentes from "./html/RepoAgentes.js";
 import RepoGestion from "./html/RepoGestion";
 import RepoCalidad from "./html/RepoCalidad";
 import RepoAudios from "./html/RepoAudios";
+import DashboardAgente from "./html/DashboardAgente";
 // import AdminCargas2 from "./html/AdminCargas2";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path={rutaservidor + "/RepoCalidad"} element={<RepoCalidad />} />
         <Route path={rutaservidor + "/AdminCargas"} element={<ListarCargas />} />
         <Route path={rutaservidor + "/RepoAudios"} element={<RepoAudios />} />
+        <Route path={rutaservidor + "/DashboardAgente"} element={<DashboardAgente />} />
         {/* <Route path={rutaservidor + "/AdminCargas2"} element={<AdminCargas2 />} /> */}
         {/* <Route path="/" element={<Login />} /> */}
           {/* <Route path="/Dashboard" element={<Dashboard />} />

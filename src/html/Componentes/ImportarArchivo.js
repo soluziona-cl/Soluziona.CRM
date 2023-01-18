@@ -102,6 +102,7 @@ function ImportarArchivo() {
             <div className='row mt-3'>
                 <Link to="/Orkesta/Procollect/CRM/Formato_Inacap.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Inacap</Link>
                 <Link to="/Orkesta/Procollect/CRM/Formato_USS.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato USS</Link>
+                <Link to="/Orkesta/Procollect/CRM/Formato_UGM.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato UGM</Link>
             </div>
             <div className='row mt-5'>
                 <div className='col-3'><input type="file" onChange={handleFile} /></div>
