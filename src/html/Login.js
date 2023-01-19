@@ -74,6 +74,10 @@ const Login = () => {
             navigate("/Orkesta/Procollect/CRM/DashboardAgente");
             return
           }
+          if (id === '3') {
+            navigate("/Orkesta/Procollect/CRM/RepoAudios");
+            return
+          }
         }
       })
       .catch((error) => {

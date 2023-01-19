@@ -74,14 +74,25 @@ const SideBar = () => {
             </ul>
           </div>
 
-        </div> : <div id="sidebar-nav" className="list-group border-0 rounded-0 text-sm-start min-vh-100">
+        </div> : ''
+
+      }
+      {sesiones.sid_usuario === "2" ?
+        <div id="sidebar-nav" className="list-group border-0 rounded-0 text-sm-start min-vh-100">
           {/* <Link to={rutaservidor + '/DashboardAgente'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Agente</span></div></Link> */}
           <Link to={rutaservidor + '/DashboardAgente'} className='list-group-item    d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><i className="fa-solid fa-user"></i><span className="ms-1  d-none d-sm-inline">Agente</span></div></Link>
-        </div>
+        </div> : ''
 
       }
 
 
+      {sesiones.sid_usuario === "3" ?
+        <div id="sidebar-nav" className="list-group border-0 rounded-0 text-sm-start min-vh-100">
+          {/* <Link to={rutaservidor + '/DashboardAgente'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Agente</span></div></Link> */}
+          <Link to={rutaservidor + '/RepoAudios'} className='list-group-item    d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><i className="fa-solid fa-bullhorn"></i><span className="ms-1  d-none d-sm-inline">Grabaciones</span></div></Link>
+        </div> : ''
+
+      }
 
 
     </>
