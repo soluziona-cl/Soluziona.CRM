@@ -89,49 +89,7 @@ const Login = () => {
     <>
 
       <main className="main-container" id="main-container">
-        {/* <div
-          className=" w-full h-screen flex items-center justify-center flex-col"
-          id="cover"
-        >
-          <div className="bg-[#FAFBFC]/50 backdrop-blur-xl bg-opacity-70 max-w-md drop-shadow-lg rounded-xl px-12 p-10 text-center w-96">
-            <section className="flex items-center justify-center flex-col">
-              <img src="./logoOrkestaWhite.png" className="h-14" />
-
-              <span className="py-6 inline-block text-base">
-                CRM <br /> <br /><b>Salcobrand</b>
-               
-              </span>
-            </section>
-
-            <label className="text-[#43484C] text-sm flex justify-start mb-2">
-              Usuario
-            </label>
-            <input
-              className="bg-[#EEEEEE] bg-opacity-70 backdrop-blur-xl h-10 w-full mb-6 border-[#B4B4B4] border rounded"
-              type="text"
-              name="user"
-              onChange={handleChangeUsuario}
-            ></input>
-            <label className="text-[#43484C] text-sm flex justify-start mb-2">
-              Clave
-            </label>
-            <input
-              className="bg-[#EEEEEE] bg-opacity-70 backdrop-blur-xl h-10 w-full mb-6 border-[#B4B4B4] border rounded"
-              type="password"
-              name="password"
-              onChange={handleChangePassword}
-            ></input>
-            <div className="group">
-              <button
-                type="button"
-                onClick={inicio_sesion}
-                className="btn btn-primary btn-sm">
-                Ingresar
-              </button>
-            </div>
-          </div>
-        </div> */}
-
+        
         <div className="container-sm-lg-6 col-sm-4">
 
           <div className="card" id="card" >
@@ -139,7 +97,7 @@ const Login = () => {
               <div className="mb-3 flex-column col-lg-6 col-sm-4">
 
                 <img className="img-fluid" src={logo} />
-                <p className="mt-2 mb-4">Bienvenido Procollect CRM</p>
+                <p className="mt-2 mb-4">Bienvenido Salcobrand CRM</p>
 
 
                 <label for="label_user" className="form-label">Ingrese usuario</label>

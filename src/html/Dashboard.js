@@ -70,7 +70,7 @@ const Dashboard = () => {
                   <h2>Dashboard</h2>
                 </div>
 
-                <Company_Campaing_Dash></Company_Campaing_Dash>
+                {/* <Company_Campaing_Dash></Company_Campaing_Dash>
 
 
                 <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
@@ -78,40 +78,83 @@ const Dashboard = () => {
                   {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
 
 
-                  {/* <button
-                    className="mb-0 btn btn-success"
-                    onClick={HideLogo}
-                  >Filtrar
-                  </button> */}
-                </div>
+                  
+                </div> */}
+                
               </div>
 
             </div>
             <hr />
             <div className="row">
 
+
+              
+              <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
+                <div className="row">
+                  <div className="col-12">
+                    <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
+                      <div className="col-sm-12 col-lg-4">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                          <div className="card-header">
+                            <h4 className="my-0 font-weight-normal">Trafico</h4>
+                          </div>
+                          <div className="card-body">
+                            <div className="table-responsive overflow-x: hidden;">
+                              {mostrarGrid !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
+                              {mostrarGrid2 !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-sm-12 col-lg-4">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                          <div className="card-header">
+                            <h4 className="my-0 font-weight-normal">Recibidas</h4>
+                          </div>
+                          <div className="card-body">
+                            {mostrarGrid !== false && <PieGestion company={campana}></PieGestion>}
+                            {mostrarGrid2 !== false && <PieGestion company={campana}></PieGestion>}
+
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-sm-12 col-lg-4">
+                        <div className="card mb-4 rounded-3 shadow-sm">
+                          <div className="card-header">
+                            <h4 className="my-0 font-weight-normal">TMO</h4>
+                          </div>
+                          <div className="card-body">
+                            {mostrarGrid !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
+                            {mostrarGrid2 !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </Animated>
+              
               <div className="row">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                    <div className="col-sm-12 col-lg-4">
+                    {/* <div className="col-sm-12 col-lg-4">
                       <Animated animationIn="bounceInLeft" animationOut="fadeOut" isVisible={true}>
                         <div className="card mb-4 rounded-3 shadow-sm">
                           <div className="card-header">
                             <h4 className="my-0 font-weight-normal">Agentes Conectados</h4>
                           </div>
                           <div className="card-body">
-
-
                             {mostrarGrid !== false && <Pie company={campana}></Pie>}
                             {mostrarGrid2 !== false && <Pie company={campana}></Pie>}
-
-
-
                           </div>
                         </div>
                       </Animated>
-                    </div>
-                    <div className="col-sm-12 col-lg-8">
+                    </div> */}
+                    <div className="col-sm-12 col-lg-12">
                       <Animated animationIn="bounceInRight" animationOut="fadeOut" isVisible={true}>
                         <div className="card mb-4 rounded-3 shadow-sm">
                           <div className="card-header">
@@ -128,56 +171,7 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
-              <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
-                <div className="row">
-                  <div className="col-12">
-                    <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                      <div className="col-sm-12 col-lg-4">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Gestion de Cargas</h4>
-                          </div>
-                          <div className="card-body">
-                            <div className="table-responsive overflow-x: hidden;">
-                              {mostrarGrid !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
-                              {mostrarGrid2 !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
 
-
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-sm-12 col-lg-4">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Compromiso de Pagos</h4>
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <PieGestion company={campana}></PieGestion>}
-                            {mostrarGrid2 !== false && <PieGestion company={campana}></PieGestion>}
-
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-sm-12 col-lg-4">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Fechas Compromiso</h4>
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
-                            {mostrarGrid2 !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
-
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </Animated>
               <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
                 <div className="row">
 
