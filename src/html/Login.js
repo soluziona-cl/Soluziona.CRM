@@ -71,8 +71,10 @@ const Login = () => {
             return
           }
           if (id === '2') {
-            navigate("/Orkesta/Procollect/CRM/DashboardAgente");
-            return
+
+            LogInn(login.cliente,login.token)
+
+
           }
           if (id === '3') {
             navigate("/Orkesta/Procollect/CRM/RepoAudios");
@@ -85,6 +87,23 @@ const Login = () => {
       });
   }
 
+  const LogInn = (async (cliente,token) => {
+
+
+    // console.log(document.getElementById("duracion").value)
+    // console.log(document.getElementById("ddl_estado").options[document.getElementById("ddl_estado").selectedIndex].text)
+
+    const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/EstadoAgente',
+      { dato_1: '', dato: 'LogIn', dato_2:cliente },
+      { headers: { "Authorization": `Bearer ${token}` } })
+    if (result.status === 200) {
+
+      navigate("/Orkesta/Procollect/CRM/DashboardAgente");
+      return
+
+    }
+
+  })
   return (
     <>
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import Donut from './Componentes/Donut';
 import Barras from './Componentes/Barras';
 import Pie from './Componentes/Pie';
@@ -15,31 +16,37 @@ import DashReporteCargaTabla from './Componentes/DashReporteCargaTabla';
 import DashReporteCargaTablaFilter from './Componentes/DashReporteCargaTablaFilter';
 import PieGestion from './Componentes/PieGestion';
 import DashReporteFechaPago from './Componentes/DashReporteFechaPago';
+import PieAgente from './Componentes/PieAgente';
+import BarrasAgente from './Componentes/BarrasAgente';
+import DashReporteCargaTablaAgente from './Componentes/DashReporteCargaTablaAgente';
+import PieGestionAgente from './Componentes/PieGestionAgente';
+import DashReporteFechaPagoAgente from './Componentes/DashReporteFechaPagoAgente';
+
 
 import axios from 'axios';
 
-function muestraReloj() {
-  var fechaHora = new Date();
-  var horas = fechaHora.getHours();
-  var minutos = fechaHora.getMinutes();
-  var segundos = fechaHora.getSeconds();
+// function muestraReloj() {
+//   var fechaHora = new Date();
+//   var horas = fechaHora.getHours();
+//   var minutos = fechaHora.getMinutes();
+//   var segundos = fechaHora.getSeconds();
 
-  if(horas < 10) { horas = '0' + horas; }
-  if(minutos < 10) { minutos = '0' + minutos; }
-  if(segundos < 10) { segundos = '0' + segundos; }
+//   if(horas < 10) { horas = '0' + horas; }
+//   if(minutos < 10) { minutos = '0' + minutos; }
+//   if(segundos < 10) { segundos = '0' + segundos; }
 
-  document.getElementById("duracion").innerHTML = horas+':'+minutos+':'+segundos;
-}
+//   document.getElementById("duracion").innerHTML = horas+':'+minutos+':'+segundos;
+// }
 
 const DashboardAgente = () => {
 
-
-  const [mostrarGrid, setMostrarGrid] = useState(false);
+  const navigate = useNavigate();
+  const [mostrarGrid, setMostrarGrid] = useState(true);
   const [mostrarGrid2, setMostrarGrid2] = useState(false);
-  const [carga, setCarga] = useState('');
-  const [contador, setContador] = useState(0);
+  // const [carga, setCarga] = useState('');
+  // const [contador, setContador] = useState(0);
 
-  const [company, setStartCompany] = useState('');
+  // const [company, setStartCompany] = useState('');
   const [campana, setStartCampana] = useState('');
   const sesiones = {
     sgui: localStorage.getItem("localgui"),
@@ -49,10 +56,28 @@ const DashboardAgente = () => {
     stoken: localStorage.getItem("token")
   };
 
+
+  const [time, setTime] = useState(0);
+  const [running, setRunning] = useState(true);
+  const [actualiza, setActualiza] = useState(true);
+
+  useEffect(() => {
+    let interval;
+    if (running) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (!running) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [running]);
+
+
   const filtrar = (event) => {
 
-    setStartCompany(document.getElementById("ddl_company").value)
-    setStartCampana(document.getElementById("ddl_campana").value)
+    // setStartCompany(document.getElementById("ddl_company").value)
+    // setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
     setMostrarGrid2(false);
     // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
@@ -61,8 +86,8 @@ const DashboardAgente = () => {
 
   const filtrar2 = (event) => {
 
-    setStartCompany(document.getElementById("ddl_company").value)
-    setStartCampana(document.getElementById("ddl_campana").value)
+    // setStartCompany(document.getElementById("ddl_company").value)
+    // setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(false);
     setMostrarGrid2(true);
 
@@ -72,15 +97,64 @@ const DashboardAgente = () => {
 
   const ChangeConecta = (async (event) => {
 
-    setInterval(muestraReloj, 1000);
 
-    // const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/EstadoAgente', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
-    // if (result.status === 200) {
+    // console.log(document.getElementById("duracion").value)
+    // console.log(document.getElementById("ddl_estado").options[document.getElementById("ddl_estado").selectedIndex].text)
 
-    //   toast('Su estado a cambiado a '+ event)
+    const result = axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/EstadoAgente',
+      { dato_1: document.getElementById("duracion").value, dato: document.getElementById("ddl_estado").options[document.getElementById("ddl_estado").selectedIndex].text, dato_2: sesiones.scliente },
+      { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+    if (result.status === 200) {
 
-    // }
+      toast('Su estado a cambiado a ' + event)
 
+    }
+
+    event === 'Terminar' ? setRunning(false) : setRunning(true)
+
+    if (!running) {
+      // console.log("esta andando")
+    } else {
+      // console.log("nope")
+      setTime(0)
+    }
+
+
+  })
+  const handleLogout = (async (event) => {
+
+
+    // console.log(document.getElementById("duracion").value)
+    // console.log(document.getElementById("ddl_estado").options[document.getElementById("ddl_estado").selectedIndex].text)
+
+    const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/EstadoAgente',
+      { dato_1: document.getElementById("duracion").value, dato: document.getElementById("ddl_estado").options[document.getElementById("ddl_estado").selectedIndex].text, dato_2: sesiones.scliente },
+      { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+    if (result.status === 200) {
+
+      toast('Su estado a cambiado a ' + event)
+
+    }
+
+    event === 'Terminar' ? setRunning(false) : setRunning(true)
+
+    if (!running) {
+      // console.log("esta andando")
+    } else {
+      // console.log("nope")
+      setTime(0)
+    }
+
+
+    const result2 = await axios.post('https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/EstadoAgente',
+      { dato_1: '', dato: 'Logout', dato_2:sesiones.scliente },
+      { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+    if (result2.status === 200) {
+
+      navigate("/Orkesta/Procollect/CRM");
+      return
+
+    }
 
   })
 
@@ -116,62 +190,69 @@ const DashboardAgente = () => {
                   <select className="form-control form-select" id="ddl_estado"
                     disabled={false}
                     // value={select}
-                    onChange={(e) => (ChangeConecta(e.target.value), setContador(0))}>
-                    <option selected>Activo/Llamando</option>
-                    <option>Reunion</option>
-                    <option>Break</option>
-                    <option>Capacitacion</option>
-                    <option>Almuerzo</option>
-                    <option>Baño</option>
-                    <option>Calidad</option>
-                    <option>Permiso</option>
+                    onChange={(e) => (ChangeConecta(e.target.value))}>
+                    <option value="Activo/Llamando" selected>Activo/Llamando</option>
+                    <option value="Reunion">Reunion</option>
+                    <option value="Break">Break</option>
+                    <option value="Capacitacion">Capacitacion</option>
+                    <option value="Almuerzo">Almuerzo</option>
+                    <option value="Baño">Baño</option>
+                    <option value="Calidad">Calidad</option>
+                    <option value="Permiso">Permiso</option>
+
                   </select>
                 </div>
-                <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                  Duracion del Estado:  <label id="duracion"> seg.</label>
+                <div className="col-sm-12 col-lg-2 mt-lg-0 mt-sm-2">
+                  Duracion del Estado:
+                </div>
+                <div className="col-sm-12 col-lg-1 mt-lg-0 mt-sm-2">
+                  <input id="duracion" className='form-input form-control' disabled value={(("0" + Math.floor((time / 30000) % 60 % 60)).slice(-2)).concat(':').concat((("0" + Math.floor((time / 30000) % 60)).slice(-2))).concat(':').concat(("0" + Math.floor((time / 500) % 60)).slice(-2))} />
                 </div>
               </div>
             </div>
             <hr />
+            <div className="d-flex justify-content-between mt-lg-0 mt-sm-0">
+              <div className="p-2">  {mostrarGrid === false && <button className="btn btn-success" onClick={() => filtrar()}>Actualizar</button>}
+                {mostrarGrid === true && <button className="btn btn-success" onClick={() => filtrar2()}>Actualizar</button>}</div>
+
+              <div className="p-2"> <button onClick={() => handleLogout('Terminar')} className="btn btn-danger" >Terminar Dia</button></div>
+            </div>
             <div className="row">
 
               <div className="row">
-                <div className="col-12">
-                  <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                    <div className="col-sm-12 col-lg-4">
-                      <Animated animationIn="bounceInLeft" animationOut="fadeOut" isVisible={true}>
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Gestionado</h4>
-                          </div>
-                          <div className="card-body">
 
 
-                            {mostrarGrid !== false && <Pie company={campana}></Pie>}
-                            {mostrarGrid2 !== false && <Pie company={campana}></Pie>}
+                <div className="col-sm-12 col-lg-4">
+                  <Animated animationIn="bounceInLeft" animationOut="fadeOut" isVisible={true}>
+                    <div className="card mb-4 rounded-3 shadow-sm">
+                      <div className="card-header">
+                        <h4 className="my-0 font-weight-normal">Gestionado</h4>
+                      </div>
+                      <div className="card-body">
 
+                        {mostrarGrid !== false && <PieAgente company={campana} agente={sesiones.scliente}></PieAgente>}
+                        {mostrarGrid2 !== false && <PieAgente company={campana} agente={sesiones.scliente}></PieAgente>}
 
-
-                          </div>
-                        </div>
-                      </Animated>
+                      </div>
                     </div>
-                    <div className="col-sm-12 col-lg-8">
-                      <Animated animationIn="bounceInRight" animationOut="fadeOut" isVisible={true}>
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Recorrido</h4>
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <Barras company={campana}></Barras>}
-                            {mostrarGrid2 !== false && <Barras company={campana}></Barras>}
-
-                          </div>
-                        </div>
-                      </Animated>
-                    </div>
-                  </div>
+                  </Animated>
                 </div>
+                <div className="col-sm-12 col-lg-8">
+                  <Animated animationIn="bounceInRight" animationOut="fadeOut" isVisible={true}>
+                    <div className="card mb-4 rounded-3 shadow-sm">
+                      <div className="card-header">
+                        <h4 className="my-0 font-weight-normal">Recorrido</h4>
+                      </div>
+                      <div className="card-body">
+                        {mostrarGrid !== false && <BarrasAgente company={campana} agente={sesiones.scliente}></BarrasAgente>}
+                        {mostrarGrid2 !== false && <BarrasAgente company={campana} agente={sesiones.scliente}></BarrasAgente>}
+
+                      </div>
+                    </div>
+                  </Animated>
+                </div>
+
+
               </div>
               <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
                 <div className="row">
@@ -184,8 +265,8 @@ const DashboardAgente = () => {
                           </div>
                           <div className="card-body">
                             <div className="table-responsive overflow-x: hidden;">
-                              {mostrarGrid !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
-                              {mostrarGrid2 !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
+                              {mostrarGrid !== false && <DashReporteCargaTablaAgente company={campana} agente={sesiones.scliente} ></DashReporteCargaTablaAgente>}
+                              {mostrarGrid2 !== false && <DashReporteCargaTablaAgente company={campana} agente={sesiones.scliente} ></DashReporteCargaTablaAgente>}
 
 
                             </div>
@@ -199,8 +280,8 @@ const DashboardAgente = () => {
                             <h4 className="my-0 font-weight-normal">Compromiso de Pagos</h4>
                           </div>
                           <div className="card-body">
-                            {mostrarGrid !== false && <PieGestion company={campana}></PieGestion>}
-                            {mostrarGrid2 !== false && <PieGestion company={campana}></PieGestion>}
+                            {mostrarGrid !== false && <PieGestionAgente company={campana} agente={sesiones.scliente}></PieGestionAgente>}
+                            {mostrarGrid2 !== false && <PieGestionAgente company={campana} agente={sesiones.scliente}></PieGestionAgente>}
 
                           </div>
                         </div>
@@ -211,8 +292,8 @@ const DashboardAgente = () => {
                             <h4 className="my-0 font-weight-normal">Fechas Compromiso</h4>
                           </div>
                           <div className="card-body">
-                            {mostrarGrid !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
-                            {mostrarGrid2 !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
+                            {mostrarGrid !== false && <DashReporteFechaPagoAgente company={campana} agente={sesiones.scliente}></DashReporteFechaPagoAgente>}
+                            {mostrarGrid2 !== false && <DashReporteFechaPagoAgente company={campana} agente={sesiones.scliente}></DashReporteFechaPagoAgente>}
 
 
                           </div>
