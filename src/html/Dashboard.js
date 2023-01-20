@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Donut from './Componentes/Donut';
 import Barras from './Componentes/Barras';
 import Pie from './Componentes/Pie';
 import Header from './Componentes/Header';
@@ -13,6 +12,11 @@ import DashReporteCargaTablaFilter from './Componentes/DashReporteCargaTablaFilt
 import PieGestion from './Componentes/PieGestion';
 import DashReporteFechaPago from './Componentes/DashReporteFechaPago';
 
+import Gauge from "./Componentes/Gauge";
+import Funnel from "./Componentes/Funnel";
+import Donut from './Componentes/Donut';
+import Grafico from "./Componentes/Grafico";
+import TablaTrafico from "./Componentes/TablaTrafico";
 const Dashboard = () => {
 
 
@@ -80,15 +84,13 @@ const Dashboard = () => {
 
                   
                 </div> */}
-                
+
               </div>
 
             </div>
             <hr />
             <div className="row">
 
-
-              
               <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
                 <div className="row">
                   <div className="col-12">
@@ -100,8 +102,9 @@ const Dashboard = () => {
                           </div>
                           <div className="card-body">
                             <div className="table-responsive overflow-x: hidden;">
-                              {mostrarGrid !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
-                              {mostrarGrid2 !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
+                              {/* {mostrarGrid !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
+                              {mostrarGrid2 !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>} */}
+                              <Donut />
                             </div>
 
                           </div>
@@ -113,9 +116,9 @@ const Dashboard = () => {
                             <h4 className="my-0 font-weight-normal">Recibidas</h4>
                           </div>
                           <div className="card-body">
-                            {mostrarGrid !== false && <PieGestion company={campana}></PieGestion>}
-                            {mostrarGrid2 !== false && <PieGestion company={campana}></PieGestion>}
-
+                            {/* {mostrarGrid !== false && <PieGestion company={campana}></PieGestion>}
+                            {mostrarGrid2 !== false && <PieGestion company={campana}></PieGestion>} */}
+                            <Funnel />
                           </div>
                         </div>
                       </div>
@@ -125,9 +128,9 @@ const Dashboard = () => {
                             <h4 className="my-0 font-weight-normal">TMO</h4>
                           </div>
                           <div className="card-body">
-                            {mostrarGrid !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
-                            {mostrarGrid2 !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
-
+                            {/* {mostrarGrid !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
+                            {mostrarGrid2 !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>} */}
+                            <Gauge />
 
                           </div>
                         </div>
@@ -137,11 +140,13 @@ const Dashboard = () => {
                 </div>
 
               </Animated>
-              
-              <div className="row">
-                <div className="col-12">
-                  <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                    {/* <div className="col-sm-12 col-lg-4">
+
+
+              <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
+                <div className="row">
+                  <div className="col-12">
+                    <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                      {/* <div className="col-sm-12 col-lg-4">
                       <Animated animationIn="bounceInLeft" animationOut="fadeOut" isVisible={true}>
                         <div className="card mb-4 rounded-3 shadow-sm">
                           <div className="card-header">
@@ -154,46 +159,51 @@ const Dashboard = () => {
                         </div>
                       </Animated>
                     </div> */}
-                    <div className="col-sm-12 col-lg-12">
-                      <Animated animationIn="bounceInRight" animationOut="fadeOut" isVisible={true}>
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Trafico Intervalo</h4>
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <Barras company={campana}></Barras>}
-                            {mostrarGrid2 !== false && <Barras company={campana}></Barras>}
+                      <div className="col-sm-12 col-lg-12">
+                        <Animated animationIn="bounceInRight" animationOut="fadeOut" isVisible={true}>
+                          <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header">
+                              <h4 className="my-0 font-weight-normal">Trafico Intervalo</h4>
+                            </div>
+                            <div className="card-body">
+                              {/* {mostrarGrid !== false && <Barras company={campana}></Barras>}
+                            {mostrarGrid2 !== false && <Barras company={campana}></Barras>} */}
+                              <Grafico />
 
+                            </div>
                           </div>
-                        </div>
-                      </Animated>
+                        </Animated>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
-                <div className="row">
+              </Animated>
 
-                  <div className="col-12">
-                    <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                      <div className="col-sm-12 col-lg-12">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Gestion Ultimos 10 Dias</h4>
-                            <hr />
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <DashReporteCargaTablaFilter company={company} carga={campana}></DashReporteCargaTablaFilter>}
-                            {mostrarGrid2 !== false && <DashReporteCargaTablaFilter company={company} carga={campana}></DashReporteCargaTablaFilter>}
-                          </div>
+              <div className="row">
+
+                <div className="col-12">
+                  <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
+                    <div className="col-sm-12 col-lg-12">
+                      <div className="card mb-4 rounded-3 shadow-sm">
+                        <div className="card-header">
+                          <h4 className="my-0 font-weight-normal">Gestion Ultimos 10 Dias</h4>
+                          <hr />
+                        </div>
+                        <div className="card-body">
+                          {/* {mostrarGrid !== false && <DashReporteCargaTablaFilter company={company} carga={campana}></DashReporteCargaTablaFilter>}
+          {mostrarGrid2 !== false && <DashReporteCargaTablaFilter company={company} carga={campana}></DashReporteCargaTablaFilter>} */}
+                          <TablaTrafico />
                         </div>
                       </div>
                     </div>
                   </div>
-
                 </div>
-              </Animated>
+
+              </div>
+
+
+
 
             </div>
           </main>
