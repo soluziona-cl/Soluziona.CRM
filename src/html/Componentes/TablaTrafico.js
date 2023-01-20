@@ -1,171 +1,119 @@
 import React, { useEffect, useState } from "react";
+import DataTable from 'react-data-table-component';
+
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "jquery/dist/jquery.min.js";
-import "datatables.net-dt/js/dataTables.dataTables";
-import "datatables.net-dt/css/jquery.dataTables.min.css";
-import "datatables.net-buttons/js/dataTables.buttons.js";
-import "datatables.net-buttons/js/buttons.colVis.js";
-import "datatables.net-buttons/js/buttons.flash.js";
-import "datatables.net-buttons/js/buttons.html5.js";
-import "datatables.net-buttons/js/buttons.print.js";
-import $, { data } from "jquery";
-
-function TablaTrafico() {
+function TablaTrafico({ ini, fin }) {
     const [data, setData] = useState([]);
     const [datashow, setDataShow] = useState([]);
 
     useEffect(() => {
-        (async () => {
-            const result = await axios.post("https://app.soluziona.cl/API_desa/Soluziona.Dashboard.Salcobrand/api/Contact_CRM/CRM/Trafico/Inbound/Intervalo")
-            setData(result.data);
-            console.log(result)
-            console.log(result.data)
-            // myObjStr.forEach(item)
-            // console.log(result)
-            // console.log(columns)
-        })();
-        componentDidMount()
+        Datos()
+
     }, []);
 
-    const componentDidMount = () => {
-        if (!$.fn.DataTable.isDataTable("#myTable")) {
-            $(document).ready(function () {
-                setTimeout(function () {
-                    $("#table").DataTable({
-                        language: {
-                            url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es-cl.json"
-                        },
-                        destroy: true,
-                        //pagingType: "full_numbers",
-                        pageLength: 10,
-                        //processing: true,
-                        dom: "Bfrtip",
-                        select: {
-                            style: "single",
-                        },
-                        //buttons tiene varios botones, pero por ahora solo uno activado
-                        buttons: [
-                            // {
-                            //     extend: "pageLength",
-                            //     className: "btn btn-secondary bg-secondary",
-                            // },
-                            // {
-                            //     extend: "copy",
-                            //     className: "btn btn-secondary bg-secondary",
-                            // },
-                            // {
-                            //     extend: "csv",
-                            //     className: "btn btn-secondary bg-secondary",
-                            // },
-                            // {
-                            //     extend: "print",
-                            //     customize: function (win) {
-                            //         $(win.document.body).css("font-size", "10pt");
-                            //         $(win.document.body)
-                            //             .find("table")
-                            //             .addClass("compact")
-                            //             .css("font-size", "inherit");
-                            //     },
-                            //     className: "btn btn-secondary bg-secondary",
-                            // },
-                        ],
 
-                        fnRowCallback: function (
-                            nRow,
-                            aData,
-                            iDisplayIndex,
-                            iDisplayIndexFull
-                        ) {
-                            var index = iDisplayIndexFull + 1;
-                            $("td:first", nRow).html(index);
-                            return nRow;
-                        },
+    const Datos = (async () => {
 
-                        lengthMenu: [
-                            [10, 20, 30, 50, -1],
-                            [10, 20, 30, 50, "All"],
-                        ],
-                        columnDefs: [
-                            {
-                                targets: 0,
-                                render: function (data, type, row, meta) {
-                                    return type === "export" ? meta.row + 1 : data;
-                                },
-                            },
-                        ],
-                    });
-                }, 2000);
-            });
+
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth.Salcobrand.CRM/api/Contact_CRM_Vocalcom/CRM/Trafico/Informe_Intervalos', { dato: ini, dato_1: fin })
+
+        if (result.status === 200) {
+            setData(result.data)
+
         }
 
-    }
 
+    })
 
-    const showTable = () => {
+    const customStyles = {
+        rows: {
+            style: {
+                minHeight: '30px', // override the row height
+                maxHeight: '50px',
+                border: '1px solid #a9dff0',
+                borderRadius: '3px'
+            },
+            striped: {
+                backgroundColor: '#a9dff0',
+            },
+        },
+        headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                backgroundColor: '#a9dff0',
 
-        try {
-            return data.map((data, index) => {
-                return (
-                    <tr key={index + 1}>
-                        <td scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">{data.intervalo}</td>
-                        <td className="py-4 px-6">{data.recibidas}</td>
-                        <td className="py-4 px-6">{data.contestadas}</td>
-                        <td className="py-4 px-6">{data.abandonadas}</td>
-                        <td className="py-4 px-6">-</td>
-                        <td className="py-4 px-6">{data.contestadas / data.recibidas}</td>
-                        <td className="py-4 px-6">{data.abandonadas / data.contestadas}</td>
-                    </tr>
+            },
+        },
+        cells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for data cells
+                paddingRight: '8px',
+                fontSize: '14px',
 
-                );
-            });
-        } catch (e) {
-            alert(e.message);
-        }
-        // if (alertas != 0) { setAlert(true) }
+            },
+
+        },
+
     };
+
+
+    const columns = [
+        {
+            name: 'Intervalo',
+            selector: row => row.hora,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Recibido</div>,
+            selector: row => row.totaL_RECIBIDAS,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Contestado</div>,
+            selector: row => row.atenD_FRONT,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Abandonado</div>,
+            selector: row => row.totaL_ABANDON,
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Nivel de Atención</div>,
+            selector: row => (100 * (row.atenD_FRONT / (row.totaL_RECIBIDAS === '0' ? 1 : row.totaL_RECIBIDAS))).toFixed(2),
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Nivel de Servicio</div>,
+            selector: row => (100 * (row.atenD_ANTES_20 / (row.atenD_FRONT === '0' ? 1 : row.atenD_FRONT))).toFixed(2),
+            center: true
+        },
+        {
+            name: <div className="text-wrap">Nivel de Abandono</div>,
+            selector: row => (row.totaL_RECIBIDAS) === '0' ? 0 : (100 - 100 * (row.atenD_FRONT / (row.totaL_RECIBIDAS === '0' ? 1 : row.totaL_RECIBIDAS))).toFixed(2),
+            center: true
+        }
+    ];
+
 
     return (
         <>
-            <div className=" flex">
-                <div className=" flex ">
-                    <table id="table" className="w-full text-sm text-left text-gray-500 ">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 border rounded-2xl ">
-                            <tr>
-                                <th scope="col" className="py-3 px-6">
-                                    Intervalo
-                                </th>
-                                <th scope="col" className="py-3 px-6">
-                                    Recibido
-                                </th>
-                                <th scope="col" className="py-3 px-6">
-                                    Contestado
-                                </th>
-                                <th scope="col" className="py-3 px-6">
-                                    Abandonado
-                                </th>
-                                <th scope="col" className="py-3 px-6">
-                                    Nivel de Atención
-                                </th>
-                                <th scope="col" className="py-3 px-6">
-                                    Nivel de Servicio
-                                </th>
-                                <th scope="col" className="py-3 px-6">
-                                    Nivel de Abandono
-                                </th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {showTable()}
+            <div className="mt-1">
 
+                <DataTable
+                    columns={columns}
+                    data={data}
+                    // highlightOnHover
+                    striped
+                    customStyles={customStyles}
 
-                        </tbody>
-                    </table>
-                </div>
-
+                />
             </div>
+
         </>
     );
 };

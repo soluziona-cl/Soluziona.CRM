@@ -25,7 +25,7 @@ const Login = () => {
   function inicio_sesion() {
     axios
       .post(
-        "https://app.soluziona.cl/API_v1_prod/Procollect/CRM/api/Ventas_CRM/CRM/Login",
+        "https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth.Salcobrand.CRM/api/Ventas_CRM/CRM/Login",
 
         { username: user, password: pass }
       )
@@ -67,15 +67,15 @@ const Login = () => {
           setUserSession(login.token, login.id_usuario);
 
           if (id === '1') {
-            navigate("/Orkesta/Procollect/CRM/Dashboard");
+            navigate("/Orkesta/CallSouth/Salcobrand/CRM/Dashboard");
             return
           }
           if (id === '2') {
-            navigate("/Orkesta/Procollect/CRM/DashboardAgente");
+            navigate("/Orkesta/CallSouth/Salcobrand/CRM/DashboardAgente");
             return
           }
           if (id === '3') {
-            navigate("/Orkesta/Procollect/CRM/RepoAudios");
+            navigate("/Orkesta/CallSouth/Salcobrand/CRM/RepoAudios");
             return
           }
         }

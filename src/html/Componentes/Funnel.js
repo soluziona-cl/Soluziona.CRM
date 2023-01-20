@@ -140,7 +140,7 @@ function Funnel() {
         <>
             <ReactEcharts
                 option={option_funnel}
-                style={{  width: "36rem", height: "36rem"  }}
+                style={{ height: "36rem"  }}
             ></ReactEcharts>
 
         </>

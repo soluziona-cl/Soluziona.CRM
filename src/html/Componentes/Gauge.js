@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useMemo, useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 
-function Gauge_2() {
+function Gauge({ini,fin}) {
 
     const [data_gauge, setData] = useState([]);
     const [etiquetas, setEtiquetas] = useState([]);
@@ -18,31 +18,44 @@ function Gauge_2() {
       }
 
     useEffect(() => {
-        axios.post("https://app.soluziona.cl/API_desa/Soluziona.Dashboard.Salcobrand/api/Contact_CRM/CRM/Trafico/Inbound/Full")
-            .then((response) => {
-
-                var arrr = response.data;
-                // console.log(arrr)
-                setData(arrr)
-
-            })
+      
+      
+        Tiempo()
 
     }, []);
 
 
-    console.log(data_gauge)
+    const Tiempo = (async() => {
 
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth.Salcobrand.CRM/api/Contact_CRM_Vocalcom/CRM/Trafico/Informe_Intervalos', { dato: ini, dato_1: fin })
 
-    let tmo = 0
+        if (result.status === 200) {
+            setData(result.data)
+
+        }
+
+    })
+
+    let tiempo = 0
+    let contestadas = 1
+
     data_gauge.forEach((element) => {
+        contestadas += element.atenD_FRONT;
 
-        tmo = (element.tmo);
+    });
+    data_gauge.forEach((element) => {
+        tiempo += element.tmo;
 
     });
 
-    console.log(tmo)
-    console.log(secondsToString(parseInt(tmo)))
+    let tmo = parseInt((tiempo/contestadas).toFixed(0))
+    // data_gauge.forEach((element) => {
 
+    //     tmo = (element.tmo);
+
+    // });
+
+   
 
     const option_gauge = {
 
@@ -52,7 +65,7 @@ function Gauge_2() {
             }
           },
           title: {
-            text: 'TMO',
+            // text: 'TMO',
             left: 'center',
             position: 'center'
           },
@@ -61,6 +74,8 @@ function Gauge_2() {
                 name: 'TMO',
                 type: 'gauge',
                 min: 0,
+                top: 10,
+                bottom: 10,
                 max: parseInt(tmo) + parseInt(tmo*0.3),
                 progress: {
                     show: true
@@ -88,11 +103,11 @@ function Gauge_2() {
         <>
             <ReactEcharts
                 option={option_gauge}
-                style={{ width: "28rem", height: "28rem"  }}
+                  style={{  height: "24rem"  }}
             ></ReactEcharts>
 
         </>
     );
 }
 
-export default Gauge_2
+export default Gauge

@@ -4,7 +4,7 @@ import ReactEcharts from "echarts-for-react";
 
 //TODO variable global para pasar por Json el rol del usuario en el metodo guardar nuevo
 
-function Grafico() {
+function Grafico({ ini, fin }) {
     //funciones para mostrar los botones
 
     const [data, setData] = useState([]);
@@ -16,16 +16,23 @@ function Grafico() {
 
     // Using useEffect to call the API once mounted and set the data
     useEffect(() => {
-        axios.post("https://app.soluziona.cl/API_desa/Soluziona.Dashboard.Salcobrand/api/Contact_CRM/CRM/Trafico/Inbound/Intervalo")
-            .then((response) => {
 
-                var arrr = response.data;
-                // console.log(arrr)
-                setData(arrr)
+        Tiempo()
 
-            })
-
+      
     }, []);
+
+    const Tiempo = (async () => {
+
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth.Salcobrand.CRM/api/Contact_CRM_Vocalcom/CRM/Trafico/Informe_Intervalos', { dato: ini, dato_1: fin })
+
+        if (result.status === 200) {
+            setData(result.data)
+
+        }
+
+    })
+
 
     let columns = []
     let recibidas = []
@@ -34,18 +41,13 @@ function Grafico() {
 
     data.forEach((element) => {
 
-        recibidas.push(parseInt(element.recibidas))
-        contestadas.push(parseInt(element.contestadas))
-        abandonadas.push(parseInt(element.abandonadas))
-        columns.push(element.intervalo)
+        recibidas.push(parseInt(element.totaL_RECIBIDAS))
+        contestadas.push(parseInt(element.atenD_FRONT))
+        abandonadas.push(parseInt(element.totaL_ABANDON))
+        columns.push(element.hora)
     });
 
-   
-    console.log(columns)
-    console.log(recibidas)
-    console.log(contestadas)
-    console.log(abandonadas)
-   
+      
 
     // const options = {
     //     grid: { top: 20, right: 40, bottom: 20, left: 40 },
@@ -108,7 +110,9 @@ function Grafico() {
         yAxis: [{
             type: 'value',
             min: 0,
-            max: 5,
+            max: function (value) {
+                return value.max + 10;
+            },
             name: 'Cantidad'
         }],
 

@@ -45,7 +45,7 @@ const SideBar = () => {
 
   const navigate = useNavigate();
   // const rutaservidor="/"; //Pruebas
-  const rutaservidor = "/Orkesta/Procollect/CRM"; //Produccion
+  const rutaservidor = "/Orkesta/CallSouth/Salcobrand/CRM"; //Produccion
   return (
     <>
 
@@ -65,7 +65,11 @@ const SideBar = () => {
             <ul className="dropdown-menu   text-small shadow" aria-labelledby="navbarDropdownReportes">
               {/* <Link  to={rutaservidor + '/RepoCarga'}   className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Carga</span></div></Link> */}
               {/* <Link  to={rutaservidor + '/RepoGestion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Gestión</span></div></Link> */}
-              <Link to={rutaservidor + '/RepoAgentes'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Agentes</span></div></Link>
+              <Link to={rutaservidor + '/RepoIntervalo'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes Intervalo</span></div></Link>
+              <Link to={rutaservidor + '/RepoEpa'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes EPA</span></div></Link>
+              <Link to={rutaservidor + '/RepoAgente'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Agentes</span></div></Link>
+              <Link to={rutaservidor + '/RepoRegion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes Regiones</span></div></Link>
+              <Link to={rutaservidor + '/RepoTipificaciones'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes Tipificaciones</span></div></Link>
               {/* <Link  to={rutaservidor + '/RepoCalidad'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Reportes de Calidad</span></div></Link> */}
               {/* <li><a className="dropdown-item border-end-0 d-inline-block text-truncate" href={rutaservidor + "/RepoCarga"}> Reportes de Carga</a></li>
           <li><a className="dropdown-item border-end-0 d-inline-block text-truncate" href={rutaservidor + "/RepoGestion"}> Reportes de Gestión</a></li>
