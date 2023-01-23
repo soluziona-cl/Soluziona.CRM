@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas_Dash';
+import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas';
 import ReporteTelefonicoAcumuladoTabla from './Componentes/ReporteTelefonicoAcumuladoTabla'
 
 
