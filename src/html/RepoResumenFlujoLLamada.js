@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company_Campaing from './Componentes/Company_Campaing';
+import Company_Campaing_600 from "./Componentes/Company_Campaing_600";
 import ReporteResumenFlujoLlamadaTabla from "./Componentes/ReporteResumenFlujoLlamadaTabla";
 
 registerLocale('es', es)
@@ -93,7 +93,7 @@ const RepoResumenFlujoLLamada = () => {
               <hr />
               <div className="row">
                 <div className="col-12">
-                  <Company_Campaing />
+                  <Company_Campaing_600 />
                 </div>
               </div>
               <div className="row">

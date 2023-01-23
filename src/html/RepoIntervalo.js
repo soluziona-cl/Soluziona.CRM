@@ -13,9 +13,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company_Campaing from './Componentes/Company_Campaing';
 import ReporteIntervaloTabla from './Componentes/ReporteIntervaloTabla'
 import ReporteIntervaloTablaDetalle from "./Componentes/ReporteIntervaloTablaDetalle";
+import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas'
 
 registerLocale('es', es)
 
@@ -94,7 +94,7 @@ const RepoIntervalo = () => {
               <hr />
               <div className="row">
                 <div className="col-12">
-                  <Company_Campaing />
+                  <Company_Campaing_Colas />
                 </div>
               </div>
               <div className="row">

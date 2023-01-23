@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import { useNavigate } from 'react-router-dom';
 
-function Company_Campaing_all() {
+function Company_Campaing_Colas_Dash() {
     const [selectLlamada, setSelectedLlamada] = useState('');
     const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState('');
 
@@ -47,7 +47,7 @@ function Company_Campaing_all() {
             setOptionListDetalleEstadoSelect('0')
             setSelectedLlamada('0')
         } else {
-            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Campaign', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Campaign/Colas', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
             setSelectedLlamada(event)
 
@@ -74,38 +74,36 @@ function Company_Campaing_all() {
     return (
 
         <>
-            <div className="row mb-2">
-              
-                <div className="col-sm-12 col-md-12 col-lg-2">
-                    <select className="form-control form-select" id="ddl_company"
-                        disabled={false}
-                        // value={select}
-                        onChange={(e) => (ChangeConecta(e.target.value))}>
-                        <option value="0">Compañia</option>
-                        {optionList.map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {item.detalle}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="col-sm-12 col-md-12 col-lg-2 mt-sm-2 mt-lg-0">
-                    <select className="form-control form-select" id="ddl_campana"
-                        disabled={optionListDetalleEstado}
-                        value={optionListDetalleEstadoSelect}
-                        onChange={(e) => (ChangeConectaDetalle(e.target.value))}
-                    >
-                        <option value="0">Campaña</option>
-                        <option value="9999">Todas</option>
-                        {optionListDetalle.map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {item.detalle}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+
+            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                <select className="form-control form-select" id="ddl_company"
+                    disabled={false}
+                    // value={select}
+                    onChange={(e) => (ChangeConecta(e.target.value))}>
+                    <option value="0">Compañia</option>
+                    {optionList.map((item) => (
+                        <option key={item.id} value={item.id}>
+                            {item.detalle}
+                        </option>
+                    ))}
+                </select>
             </div>
+            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                <select className="form-control form-select" id="ddl_campana"
+                    disabled={optionListDetalleEstado}
+                    value={optionListDetalleEstadoSelect}
+                    onChange={(e) => (ChangeConectaDetalle(e.target.value))}
+                >
+                    <option value="0">Campaña</option>
+                    {optionListDetalle.map((item) => (
+                        <option key={item.id} value={item.id}>
+                            {item.detalle}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
         </>
     )
 }
-export default Company_Campaing_all
+export default Company_Campaing_Colas_Dash

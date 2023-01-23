@@ -12,20 +12,23 @@ import DashBarras from './Componentes/DashBarras';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import DashBarrasTMO from './Componentes/DashBarrasTMO';
+import Company_Campaing_Colas_Dash from './Componentes/Company_Campaing_Colas_Dash';
 
 const DashTrafico = () => {
 
   const [key, setKey] = useState('trafico');
-  const [company, setCompany] = useState('');
-  const [carga, setCarga] = useState('');
+
 
   const [mostrarGrid, setMostrarGrid] = useState(true);
   const [mostrarGrid2, setMostrarGrid2] = useState(false);
 
+  const [company, setStartCompany] = useState('0');
+  const [campana, setStartCampana] = useState('0');
+
   const HideLogo = () => {
     // setshowlogo(!showlogo);
-    setCompany(document.getElementById("ddl_company").value)
-    setCarga(document.getElementById("ddl_campana").value)
+    setStartCompany(document.getElementById("ddl_company").value)
+    setStartCampana(document.getElementById("ddl_campana").value)
 
     // Filtrar(!filtrar)
   }
@@ -33,7 +36,7 @@ const DashTrafico = () => {
   const filtrar = (event) => {
 
     // setCompany(document.getElementById("ddl_company").value)
-    // setCarga(document.getElementById("ddl_campana").value)
+    setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
     setMostrarGrid2(false);
     // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
@@ -43,7 +46,7 @@ const DashTrafico = () => {
   const filtrar2 = (event) => {
 
     // setStartCompany(document.getElementById("ddl_company").value)
-    // setStartCampana(document.getElementById("ddl_campana").value)
+    setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(false);
     setMostrarGrid2(true);
 
@@ -62,12 +65,27 @@ const DashTrafico = () => {
           <main className="col ps-md-2 pt-2">
             <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" className="border rounded-3 p-1 text-decoration-none"><i className="fa-solid fa-bars py-2 p-1"></i> Menu</a>
             <div className="page-header pt-3">
-              <h2>Trafico</h2>
-              {mostrarGrid === false && <button type="button" className="btn btn-success" onClick={() => filtrar()}>Actualizar</button>}
-                  {mostrarGrid === true && <button type="button" className="btn btn-success" onClick={() => filtrar2()}>Actualizar</button>}
+              <div className="row mt-2 bg-light align-items-center">
+
+                <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                  <h2>Dashboard</h2>
+                </div>
+
+                <Company_Campaing_Colas_Dash />
+
+
+                <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
+                {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
+                  {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+
+                </div>
+              </div>
+
             </div>
+
+
             <hr />
-           
+
             <div className="row">
               <div className="row">
                 <div className="col-12">
@@ -78,9 +96,9 @@ const DashTrafico = () => {
                           <h4 className="my-0 font-weight-normal">Trafico Dia</h4>
                         </div>
                         <div className="card-body">
-                         
-                          {mostrarGrid !== false &&  <ReporteIntervaloTablaDash flujo='0130' ></ReporteIntervaloTablaDash>}
-                            {mostrarGrid2 !== false &&  <ReporteIntervaloTablaDash flujo='0130' ></ReporteIntervaloTablaDash>}
+
+                          {mostrarGrid !== false && <ReporteIntervaloTablaDash flujo={campana} ></ReporteIntervaloTablaDash>}
+                          {mostrarGrid2 !== false && <ReporteIntervaloTablaDash flujo={campana} ></ReporteIntervaloTablaDash>}
                         </div>
                       </div>
                     </div>
@@ -103,14 +121,14 @@ const DashTrafico = () => {
                             onSelect={(k) => setKey(k)}
                             className="mb-3">
                             <Tab eventKey="trafico" title="Trafico">
-                            {mostrarGrid !== false &&  <DashBarras flujo='0130'></DashBarras>}
-                            {mostrarGrid2 !== false &&  <DashBarras flujo='0130'></DashBarras>}
-                             
+                              {mostrarGrid !== false && <DashBarras flujo={campana}></DashBarras>}
+                              {mostrarGrid2 !== false && <DashBarras flujo={campana}></DashBarras>}
+
                             </Tab>
                             <Tab eventKey="tmo" title="TMO">
-                            {mostrarGrid !== false && <DashBarrasTMO flujo='0130'></DashBarrasTMO>}
-                            {mostrarGrid2 !== false && <DashBarrasTMO flujo='0130'></DashBarrasTMO>}
-                              
+                              {mostrarGrid !== false && <DashBarrasTMO flujo={campana}></DashBarrasTMO>}
+                              {mostrarGrid2 !== false && <DashBarrasTMO flujo={campana}></DashBarrasTMO>}
+
                             </Tab>
 
                           </Tabs>
@@ -135,9 +153,9 @@ const DashTrafico = () => {
                           <h4 className="my-0 font-weight-normal">Detalle Intervalo</h4>
                         </div>
                         <div className="card-body">
-                        {mostrarGrid !== false &&  <ReporteIntervaloDetalleTablaDash flujo='0130' ></ReporteIntervaloDetalleTablaDash>}
-                            {mostrarGrid2 !== false &&  <ReporteIntervaloDetalleTablaDash flujo='0130' ></ReporteIntervaloDetalleTablaDash>}
-                         
+                          {mostrarGrid !== false && <ReporteIntervaloDetalleTablaDash flujo={campana} ></ReporteIntervaloDetalleTablaDash>}
+                          {mostrarGrid2 !== false && <ReporteIntervaloDetalleTablaDash flujo={campana} ></ReporteIntervaloDetalleTablaDash>}
+
                         </div>
                       </div>
                     </div>

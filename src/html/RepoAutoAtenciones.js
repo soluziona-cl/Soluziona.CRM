@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company_Campaing_all from "./Componentes/Company_Campaing_all";
+import Company_Campaing_600 from "./Componentes/Company_Campaing_600";
 import ReporteAutoAtencionesTabla from "./Componentes/ReporteAutoAtencionesTabla";
 
 
@@ -100,7 +100,7 @@ const RepoAutoAtenciones = () => {
               <hr />
               <div className="row">
                 <div className="col-12">
-                  <Company_Campaing_all />
+                  <Company_Campaing_600 />
                 </div>
               </div>
               <div className="row">

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import { useNavigate } from 'react-router-dom';
 
-function Company_Campaing_all() {
+function Company_Campaing_600() {
     const [selectLlamada, setSelectedLlamada] = useState('');
     const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState('');
 
@@ -47,7 +47,7 @@ function Company_Campaing_all() {
             setOptionListDetalleEstadoSelect('0')
             setSelectedLlamada('0')
         } else {
-            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Campaign', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Campaign/600', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
             setSelectedLlamada(event)
 
@@ -96,7 +96,6 @@ function Company_Campaing_all() {
                         onChange={(e) => (ChangeConectaDetalle(e.target.value))}
                     >
                         <option value="0">Campaña</option>
-                        <option value="9999">Todas</option>
                         {optionListDetalle.map((item) => (
                             <option key={item.id} value={item.id}>
                                 {item.detalle}
@@ -108,4 +107,4 @@ function Company_Campaing_all() {
         </>
     )
 }
-export default Company_Campaing_all
+export default Company_Campaing_600

@@ -21,7 +21,7 @@ function Company_Campaing() {
     };
 
     useEffect(() => {
-        Company(sesiones.sid)
+        Company(sesiones.sid_usuario)
     }, []);
 
 

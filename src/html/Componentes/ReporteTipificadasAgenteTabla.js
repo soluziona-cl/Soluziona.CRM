@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteTipificadasAgenteTabla({ flujo, ini, fin,nombre }) {
+function ReporteTipificadasAgenteTabla({ flujo, ini, fin, nombre }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -36,23 +36,65 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin,nombre }) {
         let wb = XLSX.utils.book_new();
 
         var arr2 = datafull.map(v => ({
-            RUT_PERSONA: v.ruT_PERSONA,
-            This_Phone_number: v.this_Phone_number,
-            Call_Disposition: v.call_Disposition,
-            Call_Time: v.call_Time,
-            Dialing_Duration: v.dialing_Duration,
-            Answered_Duration: v.answered_Duration,
-            Agent: v.agent,
-            Recording_file: v.recording_file,
-            Global_Interaction_ID: v.global_Interaction_ID,
-            List_name: v.list_name
+            Nombres_o_Razón_Social_Empresa: v.nombresorazonsocialempresa,
+            Apellido_Paterno: v.apellidopaterno,
+            Apellido_Materno: v.apellidomaterno,
+            Rut: v.rut,
+            DV: v.dv,
+            Telefono: v.telefono,
+            Codigo_Area: v.codigoarea,
+            Calle: v.calle,
+            Numero: v.numero,
+            Poblacion: v.poblacion,
+            Comuna: v.comuna,
+            Ciudad: v.ciudad,
+            Region: v.region,
+            Mail: v.mail,
+            Canal: v.canal,
+            Tipo_Afiliado: v.tipoafiliado,
+            Nro_Atencion: v.nroatencion,
+            Nro_De_Ticket: v.nrodeticket,
+            ANI: v.ani,
+            Fecha: v.fecha,
+            Hora: v.hora,
+            Habilidad: v.habilidad,
+            Operación: v.operacion,
+            SubOperación: v.suboperacion,
+            Tipo: v.tipo,
+            Script: v.script,
+            Estado_Actual_del_Ticket: v.estadoactualdelticket,
+            Ejecutivo_de_atención: v.ejecutivodeatencion,
+            Supervisor: v.supervisor,
+            Fecha_Asignado: v.fechaasignado,
+            Hora_Asignado: v.horaasignado,
+            Fecha_En_Proceso: v.fechaenproceso,
+            Hora_en_Proceso: v.horaenproceso,
+            Ejecutivo_En_Proceso: v.ejecutivoenproceso,
+            Fecha_Solucionado: v.fechasolucionado,
+            Hora_Solucionado: v.horasolucionado,
+            Resolutor_de_la_atención: v.resolutordelaatencion,
+            Fecha_Cerrado: v.fechacerrado,
+            Hora_de_cierre: v.horadecierre,
+            Ejecutivo_de_cierre_del_requerimiento: v.ejecutivodecierredelrequerimiento,
+            Observación_Requerimiento: v.observacionrequerimiento,
+            Motivo: v.motivo,
+            Fecha_y_Hora_que_recibió_el_correo: v.fechayhoraquerecibioelcorreo,
+            Antiguedad_Laboral: v.antiguedadlaboral,
+            Cupo_máximo_disponible: v.cupomáximodisponible,
+            Monto_a_solicitar: v.montoasolicitar,
+            Renta_Liquida: v.rentaliquida,
+            Sucursal: v.sucursal,
+            Sucursal_de_pago: v.sucursaldepago,
+            Sucursal_De_Tramitacion: v.sucursaldetramitacion,
+            Teléfono: v.teléfono,
+            Tipo_de_renta_Fija_o_Variable: v.tipoderentafijaovariable
         }));
 
         let ws = XLSX.utils.json_to_sheet(arr2);
         var today = new Date()
         let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-        XLSX.utils.book_append_sheet(wb, ws, "Carga");
-        XLSX.writeFile(wb, "Gestion_Carga_" + date + ".xlsx");
+        XLSX.utils.book_append_sheet(wb, ws, "ReporteTipificaionAgente");
+        XLSX.writeFile(wb, "Reporte_Tipificaion_Agente_" + date + ".xlsx");
     };
 
     const [loading, setLoading] = useState(false)
@@ -140,7 +182,7 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin,nombre }) {
     };
 
     const columns = [
-        { name: <div className="text-wrap">Nombres o Razón Social Empresa</div>, selector: row => row.nombresorazonsocialempresa, center: true }
+        { name: <div className="text-wrap">Nombres o Razón Social Empresa</div>, selector: row => row.nombresorazonsocialempresa, center: true, wrap: true }
         , { name: <div className="text-wrap">Apellido Paterno</div>, selector: row => row.apellidopaterno, center: true }
         , { name: <div className="text-wrap">Apellido Materno</div>, selector: row => row.apellidomaterno, center: true }
         , { name: <div className="text-wrap">Rut</div>, selector: row => row.rut, center: true }
@@ -207,7 +249,7 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin,nombre }) {
                                 <h4 className="my-0 font-weight-normal">Detalle Agente Tipificadas - {nombre}</h4>
                             </div>
                             <div className="card-body">
-                                <section className=" float-end">
+                                <section className=" float-start">
                                     <button
                                         onClick={handleOnExportCarga}
                                         className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
@@ -233,6 +275,7 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin,nombre }) {
                                             columns={columns}
                                             data={datafull}
                                             customStyles={customStyles}
+                                            pagination
                                             noDataComponent="Los Filtros No Contiene Datos" //or your component
                                         />
                                     </div>
