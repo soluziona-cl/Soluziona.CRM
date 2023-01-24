@@ -13,6 +13,9 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import DashBarrasTMO from './Componentes/DashBarrasTMO';
 import Company_Campaing_Colas_Dash from './Componentes/Company_Campaing_Colas_Dash';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const DashTrafico = () => {
 
@@ -21,6 +24,7 @@ const DashTrafico = () => {
 
   const [mostrarGrid, setMostrarGrid] = useState(true);
   const [mostrarGrid2, setMostrarGrid2] = useState(false);
+  const [mostrarGrid3, setMostrarGrid3] = useState(false);
 
   const [company, setStartCompany] = useState('0');
   const [campana, setStartCampana] = useState('0');
@@ -33,12 +37,31 @@ const DashTrafico = () => {
     // Filtrar(!filtrar)
   }
 
+
+
+  const filtrar3 = (event) => {
+
+    setStartCampana(document.getElementById("ddl_campana").value)
+    if (document.getElementById("ddl_campana").value == '0') {
+      toast.error("Por favor seleccionar Campaña");
+      // console.log(campana)
+    } else {
+      (event === '1') ? filtrar() : filtrar2()
+    }
+
+
+
+
+  };
+
+
   const filtrar = (event) => {
 
     // setCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
     setMostrarGrid2(false);
+    setMostrarGrid3(true);
     // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
 
   };
@@ -49,11 +72,16 @@ const DashTrafico = () => {
     setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(false);
     setMostrarGrid2(true);
-
+    setMostrarGrid3(true);
     // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
   };
   return (
     <>
+
+      <ToastContainer
+        autoClose={3000} />
+
+
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
@@ -75,8 +103,8 @@ const DashTrafico = () => {
 
 
                 <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
-                  {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+                  {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar3(1)}>Buscar</button>}
+                  {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar3(2)}>Buscar</button>}
 
                 </div>
               </div>
@@ -97,8 +125,8 @@ const DashTrafico = () => {
                         </div>
                         <div className="card-body">
 
-                          {mostrarGrid !== false && <ReporteIntervaloTablaDash flujo={campana} ></ReporteIntervaloTablaDash>}
-                          {mostrarGrid2 !== false && <ReporteIntervaloTablaDash flujo={campana} ></ReporteIntervaloTablaDash>}
+                          {mostrarGrid !== false && mostrarGrid3!== false &&<ReporteIntervaloTablaDash flujo={campana} ></ReporteIntervaloTablaDash>}
+                          {mostrarGrid2 !== false && mostrarGrid3!== false  && <ReporteIntervaloTablaDash flujo={campana} ></ReporteIntervaloTablaDash>}
                         </div>
                       </div>
                     </div>
@@ -121,13 +149,13 @@ const DashTrafico = () => {
                             onSelect={(k) => setKey(k)}
                             className="mb-3">
                             <Tab eventKey="trafico" title="Trafico">
-                              {mostrarGrid !== false && <DashBarras flujo={campana}></DashBarras>}
-                              {mostrarGrid2 !== false && <DashBarras flujo={campana}></DashBarras>}
+                              {mostrarGrid !== false && mostrarGrid3!== false  && <DashBarras flujo={campana}></DashBarras>}
+                              {mostrarGrid2 !== false && mostrarGrid3!== false  && <DashBarras flujo={campana}></DashBarras>}
 
                             </Tab>
                             <Tab eventKey="tmo" title="TMO">
-                              {mostrarGrid !== false && <DashBarrasTMO flujo={campana}></DashBarrasTMO>}
-                              {mostrarGrid2 !== false && <DashBarrasTMO flujo={campana}></DashBarrasTMO>}
+                              {mostrarGrid !== false && mostrarGrid3!== false  && <DashBarrasTMO flujo={campana}></DashBarrasTMO>}
+                              {mostrarGrid2 !== false && mostrarGrid3!== false  && <DashBarrasTMO flujo={campana}></DashBarrasTMO>}
 
                             </Tab>
 
@@ -153,8 +181,8 @@ const DashTrafico = () => {
                           <h4 className="my-0 font-weight-normal">Detalle Intervalo</h4>
                         </div>
                         <div className="card-body">
-                          {mostrarGrid !== false && <ReporteIntervaloDetalleTablaDash flujo={campana} ></ReporteIntervaloDetalleTablaDash>}
-                          {mostrarGrid2 !== false && <ReporteIntervaloDetalleTablaDash flujo={campana} ></ReporteIntervaloDetalleTablaDash>}
+                          {mostrarGrid !== false && mostrarGrid3!== false  && <ReporteIntervaloDetalleTablaDash flujo={campana} ></ReporteIntervaloDetalleTablaDash>}
+                          {mostrarGrid2 !== false && mostrarGrid3!== false  && <ReporteIntervaloDetalleTablaDash flujo={campana} ></ReporteIntervaloDetalleTablaDash>}
 
                         </div>
                       </div>
