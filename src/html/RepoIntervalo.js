@@ -20,6 +20,8 @@ import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import 'animate.css';
+
 registerLocale('es', es)
 
 //con DataTable
@@ -61,11 +63,6 @@ const RepoIntervalo = () => {
     console.log(campana)
     console.log(company)
 
-    if(campana == 0 || company == 0){  
-      toast("Por favor seleccione ambas opciones");
-      }else{
-      }
-
   };
 
   const filtrar2 = (event) => {
@@ -75,10 +72,17 @@ const RepoIntervalo = () => {
     setMostrarGrid(false);
     setMostrarGrid2(true);
 
-    if(campana == 0 || company == 0){  
-      toast.error("Por favor seleccione ambas opciones");
-      }else{
-      }
+  };
+
+  const filtrar3 = (event) => {
+
+    setStartCampana(document.getElementById("ddl_campana").value)
+    if (document.getElementById("ddl_campana").value == '0') {
+      toast.error("Por favor seleccionar Campaña");
+      // console.log(campana)
+    } else {
+      (event === '1') ? filtrar() : filtrar2()
+    }
   };
 
 
@@ -89,7 +93,7 @@ const RepoIntervalo = () => {
 
   return (
     <>
-
+    <ToastContainer />
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
@@ -105,13 +109,12 @@ const RepoIntervalo = () => {
               <h2 className="page-header col-sm-12 col-lg-3 mt-lg-0 mt-sm-2 text-black">Reporte de Intervalo</h2>
             </div>
               <hr />
-              <div className="row">
+              <div className="row animate__animated animate__slideInLeft">
                 <div className="col-12">
                   <Company_Campaing_Colas />
-                  <ToastContainer />
                 </div>
               </div>
-              <div className="row">
+              <div className="row animate__animated animate__slideInLeft">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-md-12 col-lg-8">
@@ -256,8 +259,8 @@ const RepoIntervalo = () => {
                               /></div>
                             <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
 
-                              {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
-                              {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+                            {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar3(1)}>Buscar</button>}
+                            {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar3(2)}>Buscar</button>}
 
                             </div>
                           </div>
@@ -269,7 +272,7 @@ const RepoIntervalo = () => {
 
               </div>
 
-              <section className="col-lg-12 col-md-12 col-sm-12 mt-2">
+              <section className="col-lg-12 col-md-12 col-sm-12 mt-2 ">
                 {/* <TablaFull /> */}
                 <div className="mt-2">
                   {mostrarGrid !== false && <ReporteIntervaloTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}

@@ -66,12 +66,6 @@ const RepoTelefonicoAcumulado = () => {
 
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-    if(periodo == 0 || campana == 0){  
-      toast.error("Por favor todas las opciones");
-      console.log(campana)
-      }else{
-        
-      }
   };
 
   const filtrar2 = (event) => {
@@ -82,20 +76,23 @@ const RepoTelefonicoAcumulado = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-    if(periodo == 0 || campana == 0){  
-      toast("Por favor todas las opciones");
-      console.log(campana)
-      }else{
-        
-      }
   };
 
+  const filtrar3 = (event) => {
+
+    setStartCampana(document.getElementById("ddl_campana").value)
+    if (document.getElementById("ddl_campana").value == '0' || periodo == '0') {
+      toast.error("Por favor seleccionar Campaña");
+      // console.log(campana)
+    } else {
+      (event === '1') ? filtrar() : filtrar2()
+    }
+  };
 
 
   return (
     <>
-
-
+    <ToastContainer />
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
@@ -111,13 +108,12 @@ const RepoTelefonicoAcumulado = () => {
               <h2 className="page-header col-sm-12 col-lg-3 mt-lg-0 mt-sm-2 text-black">Reporte Telefonico Acumulado</h2>
             </div>
               <hr />
-              <div className="row">
+              <div className="row animate__animated animate__slideInLeft">
                 <div className="col-12">
                   <Company_Campaing_Colas />
-                  <ToastContainer />
                 </div>
               </div>
-              <div className="row">
+              <div className="row animate__animated animate__slideInLeft">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-md-12 col-lg-8">
@@ -140,8 +136,8 @@ const RepoTelefonicoAcumulado = () => {
                             </div>
                             <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
 
-                              {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
-                              {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+                            {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar3(1)}>Buscar</button>}
+                            {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar3(2)}>Buscar</button>}
 
                             </div>
                           </div>
