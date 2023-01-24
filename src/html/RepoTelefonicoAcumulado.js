@@ -16,6 +16,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas';
 import ReporteTelefonicoAcumuladoTabla from './Componentes/ReporteTelefonicoAcumuladoTabla'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 registerLocale('es', es)
 
@@ -63,7 +66,12 @@ const RepoTelefonicoAcumulado = () => {
 
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-
+    if(periodo == 0 || campana == 0){  
+      toast.error("Por favor todas las opciones");
+      console.log(campana)
+      }else{
+        
+      }
   };
 
   const filtrar2 = (event) => {
@@ -74,7 +82,12 @@ const RepoTelefonicoAcumulado = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-
+    if(periodo == 0 || campana == 0){  
+      toast("Por favor todas las opciones");
+      console.log(campana)
+      }else{
+        
+      }
   };
 
 
@@ -101,6 +114,7 @@ const RepoTelefonicoAcumulado = () => {
               <div className="row">
                 <div className="col-12">
                   <Company_Campaing_Colas />
+                  <ToastContainer />
                 </div>
               </div>
               <div className="row">

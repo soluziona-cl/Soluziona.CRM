@@ -17,6 +17,9 @@ import ReporteIntervaloTabla from './Componentes/ReporteIntervaloTabla'
 import ReporteIntervaloTablaDetalle from "./Componentes/ReporteIntervaloTablaDetalle";
 import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 registerLocale('es', es)
 
 //con DataTable
@@ -55,6 +58,13 @@ const RepoIntervalo = () => {
     setMostrarGrid(true);
     setMostrarGrid2(false);
 
+    console.log(campana)
+    console.log(company)
+
+    if(campana == 0 || company == 0){  
+      toast("Por favor seleccione ambas opciones");
+      }else{
+      }
 
   };
 
@@ -65,7 +75,10 @@ const RepoIntervalo = () => {
     setMostrarGrid(false);
     setMostrarGrid2(true);
 
-
+    if(campana == 0 || company == 0){  
+      toast.error("Por favor seleccione ambas opciones");
+      }else{
+      }
   };
 
 
@@ -95,6 +108,7 @@ const RepoIntervalo = () => {
               <div className="row">
                 <div className="col-12">
                   <Company_Campaing_Colas />
+                  <ToastContainer />
                 </div>
               </div>
               <div className="row">
