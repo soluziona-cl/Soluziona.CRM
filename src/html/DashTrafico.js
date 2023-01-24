@@ -13,9 +13,19 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import DashBarrasTMO from './Componentes/DashBarrasTMO';
 import Company_Campaing_Colas_Dash from './Componentes/Company_Campaing_Colas_Dash';
+<<<<<<< HEAD
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+=======
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import 'animate.css';
+
+
+>>>>>>> 02f536576910c663320dac7826c1613d8dfc126f
 const DashTrafico = () => {
 
   const [key, setKey] = useState('trafico');
@@ -47,10 +57,6 @@ const DashTrafico = () => {
     } else {
       (event === '1') ? filtrar() : filtrar2()
     }
-
-
-
-
   };
 
 
@@ -62,15 +68,6 @@ const DashTrafico = () => {
     setMostrarGrid2(false);
     setMostrarGrid3(true);
     // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-    if(campana == 0){  
-      toast.error("Por favor seleccione ambas opciones");
-      console.log(campana)
-      }else{
-        // setStartCampana(document.getElementById("ddl_campana").value)
-        // setMostrarGrid(true);
-        // setMostrarGrid2(false);
-        // console.log(campana)
-      }
 
   };
 
@@ -82,21 +79,17 @@ const DashTrafico = () => {
     setMostrarGrid2(true);
     setMostrarGrid3(true);
     // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-    if(campana == 0){  
-      toast.error("Por favor seleccione ambas opciones2");
-      console.log(campana)
-      }else{
-        // setStartCampana(document.getElementById("ddl_campana").value)
-        // setMostrarGrid(false);
-        // setMostrarGrid2(true);
-        // console.log(campana)
-      }
  
   };
   return (
     <>
 
+<<<<<<< HEAD
 
+=======
+      <ToastContainer
+        autoClose={3000} />
+>>>>>>> 02f536576910c663320dac7826c1613d8dfc126f
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
@@ -113,25 +106,18 @@ const DashTrafico = () => {
                 <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
                   <h2>Dashboard</h2>
                 </div>
-                <ToastContainer
-                autoClose={3000} />
                 <Company_Campaing_Colas_Dash />
-
-
                 <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
                   {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar3(1)}>Buscar</button>}
                   {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar3(2)}>Buscar</button>}
-
                 </div>
               </div>
-
             </div>
-
-
             <hr />
 
             <div className="row">
-              <div className="row">
+              
+              <div className="row animate__animated animate__slideInLeft">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-lg-12">
@@ -148,9 +134,9 @@ const DashTrafico = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
-              <div className="row">
+
+              <div className="row animate__animated animate__slideInRight">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-lg-12">
@@ -188,7 +174,7 @@ const DashTrafico = () => {
 
               </div>
 
-              <div className="row">
+              <div className="row animate__animated animate__slideInLeft">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-lg-12">
