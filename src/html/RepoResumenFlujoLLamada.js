@@ -16,6 +16,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Company_Campaing_600 from "./Componentes/Company_Campaing_600";
 import ReporteResumenFlujoLlamadaTabla from "./Componentes/ReporteResumenFlujoLlamadaTabla";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 registerLocale('es', es)
 
 //con DataTable
@@ -54,7 +57,12 @@ const RepoResumenFlujoLLamada = () => {
     setMostrarGrid(true);
     setMostrarGrid2(false);
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-
+    if(campana == 0){  
+      toast("Por favor seleccione ambas opciones");
+      console.log(campana)
+      }else{
+        
+      }
   };
 
   const filtrar2 = (event) => {
@@ -65,6 +73,12 @@ const RepoResumenFlujoLLamada = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+    if(campana == 0){  
+      toast.error("Por favor seleccione ambas opciones");
+      console.log(campana)
+      }else{
+        
+      }
   };
 
 
@@ -94,6 +108,7 @@ const RepoResumenFlujoLLamada = () => {
               <div className="row">
                 <div className="col-12">
                   <Company_Campaing_600 />
+                  <ToastContainer />
                 </div>
               </div>
               <div className="row">

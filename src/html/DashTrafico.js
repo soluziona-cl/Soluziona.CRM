@@ -17,6 +17,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const DashTrafico = () => {
 
   const [key, setKey] = useState('trafico');
@@ -63,6 +66,15 @@ const DashTrafico = () => {
     setMostrarGrid2(false);
     setMostrarGrid3(true);
     // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+    if(campana == 0){  
+      toast.error("Por favor seleccione ambas opciones");
+      console.log(campana)
+      }else{
+        // setStartCampana(document.getElementById("ddl_campana").value)
+        // setMostrarGrid(true);
+        // setMostrarGrid2(false);
+        // console.log(campana)
+      }
 
   };
 
@@ -74,6 +86,16 @@ const DashTrafico = () => {
     setMostrarGrid2(true);
     setMostrarGrid3(true);
     // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+    if(campana == 0){  
+      toast.error("Por favor seleccione ambas opciones2");
+      console.log(campana)
+      }else{
+        // setStartCampana(document.getElementById("ddl_campana").value)
+        // setMostrarGrid(false);
+        // setMostrarGrid2(true);
+        // console.log(campana)
+      }
+ 
   };
   return (
     <>
@@ -98,7 +120,8 @@ const DashTrafico = () => {
                 <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
                   <h2>Dashboard</h2>
                 </div>
-
+                <ToastContainer
+                autoClose={3000} />
                 <Company_Campaing_Colas_Dash />
 
 

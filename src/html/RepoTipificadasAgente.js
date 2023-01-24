@@ -16,6 +16,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas';
 import ReporteTipificadasAgenteTabla from './Componentes/ReporteTipificadasAgenteTabla'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 registerLocale('es', es)
 
@@ -60,7 +63,12 @@ const RepoTipificadasAgente = () => {
     setMostrarGrid(true);
     setMostrarGrid2(false);
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-
+    if(campana == 0){  
+      toast.error("Por favor seleccione ambas opciones");
+      console.log(campana)
+      }else{
+        
+      }
   };
 
   const filtrar2 = (event) => {
@@ -71,6 +79,12 @@ const RepoTipificadasAgente = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+    if(campana == 0){  
+      toast.error("Por favor seleccione ambas opciones");
+      console.log(campana)
+      }else{
+        
+      }
   };
 
 
@@ -95,6 +109,7 @@ const RepoTipificadasAgente = () => {
               <div className="row">
                 <div className="col-12">
                   <Company_Campaing_Colas />
+                  <ToastContainer />
                 </div>
               </div>
               <div className="row">
