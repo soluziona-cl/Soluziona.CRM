@@ -74,16 +74,9 @@ const RepoTipificadasAgente = () => {
     setMostrarGrid(true);
     setMostrarGrid2(false);
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-<<<<<<< HEAD
-    if(campana === '0'){  
-      toast.error("Por favor seleccione ambas opciones");
-      console.log(campana)
-      }else{
-        
-      }
-=======
 
->>>>>>> 02f536576910c663320dac7826c1613d8dfc126f
+   
+
   };
 
   const filtrar2 = (event) => {
@@ -94,16 +87,8 @@ const RepoTipificadasAgente = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-<<<<<<< HEAD
-    if(campana === '0'){  
-      toast.error("Por favor seleccione ambas opciones");
-      console.log(campana)
-      }else{
-        
-      }
-=======
 
->>>>>>> 02f536576910c663320dac7826c1613d8dfc126f
+   
   };
 
 

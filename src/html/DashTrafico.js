@@ -13,11 +13,6 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import DashBarrasTMO from './Componentes/DashBarrasTMO';
 import Company_Campaing_Colas_Dash from './Componentes/Company_Campaing_Colas_Dash';
-<<<<<<< HEAD
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-=======
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,7 +20,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'animate.css';
 
 
->>>>>>> 02f536576910c663320dac7826c1613d8dfc126f
 const DashTrafico = () => {
 
   const [key, setKey] = useState('trafico');
@@ -84,12 +78,8 @@ const DashTrafico = () => {
   return (
     <>
 
-<<<<<<< HEAD
-
-=======
       <ToastContainer
         autoClose={3000} />
->>>>>>> 02f536576910c663320dac7826c1613d8dfc126f
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
