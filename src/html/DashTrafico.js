@@ -16,10 +16,6 @@ import Company_Campaing_Colas_Dash from './Componentes/Company_Campaing_Colas_Da
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 const DashTrafico = () => {
 
   const [key, setKey] = useState('trafico');
@@ -99,9 +95,6 @@ const DashTrafico = () => {
   };
   return (
     <>
-
-      <ToastContainer
-        autoClose={3000} />
 
 
       <div className="container-fluid">

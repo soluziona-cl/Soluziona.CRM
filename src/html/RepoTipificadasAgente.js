@@ -63,7 +63,7 @@ const RepoTipificadasAgente = () => {
     setMostrarGrid(true);
     setMostrarGrid2(false);
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-    if(campana == 0){  
+    if(campana === '0'){  
       toast.error("Por favor seleccione ambas opciones");
       console.log(campana)
       }else{
@@ -79,7 +79,7 @@ const RepoTipificadasAgente = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-    if(campana == 0){  
+    if(campana === '0'){  
       toast.error("Por favor seleccione ambas opciones");
       console.log(campana)
       }else{

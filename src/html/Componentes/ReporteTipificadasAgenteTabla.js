@@ -87,7 +87,33 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin, nombre }) {
             Sucursal_de_pago: v.sucursaldepago,
             Sucursal_De_Tramitacion: v.sucursaldetramitacion,
             Teléfono: v.teléfono,
-            Tipo_de_renta_Fija_o_Variable: v.tipoderentafijaovariable
+            Tipo_de_renta_Fija_o_Variable: v.tipoderentafijaovariable,
+            id:v.id,
+            indice:v.indice,
+            fecha:v.fecha,
+            script:v.script,
+            nroticket:v.nroticket,
+            crM_PARAM1:v.crM_PARAM1,
+            crM_PARAM2:v.crM_PARAM2,
+            crM_PARAM3:v.crM_PARAM3,
+            crM_PARAM4:v.crM_PARAM4,
+            crM_PARAM5:v.crM_PARAM5,
+            crM_PARAM6:v.crM_PARAM6,
+            crM_PARAM7:v.crM_PARAM7,
+            crM_PARAM8:v.crM_PARAM8,
+            crM_PARAM9:v.crM_PARAM9,
+            crM_PARAM10:v.crM_PARAM10,
+            crM_PARAM11:v.crM_PARAM11,
+            crM_PARAM12:v.crM_PARAM12,
+            crM_PARAM13:v.crM_PARAM13,
+            crM_PARAM14:v.crM_PARAM14,
+            crM_PARAM15:v.crM_PARAM15,
+            crM_PARAM16:v.crM_PARAM16,
+            crM_PARAM17:v.crM_PARAM17,
+            crM_PARAM18:v.crM_PARAM18,
+            crM_PARAM19:v.crM_PARAM19,
+            crM_PARAM20:v.crM_PARAM20,
+            escalamiento:v.escalamiento
         }));
 
         let ws = XLSX.utils.json_to_sheet(arr2);
@@ -234,7 +260,33 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin, nombre }) {
         , { name: <div className="text-wrap">Sucursal De Tramitacion</div>, selector: row => row.sucursaldetramitacion, center: true , wrap: true}
         , { name: <div className="text-wrap">Teléfono</div>, selector: row => row.teléfono, center: true , wrap: true}
         , { name: <div className="text-wrap">Tipo de renta (Fija o Variable)</div>, selector: row => row.tipoderentafijaovariable, center: true , wrap: true}
-
+        , { name: <div className="text-wrap">id</div>, selector: row => row.id, center: true , wrap: true}
+        , { name: <div className="text-wrap">indice</div>, selector: row => row.indice, center: true , wrap: true}
+        , { name: <div className="text-wrap">fecha</div>, selector: row => row.fecha, center: true , wrap: true}
+        , { name: <div className="text-wrap">script</div>, selector: row => row.script, center: true , wrap: true}
+        , { name: <div className="text-wrap">nroticket</div>, selector: row => row.nroticket, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM1</div>, selector: row => row.crM_PARAM1, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM2</div>, selector: row => row.crM_PARAM2, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM3</div>, selector: row => row.crM_PARAM3, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM4</div>, selector: row => row.crM_PARAM4, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM5</div>, selector: row => row.crM_PARAM5, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM6</div>, selector: row => row.crM_PARAM6, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM7</div>, selector: row => row.crM_PARAM7, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM8</div>, selector: row => row.crM_PARAM8, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM9</div>, selector: row => row.crM_PARAM9, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM10</div>, selector: row => row.crM_PARAM10, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM11</div>, selector: row => row.crM_PARAM11, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM12</div>, selector: row => row.crM_PARAM12, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM13</div>, selector: row => row.crM_PARAM13, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM14</div>, selector: row => row.crM_PARAM14, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM15</div>, selector: row => row.crM_PARAM15, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM16</div>, selector: row => row.crM_PARAM16, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM17</div>, selector: row => row.crM_PARAM17, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM18</div>, selector: row => row.crM_PARAM18, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM19</div>, selector: row => row.crM_PARAM19, center: true , wrap: true}
+        , { name: <div className="text-wrap">crM PARAM20</div>, selector: row => row.crM_PARAM20, center: true , wrap: true}
+        , { name: <div className="text-wrap">escalamiento</div>, selector: row => row.escalamiento, center: true , wrap: true}
+       
     ];
 
 
