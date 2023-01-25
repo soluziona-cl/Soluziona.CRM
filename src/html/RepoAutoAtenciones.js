@@ -109,12 +109,12 @@ const RepoAutoAtenciones = () => {
               <h2 className="page-header col-sm-12 col-lg-3 mt-lg-0 mt-sm-2 text-black">Reporte AutoAtencion</h2>
             </div>
               <hr />
-              <div className="row animate__animated animate__slideInLeft">
+              <div className="row ">
                 <div className="col-12">
                   <Company_Campaing_600 />
                 </div>
               </div>
-              <div className="row animate__animated animate__slideInLeft">
+              <div className="row ">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-md-12 col-lg-8">
