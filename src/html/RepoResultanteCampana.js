@@ -13,16 +13,19 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company_Campaing_600 from "./Componentes/Company_Campaing_600";
-import ReporteDetalleFlujoLlamadaTabla from "./Componentes/ReporteDetalleFlujoLlamadaTabla";
+import ReporteResultanteCampana from './Componentes/ReporteResultanteCampana'
+
+import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import 'animate.css';
+
 registerLocale('es', es)
 
 //con DataTable
-const RepoDetalleFlujoLLamada = () => {
+const RepoResultanteCampana = () => {
   const [mostrarGrid, setMostrarGrid] = useState(false);
   const [mostrarGrid2, setMostrarGrid2] = useState(false);
 
@@ -30,7 +33,7 @@ const RepoDetalleFlujoLLamada = () => {
   const [startdatefin, setStartDateFin] = useState(new Date());
   const [company, setStartCompany] = useState('');
   const [campana, setStartCampana] = useState('');
-  const [flujo, setFlujo] = useState('');
+
   const years = range(2022, getYear(new Date()) + 2, 1);
   const months = [
     "Enero",
@@ -47,16 +50,7 @@ const RepoDetalleFlujoLLamada = () => {
     "Diciembre",
   ];
 
-  const filtrar3 = (event) => {
 
-    setStartCampana(document.getElementById("ddl_campana").value)
-    if (document.getElementById("ddl_campana").value == '0') {
-      toast.error("Por favor seleccionar Campaña");
-      // console.log(campana)
-    } else {
-      (event === '1') ? filtrar() : filtrar2()
-    }
-  };
 
   //metodos para editar
   const filtrar = (event) => {
@@ -65,7 +59,10 @@ const RepoDetalleFlujoLLamada = () => {
     setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
     setMostrarGrid2(false);
-    setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+
+    console.log(campana)
+    console.log(company)
+
   };
 
   const filtrar2 = (event) => {
@@ -75,7 +72,17 @@ const RepoDetalleFlujoLLamada = () => {
     setMostrarGrid(false);
     setMostrarGrid2(true);
 
-    setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+  };
+
+  const filtrar3 = (event) => {
+
+    setStartCampana(document.getElementById("ddl_campana").value)
+    if (document.getElementById("ddl_campana").value == '0') {
+      toast.error("Por favor seleccionar Campaña");
+      // console.log(campana)
+    } else {
+      (event === '1') ? filtrar() : filtrar2()
+    }
   };
 
 
@@ -99,12 +106,12 @@ const RepoDetalleFlujoLLamada = () => {
             <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" className="border rounded-3 p-1 text-decoration-none"><i className="fa-solid fa-bars py-2 p-1"></i> Menu</a>
 
             <div className="m-xs-0 m-lg-4"> <div className="page-header pt-3">
-              <h2 className="page-header col-sm-12 col-lg-3 mt-lg-0 mt-sm-2 text-black">Reporte Detalle Flujo Llamada</h2>
+              <h2 className="page-header col-sm-12 col-lg-4 mt-lg-0 mt-sm-2 text-black">Reporte de Resultante Campaña</h2>
             </div>
               <hr />
               <div className="row ">
                 <div className="col-12">
-                  <Company_Campaing_600 />
+                  <Company_Campaing_Colas />
                 </div>
               </div>
               <div className="row ">
@@ -251,7 +258,6 @@ const RepoDetalleFlujoLLamada = () => {
                                 }}
                               /></div>
                             <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
-
                             {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar(1)}>Buscar</button>}
                             {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2(2)}>Buscar</button>}
 
@@ -265,12 +271,12 @@ const RepoDetalleFlujoLLamada = () => {
 
               </div>
 
-              <section className="col-lg-12 col-md-12 col-sm-12 mt-2">
+              <section className="col-lg-12 col-md-12 col-sm-12 mt-2 ">
                 {/* <TablaFull /> */}
                 <div className="mt-2">
-                  {mostrarGrid !== false && <ReporteDetalleFlujoLlamadaTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} nombre={flujo} />}
-                  {mostrarGrid2 !== false && <ReporteDetalleFlujoLlamadaTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} nombre={flujo} />}
-                 
+                  {mostrarGrid !== false && <ReporteResultanteCampana flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                  {mostrarGrid2 !== false && <ReporteResultanteCampana flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+
                 </div>
 
               </section>
@@ -283,4 +289,4 @@ const RepoDetalleFlujoLLamada = () => {
   );
 };
 
-export default RepoDetalleFlujoLLamada;
+export default RepoResultanteCampana;

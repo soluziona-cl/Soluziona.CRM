@@ -13,6 +13,8 @@ import RepoResumenFlujoLLamada from "./html/RepoResumenFlujoLLamada";
 import RepoDetalleFlujoLLamada from "./html/RepoDetalleFlujoLLamada";
 import RepoTipificadasAgente from "./html/RepoTipificadasAgente";
 import RepoExcel from "./html/RepoExcel";
+import SubirArchivos from "./html/subirArchivos";
+import RepoResultanteCampana from "./html/RepoResultanteCampana";
 
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
         <Route path={rutaservidor + "/RepoDetalleFlujoLLamada"} element={<RepoDetalleFlujoLLamada />} />
         <Route path={rutaservidor + "/RepoTipificadasAgente"} element={<RepoTipificadasAgente />} />
         <Route path={rutaservidor + "/RepoExcel"} element={<RepoExcel />} />
+        <Route path={rutaservidor + "/SubirArchivos"} element={<SubirArchivos />} />
+        <Route path={rutaservidor + "/RepoResultanteCampana"} element={<RepoResultanteCampana />} />
         </Routes>
     </Router>  
   );

@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
-function ReporteIntervaloTablaDash({ flujo}) {
+function ReporteIntervaloTablaDash({ flujo }) {
 
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
@@ -37,16 +37,17 @@ function ReporteIntervaloTablaDash({ flujo}) {
         let wb = XLSX.utils.book_new();
 
         var arr2 = datafull.map(v => ({
-            RUT_PERSONA: v.ruT_PERSONA,
-            This_Phone_number: v.this_Phone_number,
-            Call_Disposition: v.call_Disposition,
-            Call_Time: v.call_Time,
-            Dialing_Duration: v.dialing_Duration,
-            Answered_Duration: v.answered_Duration,
-            Agent: v.agent,
-            Recording_file: v.recording_file,
-            Global_Interaction_ID: v.global_Interaction_ID,
-            List_name: v.list_name
+            Fecha: v.fecha,
+            Llamadas_dimensionadas_a_recibir: v.llamadas_dimensionadas,
+            Call_DisRecibidas: v.recibidas,
+            Atendidas: v.atendidas,
+            Sobre_o_bajo_tráfico: v.sobre_bajo_trafico,
+            Debió_atender: v.debio_atender,
+            Nivel_de_atención_esperado: v.n_atencion_e,
+            Nivel_de_atención_obtenido: v.n_atencion_o,
+            Ejecutivos_conectados: v.agentes,
+            TMO: secondsToString(parseInt(v.tmo).toFixed(2)),
+            Ejecutivos_Requeridos: v.agentes_r
         }));
 
         let ws = XLSX.utils.json_to_sheet(arr2);
@@ -96,7 +97,7 @@ function ReporteIntervaloTablaDash({ flujo}) {
 
 
         const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/Intervalo/Acumulado',
-            { dato: flujo},
+            { dato: flujo },
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
@@ -125,7 +126,7 @@ function ReporteIntervaloTablaDash({ flujo}) {
         rows: {
             style: {
                 minHeight: '50px', // override the row height
-                maxHeight:'60px',
+                maxHeight: '60px',
                 border: '2px solid #a9dff0',
                 borderRadius: '3px'
             },
@@ -135,7 +136,7 @@ function ReporteIntervaloTablaDash({ flujo}) {
                 paddingLeft: '8px', // override the cell padding for head cells
                 paddingRight: '8px',
                 backgroundColor: '#a9dff0',
-                
+
             },
         },
         cells: {
@@ -143,8 +144,8 @@ function ReporteIntervaloTablaDash({ flujo}) {
                 paddingLeft: '8px', // override the cell padding for data cells
                 paddingRight: '8px',
                 fontSize: '20px',
-              
-                        
+
+
             },
         },
     };
@@ -154,57 +155,57 @@ function ReporteIntervaloTablaDash({ flujo}) {
         {
             name: 'Fecha',
             selector: row => row.fecha,
-            center:true
+            center: true
         },
         {
-            name: <div className="text-wrap">Llamadas dimensionadas a recibir</div> ,
+            name: <div className="text-wrap">Llamadas dimensionadas a recibir</div>,
             selector: row => row.llamadas_dimensionadas,
-            center:true
+            center: true
         },
         {
-            name:  <div className="text-wrap">Call DisRecibidas</div> ,
+            name: <div className="text-wrap">Call DisRecibidas</div>,
             selector: row => row.recibidas,
-            center:true
+            center: true
         },
         {
             name: <div className="text-wrap">Atendidas</div>,
             selector: row => row.atendidas,
-            center:true
+            center: true
         },
         {
             name: <div className="text-wrap">Sobre o bajo tráfico</div>,
             selector: row => row.sobre_bajo_trafico,
-            center:true
+            center: true
         },
         {
             name: <div className="text-wrap">Debió atender</div>,
             selector: row => row.debio_atender,
-            center:true
+            center: true
         },
         {
             name: <div className="text-wrap">Nivel de atención esperado</div>,
             selector: row => row.n_atencion_e,
-            center:true
+            center: true
         },
         {
             name: <div className="text-wrap">Nivel de atención obtenido</div>,
             selector: row => row.n_atencion_o,
-            center:true
+            center: true
         },
         {
             name: <div className="text-wrap">Ejecutivos conectados</div>,
             selector: row => row.agentes,
-            center:true
+            center: true
         },
         {
             name: <div className="text-wrap">TMO</div>,
             selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
-            center:true
+            center: true
         },
         {
             name: <div className="text-wrap">Ejecutivos Requeridos</div>,
             selector: row => row.agentes_r,
-            center:true
+            center: true
         },
     ];
 
@@ -231,9 +232,9 @@ function ReporteIntervaloTablaDash({ flujo}) {
                         columns={columns}
                         data={datafull}
                         // highlightOnHover
-                        
+
                         customStyles={customStyles}
-                        
+
                     />
                 </div>
             )}
