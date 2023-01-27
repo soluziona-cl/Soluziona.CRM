@@ -7,6 +7,9 @@ import { useState, useEffect } from 'react';
 
 import { setUserSession } from './Componentes/Common';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
     const [user, setUsuario] = useState('');
@@ -25,7 +28,7 @@ const Login = () => {
     function inicio_sesion() {
         axios
             .post(
-                "https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Login",
+                "https://app.soluziona.cl/API_desa/Soluziona.Videollamada/api/Ventas_CRM/CRM/Login",
 
                 { username: user, password: pass }
             )
@@ -61,7 +64,7 @@ const Login = () => {
                 console.log(login);
                 if (id === "-1") {
                     // console.log("NOP");
-                    alert("credenciales erróneas");
+                    toast.error("credenciales erróneas");
                 } else {
 
                     setUserSession(login.token, login.id_usuario);
@@ -69,7 +72,8 @@ const Login = () => {
 
                     //navigate("/Orkesta_CallSouth_Salcobrand/Dashboard");
                     //   navigate("/Orkesta/CallSouth/LosHeroes/CRM/Dashboard");
-                    navigate("/Orkesta/CallSouth/LosHeroes/CRM/DashTrafico");
+                    navigate("/Orkesta/CallSouth/LosHeroes/CRM/Dashboard");
+
                 }
             })
             .catch((error) => {
@@ -80,6 +84,7 @@ const Login = () => {
     return (
         <>
 
+            <ToastContainer />
             <main className="main-container" id="main-container">
                 <div className="container-sm-lg-6 col-sm-4">
 
@@ -88,7 +93,7 @@ const Login = () => {
                             <div className="mb-3 flex-column col-lg-6 col-sm-4">
 
                                 <img className="img-fluid" src={logo} />
-                                <p className="mt-2 mb-4">Bienvenido LOS HEROES CRM</p>
+                                <p className="mt-2 mb-4">Soluziona Videollamadas</p>
 
 
                                 <label for="label_user" className="form-label">Ingrese usuario</label>

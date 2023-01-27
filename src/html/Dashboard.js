@@ -1,23 +1,37 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Donut from './Componentes/Donut';
-import Barras from './Componentes/Barras';
-import Pie from './Componentes/Pie';
 import Header from './Componentes/Header';
 import Sidebar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
-import Company_Campaing_Dash from './Componentes/Company_Campaing_Dash';
+import Jitsi from './Componentes/Jitsi';
 
-import DashReporteCargaTabla from './Componentes/DashReporteCargaTabla';
-import DashReporteCargaTablaFilter from './Componentes/DashReporteCargaTablaFilter';
-import PieGestion from './Componentes/PieGestion';
-import DashReporteFechaPago from './Componentes/DashReporteFechaPago';
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { getToken, removeUserSession, setUserSession } from '../html/Componentes/Common';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import "jquery/dist/jquery.min.js";
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import "datatables.net-buttons/js/dataTables.buttons.js";
+import "datatables.net-buttons/js/buttons.colVis.js";
+import "datatables.net-buttons/js/buttons.flash.js";
+import "datatables.net-buttons/js/buttons.html5.js";
+import "datatables.net-buttons/js/buttons.print.js";
+import $, { data } from "jquery";
 
 const Dashboard = () => {
-
-
+  const [authLoading, setAuthLoading] = useState(true);
+  const navigate = useNavigate();
   const [filtrar, Filtrar] = useState(false);
   const [company, setCompany] = useState('');
   const [carga, setCarga] = useState('');
+  const [datashow, setDataShow] = useState([]);
+  const [datamodal, setDataModal] = useState([]);
+  const [dataccion, setDataAccion] = useState([]);
+
+  const [mostrarJitsi, setMostrarJitsi] = useState(false);
+  const [cerrarJitsi, setCerrarJitsi] = useState(false);
+  
 
   const HideLogo = () => {
     // setshowlogo(!showlogo);
@@ -27,6 +41,174 @@ const Dashboard = () => {
     Filtrar(!filtrar)
   }
 
+  const sesiones = {
+    sgui: localStorage.getItem("localgui"),
+    scliente: localStorage.getItem("localcliente"),
+    sid: localStorage.getItem("localid"),
+    sid_usuario: localStorage.getItem("localid_usuario"),
+    stoken: localStorage.getItem("token")
+  };
+
+  useEffect(() => {
+    const token = getToken();
+
+    if (!token) {
+      console.log('Vacio')
+      navigate("/");
+      return;
+    }
+
+    axios.post('https://app.soluziona.cl/API_desa/Soluziona.Videollamada/api/Ventas_CRM/CRM/Session_Check', { user: sesiones.sid_usuario, gui: sesiones.sgui }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+      .then(response => {
+
+        setUserSession(sesiones.sgui, sesiones.sid_usuario);
+        setAuthLoading(false);
+
+
+      }).catch(error => {
+        removeUserSession();
+        setAuthLoading(false);
+      });
+
+    Datos()
+    componentDidMount()
+  }, []);
+
+  const Datos = (async () => {
+    console.log("show")
+    const response = await axios.post('https://app.soluziona.cl/API_desa/Soluziona.Videollamada/api/Ventas_CRM/CRM/Historial_Show', { dato: null }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+
+    if (response.status === 200) {
+      console.log(response)
+      // console.log(response.data)
+      // console.log(response.data)
+      setDataShow(response.data)
+      console.log(datashow)
+    }
+  })
+
+  const componentDidMount = () => {
+    if (!$.fn.DataTable.isDataTable("#myTable")) {
+      $(document).ready(function () {
+        setTimeout(function () {
+          $("#table").DataTable({
+            language: {
+              url: "//cdn.datatables.net/plug-ins/1.11.3/i18n/es-cl.json"
+            },
+            destroy: true,
+            //pagingType: "full_numbers",
+            pageLength: 10,
+            //processing: true,
+            dom: "Bfrtip",
+            select: {
+              style: "single",
+            },
+            //buttons tiene varios botones, pero por ahora solo uno activado
+            buttons: [
+              // {
+              //     extend: "pageLength",
+              //     className: "btn btn-secondary bg-secondary",
+              // },
+              // {
+              //     extend: "copy",
+              //     className: "btn btn-secondary bg-secondary",
+              // },
+              // {
+              //     extend: "csv",
+              //     className: "btn btn-secondary bg-secondary",
+              // },
+              // {
+              //     extend: "print",
+              //     customize: function (win) {
+              //         $(win.document.body).css("font-size", "10pt");
+              //         $(win.document.body)
+              //             .find("table")
+              //             .addClass("compact")
+              //             .css("font-size", "inherit");
+              //     },
+              //     className: "btn btn-secondary bg-secondary",
+              // },
+            ],
+
+            fnRowCallback: function (
+              nRow,
+              aData,
+              iDisplayIndex,
+              iDisplayIndexFull
+            ) {
+              var index = iDisplayIndexFull + 1;
+              $("td:first", nRow).html(index);
+              return nRow;
+            },
+
+            lengthMenu: [
+              [10, 20, 30, 50, -1],
+              [10, 20, 30, 50, "All"],
+            ],
+            columnDefs: [
+              {
+                targets: 0,
+                render: function (data, type, row, meta) {
+                  return type === "export" ? meta.row + 1 : data;
+                },
+              },
+            ],
+          });
+        }, 2000);
+      });
+    }
+
+  }
+
+  const showTable = () => {
+
+    try {
+      return datashow.map((data, index) => {
+        return (
+          <tr key={index + 1}>
+            <td></td>
+            <td className="text-xs font-weight-bold">{data.nombre}</td>
+            <td className="text-xs font-weight-bold">{data.fecha}</td>
+            <td className="text-xs font-weight-bold">{data.estado}</td>
+            <td className="text-xs font-weight-bold">{data.observacion}</td>
+            <td><button type="button" className="btn btn-success" data-bs-toggle="modal"
+              data-bs-target="#modalJitsi" onClick={() => datalModal(data)}>
+              Ver detalles</button></td>
+          </tr>
+        );
+      });
+    } catch (e) {
+      alert(e.message);
+    }
+    // if (alertas != 0) { setAlert(true) }
+  };
+
+  const mostrar = () => {
+    setMostrarJitsi(true);
+    // mostrarJitsi.show();
+    console.log("mostrar");
+  };
+
+  const datalModal = (async (data) => {
+    // console.log(data)
+    setDataModal(data)
+    console.log(data.nombre)
+
+
+    const response = await axios.post('https://app.soluziona.cl/API_desa/Soluziona.Videollamada/api/Ventas_CRM/CRM/Envio_id', { dato: datamodal.id }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+    console.log(response)
+
+    // console.log(response.data)
+    // console.log(response.data[0].idaccion)
+    // setDataAccion(response.data[0])
+    // console.log(dataccion)
+    // console.log(dataccion.idaccion)
+  })
+
+  const cerrar = () => {
+    setCerrarJitsi(true);
+    console.log("cerrar");
+  };
 
   return (
     <>
@@ -44,106 +226,97 @@ const Dashboard = () => {
               <h2>Dashboard</h2>
             </div>
             <hr />
+
+
+
             <div className="row">
+              <div className="col-12">
+                <div className="row row-cols-3 row-cols-md-3 mb-3 text-center">
 
-              <div className="row">
-                <div className="col-12">
-                  <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                    <div className="col-sm-12 col-lg-4">
-                      <div className="card mb-4 rounded-3 shadow-sm">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Agentes Conectados</h4>
-                        </div>
-                        <div className="card-body">
-                          <Pie></Pie>
-                        </div>
+                  <div className="col-sm-12 col-lg-11">
+                    <div className="card mb-4 rounded-3 shadow-sm">
+                      <div className="card-header">
+                        <h4 className="my-0 font-weight-normal">Llamadas pendientes</h4>
                       </div>
-                    </div>
-                    <div className="col-sm-12 col-lg-8">
-                      <div className="card mb-4 rounded-3 shadow-sm">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Trafico Intervalo</h4>
-                        </div>
-                        <div className="card-body">
-                          <Barras></Barras>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-12">
-                  <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                    <div className="col-sm-12 col-lg-4">
-                      <div className="card mb-4 rounded-3 shadow-sm">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Gestion de Cargas</h4>
-                        </div>
-                        <div className="card-body">
-                          <div className="table-responsive overflow-x: hidden;">
-                            <DashReporteCargaTabla></DashReporteCargaTabla>
-                          </div>
 
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-12 col-lg-4">
-                      <div className="card mb-4 rounded-3 shadow-sm">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Compromiso de Pagos</h4>
-                        </div>
-                        <div className="card-body">                        
-                            <PieGestion></PieGestion>                        
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-12 col-lg-4">
-                      <div className="card mb-4 rounded-3 shadow-sm">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Fechas Compromiso</h4>
-                        </div>
-                        <div className="card-body">                        
-                            <DashReporteFechaPago></DashReporteFechaPago>                        
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
+                      <table id="table" className="table table-striped table-bordered base-style display text-nowrap text-sm">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Observacion</th>
+                            <th>Accion</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {showTable()}
+                        </tbody>
+                      </table>
+                      <div>
 
-                <div className="col-12">
-                  <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                    <div className="col-sm-12 col-lg-12">
-                      <div className="card mb-4 rounded-3 shadow-sm">
-                        <div className="card-header">
-                          <h4 className="my-0 font-weight-normal">Gestion Ultimos 10 Dias</h4>
-                          <hr />
-                          <div className="row mt-2 bg-light align-items-center">
-                            <Company_Campaing_Dash></Company_Campaing_Dash>
-                            <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                              <button
-                                className="mb-0 btn btn-success"
-                                onClick={HideLogo}
-                              >Buscar
-                              </button>
+                      </div>
+
+                      {/* inicio modal jitsi*/}
+                      <div class="modal" tabindex="-1" id="modalJitsi">
+                        <div class="modal-dialog modal-fullscreen">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Llamada de {datamodal.nombre}</h5>
+                            </div>
+                            <div className="row">
+                              <div class="modal-body">
+                                <div className="row">
+                                  {/* <div className="col-6">
+                                    <div className="mb-3">
+                                      <label for="recipient-name" className="col-form-label">Nombre: {datamodal.nombre}</label><br />
+                                    </div>
+                                    <div className="mb-3">
+                                      <label for="recipient-name" className="col-form-label">Rut: {datamodal.rut} </label><br />
+                                    </div>
+                                    <div className="mb-3">
+                                      <label for="recipient-name" className="col-form-label">Fecha: {datamodal.fecha}</label><br />
+                                    </div>
+                                    <div className="mb-3">
+                                      <label for="recipient-name" className="col-form-label">Celular: {datamodal.celular}</label><br />
+                                    </div>
+                                    <div className="mb-3">
+                                      <label for="recipient-name" className="col-form-label">Correo: {datamodal.correo}</label><br />
+                                    </div>
+                                    <div className="mb-3">
+                                      <label for="recipient-name" className="col-form-label">Link: {datamodal.Link}</label><br />
+                                    </div>
+                                    <div className="mb-3">
+                                      <label for="recipient-name" className="col-form-label">Observacion: {datamodal.observacion}</label><br />
+                                    </div>
+
+
+                                  </div> */}
+
+                                  <div className="col">
+                                    <button type="button" className="btn btn-success" onClick={mostrar}>llamar</button>
+                                    {mostrarJitsi !== false && cerrarJitsi !== true && <Jitsi />}
+                                  </div>
+                                  
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"onClick={cerrar}>Close</button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className="card-body">
-                          {filtrar !== false &&
-                            <DashReporteCargaTablaFilter company={company} carga={carga}></DashReporteCargaTablaFilter>}
-                        </div>
                       </div>
+
+                      {/* fin modal jitsi */}
+
                     </div>
                   </div>
                 </div>
-
               </div>
-
-
             </div>
+
           </main>
 
         </div>

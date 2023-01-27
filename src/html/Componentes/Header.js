@@ -20,7 +20,7 @@ function Header() {
             <div className=" top-0 " id="header">
                 <div className=" justify-content-around align-content-around  py-0 my-4 m-3">
                     <div className=" align-content-around justify-content-around   " id="mobile-menu-2">
-                        <span className="" style={{ color: 'white' }}>Control CRM Orkesta LOS HEROES</span>
+                        <span className="" style={{ color: 'white' }}>Videollamadas Soluziona CRM</span>
                     </div>
                     <div className=" my-2 position-absolute end-0 translate-middle">
                         <button 
