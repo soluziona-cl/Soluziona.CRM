@@ -122,9 +122,9 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 3000)
     }, [])
 
 
@@ -204,8 +204,11 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
 
 
             setData(result.data);
-
+            setLoading(false)
             console.log(result.data)
+        }
+        else{
+            setLoading(false)
         }
 
     })
