@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
-import DotLoader from "react-spinners/DotLoader";
+import ClockLoader from "react-spinners/ClockLoader";
 
 function ReporteIntervaloTabla({ flujo, ini, fin }) {
 
@@ -59,9 +59,9 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 3000)
     }, [])
 
 
@@ -102,6 +102,7 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
         if (result.status === 200) {
 
             console.log(result.data)
+            setLoading(false)
             setData(result.data);
             // setData([{
             //     "fecha": "3/18/2022",
@@ -116,9 +117,13 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
             //     "TMO": 94,
             //     "agentes_r": 94
             //   }]);
-        }
 
+        }
+        else{
+            setLoading(false)
+        }
     })
+   
 
 
     const customStyles = {
@@ -220,7 +225,7 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
                                     <h4 className="my-0 font-weight-normal">Trafico Acumulado Dia</h4>
                                 </div>
                                 <div className="card-body">
-                                    <section className=" float-end">
+                                    <section className=" float-start">
                                         <button
                                             onClick={handleOnExportCarga}
                                             className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
@@ -229,7 +234,7 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
                                     </section>
                                     {loading ? (
                                         <div className="d-flex justify-content-center mt-3">
-                                            <DotLoader
+                                            <ClockLoader
                                                 className='loading'
                                                 color={'#5b198ab5'}
                                                 loading={loading}

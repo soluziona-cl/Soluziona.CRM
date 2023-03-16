@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
-import DotLoader from "react-spinners/DotLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+
 
 function ReporteTipificadasAgenteTabla({ flujo, ini, fin, nombre }) {
 
@@ -126,9 +127,9 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin, nombre }) {
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 3000)
     }, [])
 
 
@@ -169,9 +170,12 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin, nombre }) {
         if (result.status === 200) {
 
             console.log(result.data)
+            setLoading(false)
             setData(result.data);
         }
-
+        else{
+            setLoading(false)
+        }
     })
 
     const customStyles = {
@@ -310,7 +314,7 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin, nombre }) {
                                 </section>
                                 {loading ? (
                                     <div className="d-flex justify-content-center mt-3">
-                                        <DotLoader
+                                        <ClockLoader
                                             className='loading'
                                             color={'#5b198ab5'}
                                             loading={loading}

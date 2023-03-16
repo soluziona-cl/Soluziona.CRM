@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
-import DotLoader from "react-spinners/DotLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+
 
 
 
@@ -69,9 +70,9 @@ function ReporteTelefonicoAcumuladoTabla({ flujo, periodo, nombre }) {
 const [loading, setLoading] = useState(false)
 useEffect(() => {
     setLoading(true)
-    setTimeout(() => {
-        setLoading(false)
-    }, 3000)
+    // setTimeout(() => {
+    //     setLoading(false)
+    // }, 3000)
 }, [])
 
 
@@ -126,6 +127,10 @@ const Datos = (async () => {
         // });
 
         setData(result.data);
+        setLoading(false)
+    }
+    else{
+        setLoading(false)
     }
 
 })
@@ -222,7 +227,7 @@ return (
                             <h4 className="my-0 font-weight-normal">Trafico Acumulado {periodo} - {nombre}</h4>
                         </div>
                         <div className="card-body">
-                            <section className=" float-end">
+                            <section className=" float-start">
                                 <button
                                     onClick={handleOnExportCarga}
                                     className="rounded inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-secondary rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 m-2 text-white">
@@ -231,7 +236,7 @@ return (
                             </section>
                             {loading ? (
                                 <div className="d-flex justify-content-center mt-3">
-                                    <DotLoader
+                                    <ClockLoader
                                         className='loading'
                                         color={'#5b198ab5'}
                                         loading={loading}

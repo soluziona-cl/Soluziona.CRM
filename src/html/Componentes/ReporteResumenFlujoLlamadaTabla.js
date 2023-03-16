@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
-import DotLoader from "react-spinners/DotLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+
 
 function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
 
@@ -368,6 +369,41 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
         esconder()
         
 
+        // { name: <div className="text-wrap">{ini.substring(0, 6)}01</div>, selector: row => row._1, center: true },
+        // { name: <div className="text-wrap">{ini.substring(0, 6)}02</div>, selector: row => row._2, center: true },
+     
+        { name: <div className="text-wrap">01{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._1, center: true },
+        { name: <div className="text-wrap">02{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4)}</div>, selector: row => row._1, center: true},
+        { name: <div className="text-wrap">03{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._1, center: true},
+        { name: <div className="text-wrap">04{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._1, center: true},
+        { name: <div className="text-wrap">05{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._5, center: true },
+        { name: <div className="text-wrap">06{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._6, center: true },
+        { name: <div className="text-wrap">07{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._7, center: true },
+        { name: <div className="text-wrap">08{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._8, center: true },
+        { name: <div className="text-wrap">09{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._9, center: true },
+        { name: <div className="text-wrap">10{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._10, center: true },
+        { name: <div className="text-wrap">11{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._11, center: true },
+        { name: <div className="text-wrap">12{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._12, center: true },
+        { name: <div className="text-wrap">13{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._13, center: true },
+        { name: <div className="text-wrap">14{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._14, center: true },
+        { name: <div className="text-wrap">15{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._15, center: true },
+        { name: <div className="text-wrap">16{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._16, center: true },
+        { name: <div className="text-wrap">17{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._17, center: true },
+        { name: <div className="text-wrap">18{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._18, center: true },
+        { name: <div className="text-wrap">19{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._19, center: true },
+        { name: <div className="text-wrap">20{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._20, center: true },
+        { name: <div className="text-wrap">21{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._21, center: true },
+        { name: <div className="text-wrap">22{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._22, center: true },
+        { name: <div className="text-wrap">23{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._23, center: true },
+        { name: <div className="text-wrap">24{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._24, center: true },
+        { name: <div className="text-wrap">25{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._25, center: true },
+        { name: <div className="text-wrap">26{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._26, center: true },
+        { name: <div className="text-wrap">27{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._27, center: true },
+        { name: <div className="text-wrap">28{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._28, center: true },
+        { name: <div className="text-wrap">29{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._29, center: true },
+        { name: <div className="text-wrap">30{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._30, center: true },
+        { name: <div className="text-wrap">31{"/"+ini.substring(4, 6)+"/"+ ini.slice(0, 4) }</div>, selector: row => row._31, center: true },
+       
     ];
   
 
@@ -391,7 +427,7 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
                                 </section>
                                 {loading ? (
                                     <div className="d-flex justify-content-center mt-3">
-                                        <DotLoader
+                                        <ClockLoader
                                             className='loading'
                                             color={'#5b198ab5'}
                                             loading={loading}

@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
-import DotLoader from "react-spinners/DotLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+
 
 function ReporteIntervaloTablaDetalle({ flujo, campana, ini, fin }) {
 
@@ -59,9 +60,9 @@ function ReporteIntervaloTablaDetalle({ flujo, campana, ini, fin }) {
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 3000)
     }, [])
 
 
@@ -102,6 +103,7 @@ function ReporteIntervaloTablaDetalle({ flujo, campana, ini, fin }) {
         if (result.status === 200) {
 
             console.log(result.data)
+            setLoading(false)
             setData(result.data);
             // setData([{
             //     "fecha": "3/18/2022",
@@ -116,6 +118,9 @@ function ReporteIntervaloTablaDetalle({ flujo, campana, ini, fin }) {
             //     "TMO": 94,
             //     "agentes_r": 94
             //   }]);
+        }
+        else{
+            setLoading(false)
         }
 
     })
@@ -234,7 +239,7 @@ function ReporteIntervaloTablaDetalle({ flujo, campana, ini, fin }) {
                                 </section>
                                 {loading ? (
                                     <div className="d-flex justify-content-center mt-3">
-                                        <DotLoader
+                                        <ClockLoader
                                             className='loading'
                                             color={'#5b198ab5'}
                                             loading={loading}

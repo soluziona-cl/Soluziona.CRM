@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
-import DotLoader from "react-spinners/DotLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+
 
 function ReporteResultanteCampanaTabla({ campanas, cargas }) {
 
@@ -1045,7 +1046,7 @@ function ReporteResultanteCampanaTabla({ campanas, cargas }) {
                             <div className="card-body">
                                 {loading1 ? (
                                     <div className="d-flex justify-content-center mt-3">
-                                        <DotLoader
+                                        <ClockLoader
                                             className='loading'
                                             color={'#5b198ab5'}
                                             loading={loading1}
@@ -1086,7 +1087,7 @@ function ReporteResultanteCampanaTabla({ campanas, cargas }) {
                                 </section>
                                 {loading2 ? (
                                     <div className="d-flex justify-content-center mt-3">
-                                        <DotLoader
+                                        <ClockLoader
                                             className='loading'
                                             color={'#5b198ab5'}
                                             loading={loading2}
@@ -1132,7 +1133,7 @@ function ReporteResultanteCampanaTabla({ campanas, cargas }) {
                                 </section> */}
                                 {loading3 ? (
                                     <div className="d-flex justify-content-center mt-3">
-                                        <DotLoader
+                                        <ClockLoader
                                             className='loading'
                                             color={'#5b198ab5'}
                                             loading={loading3}

@@ -3,7 +3,8 @@ import React, { useMemo, useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import { useNavigate } from 'react-router-dom';
 import { getToken, removeUserSession, setUserSession } from './Common';
-import DotLoader from "react-spinners/DotLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+
 //TODO variable global para pasar por Json el rol del usuario en el metodo guardar nuevo
 
 function DashBarras({flujo}) {
@@ -23,9 +24,9 @@ function DashBarras({flujo}) {
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 2000)
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 2000)
     }, [])
 
 
@@ -65,6 +66,7 @@ function DashBarras({flujo}) {
     if (result.status === 200) {
 
         console.log(result.data)
+        setLoading(false)
           setData(result.data);
         // setData([
         //     {"intervalo":"08:30","llamadas_dimensionadas":83,"recibidas":87,"atendidas":86,"sobre_bajo_trafico":91,"debio_atender":92,"n_atencion_e":99,"n_atencion_o":85,"agentes":85,"TMO":94,"agentes_r":94},
@@ -80,7 +82,9 @@ function DashBarras({flujo}) {
             
         //     ]);
     }
-
+    else{
+        setLoading(false)
+    }
     })
 
     let columns = []
@@ -206,7 +210,7 @@ function DashBarras({flujo}) {
     return ( <>
         {loading ? (
                 <div className="d-flex justify-content-center mt-3">
-                    <DotLoader
+                    <ClockLoader
                         className='loading'
                         color={'#5b198ab5'}
                         loading={loading}

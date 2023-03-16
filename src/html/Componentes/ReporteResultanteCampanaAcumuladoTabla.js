@@ -6,7 +6,8 @@ import { getToken, removeUserSession, setUserSession } from './Common';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from "xlsx";
 import { ToastContainer, toast } from "react-toastify";
-import DotLoader from "react-spinners/DotLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+
 
 function ReporteResultanteCampanaAcumuladoTabla({ flujo, ini, fin }) {
 
@@ -57,9 +58,9 @@ function ReporteResultanteCampanaAcumuladoTabla({ flujo, ini, fin }) {
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 3000)
     }, [])
 
 
@@ -103,9 +104,12 @@ function ReporteResultanteCampanaAcumuladoTabla({ flujo, ini, fin }) {
             var arrr = result.data;
 
             setData(result.data);
+            setLoading(false)
 
         }
-
+        else{
+            setLoading(false)
+        }
     })
 
     const DatosExcel = (async () => {
@@ -195,7 +199,7 @@ function ReporteResultanteCampanaAcumuladoTabla({ flujo, ini, fin }) {
                                 </section>
                                 {loading ? (
                                     <div className="d-flex justify-content-center mt-3">
-                                        <DotLoader
+                                        <ClockLoader
                                             className='loading'
                                             color={'#5b198ab5'}
                                             loading={loading}
