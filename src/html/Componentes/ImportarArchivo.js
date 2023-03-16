@@ -20,7 +20,7 @@ function ImportarArchivo() {
     const navigate = useNavigate();
     useEffect(() => {
         const token = getToken();
-        const rutaservidor = "/Orkesta/Procollect/CRM"
+        const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
         if (!token) {
             // console.log('Vacio')
             navigate(rutaservidor);
@@ -67,26 +67,50 @@ function ImportarArchivo() {
             var arrr = result.data;
             arrr.forEach((element) => {
                 // console.log(element.id);
-                UploadFile(element.id)
+                UploadFile(element.id, flujo)
             });
 
         }
 
     })
 
-    const UploadFile = (async (url) => {
+    const UploadFile = (async (url, flujo) => {
 
         var formData = new FormData()
         formData.append('postedFile', excel)
+        // formData.append('nombre_base', JSON.stringify(flujo))
+
+        // console.log(formData)
 
         await axios.post(url, formData, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
             .then(function (response) {
-                toast(response.data.flujo)
+
+                Detalle(flujo, response.data.flujo)
+
             })
             .catch(function (error) {
                 toast('Archivo No Valido. Verificar Formato')
 
             })
+
+    })
+    const Detalle = (async (flujo, respuesta) => {
+
+
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Carga/Validador/Normal', { dato: flujo }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
+        if (result.status === 200) {
+
+            // console.log(result.data)
+            var resultado = result.data;
+
+            // console.log(resultado)
+            // arrr.forEach((element) => {
+            //     // console.log(element.id);
+            //     UploadFile(element.id, flujo)
+            // });
+            toast(respuesta)
+        }
+
 
     })
 
@@ -100,14 +124,14 @@ function ImportarArchivo() {
         <>
             <ToastContainer />
             <div className='row mt-3'>
-                <Link to="/Orkesta/Procollect/CRM/FormatoCargaA.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga A</Link>
-                <Link to="/Orkesta/Procollect/CRM/FormatoCargaB.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga B</Link>
-                <Link to="/Orkesta/Procollect/CRM/FormatoCargaPermanencia.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Permanencia</Link>
-                <Link to="/Orkesta/Procollect/CRM/FormatoCargaSaldo.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Saldo a Favor</Link>
-                <Link to="/Orkesta/Procollect/CRM/FormatoCargaCredito.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Credito</Link>
-                <Link to="/Orkesta/Procollect/CRM/FormatoCargaBeneficio.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Beneficio</Link>
-                <Link to="/Orkesta/Procollect/CRM/FormatoCargaReforzamiento.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Reforzamiento</Link>
-               
+                <Link to="/Orkesta/CallSouth/LosHeroes/CRM/FormatoCargaA.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga A</Link>
+                <Link to="/Orkesta/CallSouth/LosHeroes/CRM/FormatoCargaB.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga B</Link>
+                <Link to="/Orkesta/CallSouth/LosHeroes/CRM/FormatoCargaPermanencia.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Permanencia</Link>
+                <Link to="/Orkesta/CallSouth/LosHeroes/CRM/FormatoCargaSaldo.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Saldo a Favor</Link>
+                <Link to="/Orkesta/CallSouth/LosHeroes/CRM/FormatoCargaCredito.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Credito</Link>
+                <Link to="/Orkesta/CallSouth/LosHeroes/CRM/FormatoCargaBeneficio.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Beneficio</Link>
+                <Link to="/Orkesta/CallSouth/LosHeroes/CRM/FormatoCargaReforzamiento.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Formato Carga Reforzamiento</Link>
+
             </div>
             <div className='row mt-5'>
                 <div className='col-3'><input type="file" onChange={handleFile} /></div>

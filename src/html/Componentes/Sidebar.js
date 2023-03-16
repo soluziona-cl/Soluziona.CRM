@@ -105,6 +105,7 @@ const SideBar = () => {
           <a className="d-flex align-items-center  list-group-item border-end-0   d-inline-block text-truncate link-dark text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown" id="navbarDropdownReportes" aria-expanded="false"><i className="fa-solid fa-bars"></i><span className="ms-1 d-none d-sm-inline  ">Reportes Outbound</span></a>
           <ul className="dropdown-menu   text-small shadow" aria-labelledby="navbarDropdownReportes">
             <Link to={rutaservidor + '/RepoResultanteCampana'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Resultante Campaña</span></div></Link>
+            <Link to={rutaservidor + '/RepoResultanteAcumuladoCampana'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Resultante Acumulado Campaña</span></div></Link>
 
           </ul>
         </div>

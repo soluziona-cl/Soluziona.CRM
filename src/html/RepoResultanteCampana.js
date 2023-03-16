@@ -13,9 +13,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ReporteResultanteCampana from './Componentes/ReporteResultanteCampana'
+import ReporteResultanteCampanaTabla from './Componentes/ReporteResultanteCampanaTabla'
 
-import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas'
+import Company_Campaing_Colas_Campana from './Componentes/Company_Campaing_Colas_Campana'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,6 +33,7 @@ const RepoResultanteCampana = () => {
   const [startdatefin, setStartDateFin] = useState(new Date());
   const [company, setStartCompany] = useState('');
   const [campana, setStartCampana] = useState('');
+  const [carga, setStartCampanaCarga] = useState('');
 
   const years = range(2022, getYear(new Date()) + 2, 1);
   const months = [
@@ -57,11 +58,13 @@ const RepoResultanteCampana = () => {
 
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
+    setStartCampanaCarga(document.getElementById("ddl_carga").value)
     setMostrarGrid(true);
     setMostrarGrid2(false);
 
     console.log(campana)
     console.log(company)
+    console.log(carga)
 
   };
 
@@ -69,9 +72,12 @@ const RepoResultanteCampana = () => {
 
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
+    setStartCampanaCarga(document.getElementById("ddl_carga").value)
     setMostrarGrid(false);
     setMostrarGrid2(true);
-
+    console.log(campana)
+    console.log(company)
+    console.log(carga)
   };
 
   const filtrar3 = (event) => {
@@ -93,7 +99,7 @@ const RepoResultanteCampana = () => {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
@@ -111,7 +117,7 @@ const RepoResultanteCampana = () => {
               <hr />
               <div className="row ">
                 <div className="col-12">
-                  <Company_Campaing_Colas />
+                  <Company_Campaing_Colas_Campana />
                 </div>
               </div>
               <div className="row ">
@@ -122,144 +128,8 @@ const RepoResultanteCampana = () => {
                         <div className="card-body">
                           <div className="row mt-2 align-items-center">
                             <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
-                              <DatePicker
-                                id="ini"
-                                locale='es'
-                                className="form-control rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                                //  customInput={<ExampleCustomInput />}
-                                renderCustomHeader={({
-                                  date,
-                                  changeYear,
-                                  changeMonth,
-                                  decreaseMonth,
-                                  increaseMonth,
-                                  prevMonthButtonDisabled,
-                                  nextMonthButtonDisabled,
-                                }) => (
-                                  <div
-                                    style={{
-                                      margin: 10,
-                                      display: "flex",
-                                      justifyContent: "center",
-                                    }}
-                                  >
-                                    <button
-                                      onClick={decreaseMonth}
-                                      disabled={prevMonthButtonDisabled}
-                                    >
-                                      {"<"}
-                                    </button>
-                                    <select
-                                      value={getYear(date)}
-                                      onChange={({ target: { value } }) => changeYear(value)}
-                                    >
-                                      {years.map((option) => (
-                                        <option key={option} value={option}>
-                                          {option}
-                                        </option>
-                                      ))}
-                                    </select>
-
-                                    <select
-                                      value={months[getMonth(date)]}
-                                      onChange={({ target: { value } }) =>
-                                        changeMonth(months.indexOf(value))
-                                      }
-                                    >
-                                      {months.map((option) => (
-                                        <option key={option} value={option}>
-                                          {option}
-                                        </option>
-                                      ))}
-                                    </select>
-
-                                    <button
-                                      onClick={increaseMonth}
-                                      disabled={nextMonthButtonDisabled}
-                                    >
-                                      {">"}
-                                    </button>
-                                  </div>
-                                )}
-                                selected={startdateini}
-                                dateFormat="dd/MM/yyyy"
-                                maxDate={new Date()}
-                                onChange={(date) => {
-                                  setStartDateIni(date);
-
-                                }}
-                              /></div>
-                            <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
-                              <DatePicker
-                                id="fin"
-                                locale='es'
-                                className="form-control rounded-md text-center h-10 hover:bg-gray-200 hover:border-blue-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                                //  customInput={<ExampleCustomInput />}
-                                renderCustomHeader={({
-                                  date,
-                                  changeYear,
-                                  changeMonth,
-                                  decreaseMonth,
-                                  increaseMonth,
-                                  prevMonthButtonDisabled,
-                                  nextMonthButtonDisabled,
-                                }) => (
-                                  <div
-                                    style={{
-                                      margin: 10,
-                                      display: "flex",
-                                      justifyContent: "center",
-                                    }}
-                                  >
-                                    <button
-                                      onClick={decreaseMonth}
-                                      disabled={prevMonthButtonDisabled}
-                                    >
-                                      {"<"}
-                                    </button>
-                                    <select
-                                      value={getYear(date)}
-                                      onChange={({ target: { value } }) => changeYear(value)}
-                                    >
-                                      {years.map((option) => (
-                                        <option key={option} value={option}>
-                                          {option}
-                                        </option>
-                                      ))}
-                                    </select>
-
-                                    <select
-                                      value={months[getMonth(date)]}
-                                      onChange={({ target: { value } }) =>
-                                        changeMonth(months.indexOf(value))
-                                      }
-                                    >
-                                      {months.map((option) => (
-                                        <option key={option} value={option}>
-                                          {option}
-                                        </option>
-                                      ))}
-                                    </select>
-
-                                    <button
-                                      onClick={increaseMonth}
-                                      disabled={nextMonthButtonDisabled}
-                                    >
-                                      {">"}
-                                    </button>
-                                  </div>
-                                )}
-                                selected={startdatefin}
-                                dateFormat="dd/MM/yyyy"
-                                maxDate={new Date()}
-                                onChange={(date) => {
-                                  setStartDateFin(date);
-
-                                }}
-                              /></div>
-                            <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
-                            {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar(1)}>Buscar</button>}
-                            {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2(2)}>Buscar</button>}
+                              {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar(1)}>Buscar</button>}
+                              {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2(2)}>Buscar</button>}
 
                             </div>
                           </div>
@@ -274,8 +144,8 @@ const RepoResultanteCampana = () => {
               <section className="col-lg-12 col-md-12 col-sm-12 mt-2 ">
                 {/* <TablaFull /> */}
                 <div className="mt-2">
-                  {mostrarGrid !== false && <ReporteResultanteCampana flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
-                  {mostrarGrid2 !== false && <ReporteResultanteCampana flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                  {mostrarGrid !== false && <ReporteResultanteCampanaTabla campanas={campana} cargas={carga} />}
+                  {mostrarGrid2 !== false && <ReporteResultanteCampanaTabla campanas={campana} cargas={carga} />}
 
                 </div>
 
