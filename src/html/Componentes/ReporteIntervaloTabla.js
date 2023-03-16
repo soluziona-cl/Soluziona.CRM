@@ -36,16 +36,17 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
         let wb = XLSX.utils.book_new();
 
         var arr2 = datafull.map(v => ({
-            RUT_PERSONA: v.ruT_PERSONA,
-            This_Phone_number: v.this_Phone_number,
-            Call_Disposition: v.call_Disposition,
-            Call_Time: v.call_Time,
-            Dialing_Duration: v.dialing_Duration,
-            Answered_Duration: v.answered_Duration,
-            Agent: v.agent,
-            Recording_file: v.recording_file,
-            Global_Interaction_ID: v.global_Interaction_ID,
-            List_name: v.list_name
+            Fecha: v.fecha,
+            Llamadas_dimensionadas_a_recibir: v.llamadas_dimensionadas,
+            Call_DisRecibidas: v.recibidas,
+            Atendidas: v.atendidas,
+            Sobre_o_bajo_tráfico: v.sobre_bajo_trafico,
+            Debió_atender: v.debio_atender,
+            Nivel_de_atención_esperado: v.n_atencion_e,
+            Nivel_de_atención_obtenido: v.n_atencion_o,
+            Ejecutivos_conectados: v.agentes,
+            TMO: secondsToString(parseInt(v.tmo).toFixed(2)),
+            Ejecutivos_Requeridos: v.agentes_r
         }));
 
         let ws = XLSX.utils.json_to_sheet(arr2);

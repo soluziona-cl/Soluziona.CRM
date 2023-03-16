@@ -18,7 +18,7 @@ import Company_Campaing from './Componentes/Company_Campaing';
 import ReporteTipificadasAgenteTabla from './Componentes/ReporteTipificadasAgenteTabla'
 
 
-  registerLocale('es', es)
+registerLocale('es', es)
 
 //con DataTable
 const RepoExcel = () => {
@@ -57,10 +57,10 @@ const RepoExcel = () => {
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
-  
+
   };
 
-  
+
   return (
     <>
 
@@ -85,20 +85,30 @@ const RepoExcel = () => {
 
                   </div>
                   <section className="col-lg-12 col-sm-8 mt-2">
-                   
-                   <table className="table">
-                    <thead>
-                      <tr>
-                        <td>Mes</td>
-                        <td>Archivo</td>
-                      </tr>
-                    </thead>
-                    <tbody>  <tr>
-                        <td>Enero</td>
-                        <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Enero.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes</Link></td>
-                      </tr></tbody>
-                   </table>
-                    
+
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <td>Mes</td>
+                          <td>Archivo</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Enero</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Enero.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Enero</Link></td>
+                        </tr>
+                        <tr>
+                          <td>Febrero</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Febrero.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Febrero</Link></td>
+                        </tr>
+                        <tr>
+                          <td>Marzo</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Marzo.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Marzo</Link></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
                   </section>
 
                 </div>

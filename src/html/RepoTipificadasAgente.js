@@ -13,8 +13,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company_Campaing from './Componentes/Company_Campaing';
+import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas';
 import ReporteTipificadasAgenteTabla from './Componentes/ReporteTipificadasAgenteTabla'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 registerLocale('es', es)
@@ -53,13 +56,27 @@ const RepoTipificadasAgente = () => {
   // }, []);
 
   //metodos para editar
+  const filtrar3 = (event) => {
+
+    setStartCampana(document.getElementById("ddl_campana").value)
+    if (document.getElementById("ddl_campana").value == '0') {
+      toast.error("Por favor seleccionar Campaña");
+      // console.log(campana)
+    } else {
+      (event === '1') ? filtrar() : filtrar2()
+    }
+  };
+
   const filtrar = (event) => {
 
     setStartCompany(document.getElementById("ddl_company").value)
     setStartCampana(document.getElementById("ddl_campana").value)
     setMostrarGrid(true);
     setMostrarGrid2(false);
+
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+
+   
 
   };
 
@@ -71,12 +88,15 @@ const RepoTipificadasAgente = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+
+   
   };
 
 
 
   return (
     <>
+    <ToastContainer />
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
@@ -92,12 +112,12 @@ const RepoTipificadasAgente = () => {
               <h2 className="page-header col-sm-12 col-lg-3 mt-lg-0 mt-sm-2 text-black">Reporte Tipificacion Agente</h2>
             </div>
               <hr />
-              <div className="row">
+              <div className="row ">
                 <div className="col-12">
-                  <Company_Campaing />
+                  <Company_Campaing_Colas />
                 </div>
               </div>
-              <div className="row">
+              <div className="row ">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-md-12 col-lg-8">
@@ -242,9 +262,8 @@ const RepoTipificadasAgente = () => {
                               /></div>
                             <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
 
-                              {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
-                              {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
-
+                            {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar(1)}>Buscar</button>}
+                            {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2(2)}>Buscar</button>}
                             </div>
                           </div>
                         </div>

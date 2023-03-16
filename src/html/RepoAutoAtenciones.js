@@ -13,8 +13,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company_Campaing_all from "./Componentes/Company_Campaing_all";
+import Company_Campaing_600 from "./Componentes/Company_Campaing_600";
 import ReporteAutoAtencionesTabla from "./Componentes/ReporteAutoAtencionesTabla";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 registerLocale('es', es)
@@ -53,7 +56,17 @@ const RepoAutoAtenciones = () => {
 
   }, []);
 
-  //metodos para editar
+  const filtrar3 = (event) => {
+
+    setStartCampana(document.getElementById("ddl_campana").value)
+    if (document.getElementById("ddl_campana").value == '0') {
+      toast.error("Por favor seleccionar Campaña");
+      // console.log(campana)
+    } else {
+      (event === '1') ? filtrar() : filtrar2()
+    }
+  };
+
   const filtrar = (event) => {
 
     setStartCompany(document.getElementById("ddl_company").value)
@@ -63,7 +76,6 @@ const RepoAutoAtenciones = () => {
 
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-
   };
 
   const filtrar2 = (event) => {
@@ -74,7 +86,6 @@ const RepoAutoAtenciones = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-
   };
 
 
@@ -82,7 +93,7 @@ const RepoAutoAtenciones = () => {
   return (
     <>
 
-
+<ToastContainer />
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
@@ -98,12 +109,12 @@ const RepoAutoAtenciones = () => {
               <h2 className="page-header col-sm-12 col-lg-3 mt-lg-0 mt-sm-2 text-black">Reporte AutoAtencion</h2>
             </div>
               <hr />
-              <div className="row">
+              <div className="row ">
                 <div className="col-12">
-                  <Company_Campaing_all />
+                  <Company_Campaing_600 />
                 </div>
               </div>
-              <div className="row">
+              <div className="row ">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-md-12 col-lg-8">
@@ -125,9 +136,8 @@ const RepoAutoAtenciones = () => {
                               </select>
                             </div>
                             <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
-
-                              {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
-                              {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+                            {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar(1)}>Buscar</button>}
+                            {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2(2)}>Buscar</button>}
 
                             </div>
                           </div>

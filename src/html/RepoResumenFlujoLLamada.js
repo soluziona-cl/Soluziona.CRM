@@ -13,8 +13,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Company_Campaing from './Componentes/Company_Campaing';
+import Company_Campaing_600 from "./Componentes/Company_Campaing_600";
 import ReporteResumenFlujoLlamadaTabla from "./Componentes/ReporteResumenFlujoLlamadaTabla";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 registerLocale('es', es)
 
@@ -45,6 +48,16 @@ const RepoResumenFlujoLLamada = () => {
   ];
 
 
+  const filtrar3 = (event) => {
+
+    setStartCampana(document.getElementById("ddl_campana").value)
+    if (document.getElementById("ddl_campana").value == '0') {
+      toast.error("Por favor seleccionar Campaña");
+      // console.log(campana)
+    } else {
+      (event === '1') ? filtrar() : filtrar2()
+    }
+  };
 
   //metodos para editar
   const filtrar = (event) => {
@@ -54,7 +67,6 @@ const RepoResumenFlujoLLamada = () => {
     setMostrarGrid(true);
     setMostrarGrid2(false);
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
-
   };
 
   const filtrar2 = (event) => {
@@ -65,6 +77,7 @@ const RepoResumenFlujoLLamada = () => {
     setMostrarGrid2(true);
 
     setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+
   };
 
 
@@ -75,7 +88,7 @@ const RepoResumenFlujoLLamada = () => {
 
   return (
     <>
-
+    <ToastContainer />
       <div className="container-fluid">
         <div className="row flex-nowrap"><Header /></div>
         <div className="row flex-nowrap">
@@ -91,12 +104,12 @@ const RepoResumenFlujoLLamada = () => {
               <h2 className="page-header col-sm-12 col-lg-3 mt-lg-0 mt-sm-2 text-black">Reporte Resumen Flujo Llamada</h2>
             </div>
               <hr />
-              <div className="row">
+              <div className="row ">
                 <div className="col-12">
-                  <Company_Campaing />
+                  <Company_Campaing_600 />
                 </div>
               </div>
-              <div className="row">
+              <div className="row ">
                 <div className="col-12">
                   <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
                     <div className="col-sm-12 col-md-12 col-lg-8">
@@ -240,9 +253,9 @@ const RepoResumenFlujoLLamada = () => {
                                 }}
                               /></div>
                             <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
-
-                              {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
-                              {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+                              
+                            {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar(1)}>Buscar</button>}
+                            {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2(2)}>Buscar</button>}
 
                             </div>
                           </div>
@@ -256,7 +269,7 @@ const RepoResumenFlujoLLamada = () => {
 
               <section className="col-lg-12 col-md-12 col-sm-12 mt-2">
                 {/* <TablaFull /> */}
-                <div className="mt-2">
+                <div className="mt-2 mb-2">
                   {mostrarGrid !== false && <ReporteResumenFlujoLlamadaTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} nombre={flujo} />}
                   {mostrarGrid2 !== false && <ReporteResumenFlujoLlamadaTabla flujo={campana} ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} nombre={flujo} />}
                  

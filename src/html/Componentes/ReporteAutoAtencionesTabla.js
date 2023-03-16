@@ -47,16 +47,21 @@ function ReporteAutoAtencionesTabla({ flujo, periodo, nombre }) {
         let wb = XLSX.utils.book_new();
 
         var arr2 = datafull.map(v => ({
-            "Mes": v.mes,
-            This_Phone_number: v.this_Phone_number,
-            Call_Disposition: v.call_Disposition,
-            Call_Time: v.call_Time,
-            Dialing_Duration: v.dialing_Duration,
-            Answered_Duration: v.answered_Duration,
-            Agent: v.agent,
-            Recording_file: v.recording_file,
-            Global_Interaction_ID: v.global_Interaction_ID,
-            List_name: v.list_name
+            Mes:v.mes,
+            Auto_atención_Licencias_Médicas:v.licencia,
+            Auto_atención_Saldo_Favor:v.saldo,
+            Fecha_y_lugar_de_pago_pensión:v.pagopension,
+            Apertura_y_horario_de_atención_Sucursales:v.sucursales,
+            Horario_de_atención_Call_Center_FH:v.callcenter,
+            Cambio_forma_de_pago:v.formapago,
+            Deriva_Prepago:v.derivaprepago,
+            Grabación_de_Parques:v.parques,
+            Info_Crédito_vigente:v.creditovigente,
+            Bono_Gobierno_Deriva_101:v.bonogobierno,
+            TAM:v.tam,
+            Autorización_para_pagos_de_LM_con_transferencias_electrónicas:v.transferencia,
+            AFA_Estado:v.afaestado,
+            AFA_documentos:v.afadocumentos,
         }));
 
         let ws = XLSX.utils.json_to_sheet(arr2);
