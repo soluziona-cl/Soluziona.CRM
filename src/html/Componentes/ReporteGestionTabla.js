@@ -56,9 +56,9 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
     const [loading, setLoading] = useState(false)
     useEffect(() => {
     setLoading(true)
-    setTimeout(()=> {
-       setLoading(false)
-    }, 3000)
+    // setTimeout(()=> {
+    //    setLoading(false)
+    // }, 3000)
    }, [])
 
     useEffect(() => {
@@ -100,7 +100,11 @@ function ReporteGestionTabla({ flujo , campana , ini , fin }) {
         if (result.status === 200) {
 
             console.log(result.data)
+            setLoading(false)
             setData(result.data);
+        }
+        else {
+            setLoading(false)
         }
 
     })
