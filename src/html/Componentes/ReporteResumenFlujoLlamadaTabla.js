@@ -12,6 +12,7 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
     const [datafull, setData] = useState([]);
     const [authLoading, setAuthLoading] = useState(true);
     const navigate = useNavigate();
+    const [omit, setOmit] = useState(false);
     const sesiones = {
         sgui: localStorage.getItem("localgui"),
         scliente: localStorage.getItem("localcliente"),
@@ -213,6 +214,10 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
 
     })
 
+    // const addclass=()=>{
+    //     document.querySelector("row._1").classList.add('d-none');
+    // }
+
     const getTotals = (data, key) => {
         let total = 0;
         data.forEach(item => {
@@ -251,6 +256,26 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
 
     };
 
+   async function esconder(row){
+        console.log(console.log(row))
+        console.log("prueba")
+    }
+
+    const conditionalRowStyles = [
+        {
+          when: row => row._1 === 0 || row._1 === null,
+          headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                backgroundColor: '#a9dff0',
+
+            },
+        },
+        },
+      ];
+
+      
 
     const columns = [
         {
@@ -301,40 +326,50 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
             center: true
         }
         ,
-        { name: <div className="text-wrap">{ini.substring(0, 6)}01</div>, selector: row => row._1, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}02</div>, selector: row => row._2, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}03</div>, selector: row => row._3, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}04</div>, selector: row => row._4, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}05</div>, selector: row => row._5, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}06</div>, selector: row => row._6, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}07</div>, selector: row => row._7, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}08</div>, selector: row => row._8, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}09</div>, selector: row => row._9, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}10</div>, selector: row => row._10, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}11</div>, selector: row => row._11, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}12</div>, selector: row => row._12, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}13</div>, selector: row => row._13, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}14</div>, selector: row => row._14, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}15</div>, selector: row => row._15, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}16</div>, selector: row => row._16, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}17</div>, selector: row => row._17, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}18</div>, selector: row => row._18, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}19</div>, selector: row => row._19, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}20</div>, selector: row => row._20, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}21</div>, selector: row => row._21, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}22</div>, selector: row => row._22, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}23</div>, selector: row => row._23, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}24</div>, selector: row => row._24, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}25</div>, selector: row => row._25, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}26</div>, selector: row => row._26, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}27</div>, selector: row => row._27, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}28</div>, selector: row => row._28, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}29</div>, selector: row => row._29, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}30</div>, selector: row => row._30, center: true },
-        { name: <div className="text-wrap">{ini.substring(0, 6)}31</div>, selector: row => row._31, center: true },
+        // addclass(),
+        //{ row == 0 ? className="d-none" : className="text-wrap" }
+        // { row === null ? className="d-none" : className="text-wrap"}
+        // className={`${et xt-wrap"}`}
+
+
+        { name: <div id="row._1" className="text-wrap">{ini.substring(0, 6)}01</div>, selector: row => row._1, center: true, },
+        { name: <div id="row._2" className="text-wrap">{ini.substring(0, 6)}02</div>, selector: row => row._2, center: true, },
+        { name: <div id="row._3" className="text-wrap">{ini.substring(0, 6)}03</div>, selector: row => row._3, center: true },
+        { name: <div id="row._4" className="text-wrap">{ini.substring(0, 6)}04</div>, selector: row => row._4, center: true },
+        { name: <div id="row._5" className="text-wrap">{ini.substring(0, 6)}05</div>, selector: row => row._5, center: true },
+        { name: <div id="row._6" className="text-wrap">{ini.substring(0, 6)}06</div>, selector: row => row._6, center: true },
+        { name: <div id="row._7" className="text-wrap">{ini.substring(0, 6)}07</div>, selector: row => row._7, center: true },
+        { name: <div id="row._8" className="text-wrap">{ini.substring(0, 6)}08</div>, selector: row => row._8, center: true },
+        { name: <div id="row._9" className="text-wrap">{ini.substring(0, 6)}09</div>, selector: row => row._9, center: true },
+        { name: <div id="row._10" className="text-wrap">{ini.substring(0, 6)}10</div>, selector: row => row._10, center: true },
+        { name: <div id="row._11" className="text-wrap">{ini.substring(0, 6)}11</div>, selector: row => row._11, center: true },
+        { name: <div id="row._12" className="text-wrap">{ini.substring(0, 6)}12</div>, selector: row => row._12, center: true },
+        { name: <div id="row._13" className="text-wrap">{ini.substring(0, 6)}13</div>, selector: row => row._13, center: true },
+        { name: <div id="row._14" className="text-wrap">{ini.substring(0, 6)}14</div>, selector: row => row._14, center: true },
+        { name: <div id="row._15" className="text-wrap">{ini.substring(0, 6)}15</div>, selector: row => row._15, center: true },
+        { name: <div id="row._16" className="text-wrap">{ini.substring(0, 6)}16</div>, selector: row => row._16, center: true, omit : () =>esconder()},
+        // { name: <div id="row._16" className="text-wrap">{ini.substring(0, 6)}16</div>, selector: row => row._16 == null || row._16 == 0 ? setOmit(true) : setOmit(false) , center: true, omit : omit },
+        // == null || row._16 == 0 ? {omit: true} : {omit : false}
+        { name: <div id="row._17" className="text-wrap">{ini.substring(0, 6)}17</div>, selector: row => row._17, center: true },
+        { name: <div id="row._18" className="text-wrap">{ini.substring(0, 6)}18</div>, selector: row => row._18, center: true },
+        { name: <div id="row._19" className="text-wrap">{ini.substring(0, 6)}19</div>, selector: row => row._19, center: true },
+        { name: <div id="row._20" className="text-wrap">{ini.substring(0, 6)}20</div>, selector: row => row._20, center: true },
+        { name: <div id="row._21" className="text-wrap">{ini.substring(0, 6)}21</div>, selector: row => row._21, center: true },
+        { name: <div id="row._22" className="text-wrap">{ini.substring(0, 6)}22</div>, selector: row => row._22, center: true },
+        { name: <div id="row._23" className="text-wrap">{ini.substring(0, 6)}23</div>, selector: row => row._23, center: true },
+        { name: <div id="row._24" className="text-wrap">{ini.substring(0, 6)}24</div>, selector: row => row._24, center: true },
+        { name: <div id="row._25" className="text-wrap">{ini.substring(0, 6)}25</div>, selector: row => row._25, center: true },
+        { name: <div id="row._26" className="text-wrap">{ini.substring(0, 6)}26</div>, selector: row => row._26, center: true },
+        { name: <div id="row._27" className="text-wrap">{ini.substring(0, 6)}27</div>, selector: row => row._27, center: true },
+        { name: <div id="row._28" className="text-wrap">{ini.substring(0, 6)}28</div>, selector: row => row._28, center: true },
+        { name: <div id="row._29" className="text-wrap">{ini.substring(0, 6)}29</div>, selector: row => row._29, center: true },
+        { name: <div id="row._30" className="text-wrap">{ini.substring(0, 6)}30</div>, selector: row => row._30, center: true },
+        { name: <div id="row._31" className="text-wrap">{ini.substring(0, 6)}31</div>, selector: row => row._31, center: true },
+        esconder()
+        
 
     ];
-
+  
 
     return (
         <>
@@ -373,6 +408,7 @@ function ReporteResumenFlujoLlamadaTabla({ flujo, ini, fin, nombre }) {
                                             columns={columns}
                                             data={datafull}
                                             customStyles={customStyles}
+                                            conditionalRowStyles={conditionalRowStyles}
                                             striped
                                             noDataComponent="Los Filtros No Contiene Datos" //or your component
                                         />
