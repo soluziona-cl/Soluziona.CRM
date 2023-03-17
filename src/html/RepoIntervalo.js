@@ -20,6 +20,9 @@ import Company_Campaing_Colas from './Componentes/Company_Campaing_Colas'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { getToken, removeUserSession, setUserSession } from '../html/Componentes/Common';
+import { useNavigate } from 'react-router-dom';
+
 import 'animate.css';
 
 registerLocale('es', es)
@@ -50,7 +53,31 @@ const RepoIntervalo = () => {
     "Diciembre",
   ];
 
+  const [authLoading, setAuthLoading] = useState(true);
+  const navigate = useNavigate();
 
+  const sesiones = {
+    sgui: localStorage.getItem("localgui"),
+    scliente: localStorage.getItem("localcliente"),
+    sid: localStorage.getItem("localid"),
+    sid_usuario: localStorage.getItem("localid_usuario"),
+    stoken: localStorage.getItem("token")
+};
+
+useEffect(() => {
+  const token = getToken();
+      const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
+      if (!token) {
+
+          // console.log('Vacio')
+          navigate(rutaservidor);
+          return;
+
+      }
+      setAuthLoading(false);
+
+
+}, []);
 
   //metodos para editar
   const filtrar = (event) => {

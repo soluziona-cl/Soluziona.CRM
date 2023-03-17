@@ -17,6 +17,9 @@ import Company_Campaing_Colas_Dash from './Componentes/Company_Campaing_Colas_Da
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { getToken, removeUserSession, setUserSession } from '../html/Componentes/Common';
+import { useNavigate } from 'react-router-dom';
+
 import 'animate.css';
 
 
@@ -24,6 +27,8 @@ const DashTrafico = () => {
 
     const [key, setKey] = useState('trafico');
 
+    const [authLoading, setAuthLoading] = useState(true);
+    const navigate = useNavigate();
 
     const [mostrarGrid, setMostrarGrid] = useState(true);
     const [mostrarGrid2, setMostrarGrid2] = useState(false);
@@ -40,7 +45,28 @@ const DashTrafico = () => {
         // Filtrar(!filtrar)
     }
 
-
+    const sesiones = {
+        sgui: localStorage.getItem("localgui"),
+        scliente: localStorage.getItem("localcliente"),
+        sid: localStorage.getItem("localid"),
+        sid_usuario: localStorage.getItem("localid_usuario"),
+        stoken: localStorage.getItem("token")
+    };
+    
+    useEffect(() => {
+      const token = getToken();
+      const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM";
+          if (!token) {
+    
+              // console.log('Vacio')
+              navigate(rutaservidor);
+              return;
+    
+          }
+          setAuthLoading(false);
+    
+    
+    }, []);
 
     const filtrar3 = (event) => {
 

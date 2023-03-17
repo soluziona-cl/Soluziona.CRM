@@ -2,12 +2,14 @@ import React from "react"
 import { useNavigate } from "react-router-dom";
 import "../../css/general.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getToken, removeUserSession, setUserSession } from '../Componentes/Common';
 
 function Header() {
 
     const navigate = useNavigate();
     const handleLogout = () => {
 
+        removeUserSession();
         navigate(rutaservidor);
     };
 
