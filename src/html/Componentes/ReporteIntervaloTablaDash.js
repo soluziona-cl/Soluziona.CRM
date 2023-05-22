@@ -178,6 +178,11 @@ function ReporteIntervaloTablaDash({ flujo }) {
             center: true
         },
         {
+            name: <div className="text-wrap">Atendidas 15 seg</div>,
+            selector: row => row.atendidas15,
+            center: true
+        },
+        {
             name: <div className="text-wrap">Sobre o bajo tráfico</div>,
             selector: row => row.sobre_bajo_trafico,
             center: true
@@ -189,12 +194,12 @@ function ReporteIntervaloTablaDash({ flujo }) {
         },
         {
             name: <div className="text-wrap">Nivel de atención esperado</div>,
-            selector: row => row.n_atencion_e,
+            selector: row => parseInt(row.n_atencion_e*100).toFixed(0) + "%",
             center: true
         },
         {
             name: <div className="text-wrap">Nivel de atención obtenido</div>,
-            selector: row => row.n_atencion_o,
+            selector: row => (row.atendidas === '0') ? 0 : parseFloat(100 * (row.llamadas_dimensionadas / row.atendidas)).toFixed(2) +" %",
             center: true
         },
         {
@@ -204,7 +209,7 @@ function ReporteIntervaloTablaDash({ flujo }) {
         },
         {
             name: <div className="text-wrap">TMO</div>,
-            selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
+            selector: row => (parseInt(row.tmo).toFixed(2)),
             center: true
         },
         {
