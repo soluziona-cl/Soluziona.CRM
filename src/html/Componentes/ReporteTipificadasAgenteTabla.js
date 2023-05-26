@@ -268,28 +268,28 @@ function ReporteTipificadasAgenteTabla({ flujo, ini, fin, nombre }) {
         , { name: <div className="text-wrap">indice</div>, selector: row => row.indice, center: true , wrap: true}
         , { name: <div className="text-wrap">fecha</div>, selector: row => row.fecha, center: true , wrap: true}
         , { name: <div className="text-wrap">script</div>, selector: row => row.script, center: true , wrap: true}
-        , { name: <div className="text-wrap">nroticket</div>, selector: row => row.nroticket, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM1</div>, selector: row => row.crM_PARAM1, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM2</div>, selector: row => row.crM_PARAM2, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM3</div>, selector: row => row.crM_PARAM3, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM4</div>, selector: row => row.crM_PARAM4, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM5</div>, selector: row => row.crM_PARAM5, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM6</div>, selector: row => row.crM_PARAM6, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM7</div>, selector: row => row.crM_PARAM7, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM8</div>, selector: row => row.crM_PARAM8, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM9</div>, selector: row => row.crM_PARAM9, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM10</div>, selector: row => row.crM_PARAM10, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM11</div>, selector: row => row.crM_PARAM11, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM12</div>, selector: row => row.crM_PARAM12, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM13</div>, selector: row => row.crM_PARAM13, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM14</div>, selector: row => row.crM_PARAM14, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM15</div>, selector: row => row.crM_PARAM15, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM16</div>, selector: row => row.crM_PARAM16, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM17</div>, selector: row => row.crM_PARAM17, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM18</div>, selector: row => row.crM_PARAM18, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM19</div>, selector: row => row.crM_PARAM19, center: true , wrap: true}
-        , { name: <div className="text-wrap">crM PARAM20</div>, selector: row => row.crM_PARAM20, center: true , wrap: true}
-        , { name: <div className="text-wrap">escalamiento</div>, selector: row => row.escalamiento, center: true , wrap: true}
+        // , { name: <div className="text-wrap">nroticket</div>, selector: row => row.nroticket, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM1</div>, selector: row => row.crM_PARAM1, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM2</div>, selector: row => row.crM_PARAM2, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM3</div>, selector: row => row.crM_PARAM3, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM4</div>, selector: row => row.crM_PARAM4, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM5</div>, selector: row => row.crM_PARAM5, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM6</div>, selector: row => row.crM_PARAM6, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM7</div>, selector: row => row.crM_PARAM7, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM8</div>, selector: row => row.crM_PARAM8, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM9</div>, selector: row => row.crM_PARAM9, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM10</div>, selector: row => row.crM_PARAM10, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM11</div>, selector: row => row.crM_PARAM11, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM12</div>, selector: row => row.crM_PARAM12, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM13</div>, selector: row => row.crM_PARAM13, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM14</div>, selector: row => row.crM_PARAM14, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM15</div>, selector: row => row.crM_PARAM15, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM16</div>, selector: row => row.crM_PARAM16, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM17</div>, selector: row => row.crM_PARAM17, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM18</div>, selector: row => row.crM_PARAM18, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM19</div>, selector: row => row.crM_PARAM19, center: true , wrap: true}
+        // , { name: <div className="text-wrap">crM PARAM20</div>, selector: row => row.crM_PARAM20, center: true , wrap: true}
+        // , { name: <div className="text-wrap">escalamiento</div>, selector: row => row.escalamiento, center: true , wrap: true}
        
     ];
 

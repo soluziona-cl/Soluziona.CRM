@@ -96,7 +96,7 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
 
 
         const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/DashTrafico/Intervalo/Acumulado/Reporte',
-            { dato: flujo, dato_1: ini, dato_2: fin },
+            { dato: flujo, dato_1: ini, dato_2: ini },
             { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
         if (result.status === 200) {
@@ -187,12 +187,12 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
         },
         {
             name: <div className="text-wrap">Nivel de atención esperado</div>,
-            selector: row => row.n_atencion_e,
+            selector: row => parseFloat(row.n_atencion_e).toFixed(1) +"%",
             center: true
         },
         {
             name: <div className="text-wrap">Nivel de atención obtenido</div>,
-            selector: row => row.n_atencion_o,
+            selector: row => parseFloat(row.n_atencion_o).toFixed(1) +"%",
             center: true
         },
         {
@@ -202,7 +202,7 @@ function ReporteIntervaloTabla({ flujo, ini, fin }) {
         },
         {
             name: <div className="text-wrap">TMO</div>,
-            selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
+            selector: row => (parseInt(row.tmo)),
             center: true
         },
         {

@@ -188,12 +188,12 @@ function ReporteIntervaloDetalleTablaDash({ flujo, campana, ini, fin }) {
         },
         {
             name: <div className="text-wrap">Nivel de atención esperado</div>,
-            selector: row => row.n_atencion_e,
+            selector: row => row.n_atencion_e + "%",
             center:true
         },
         {
             name: <div className="text-wrap">Nivel de atención obtenido</div>,
-            selector: row => row.n_atencion_o,
+            selector: row => parseFloat(row.n_atencion_o).toFixed(1) + "%",
             center:true
         },
         {
@@ -203,7 +203,7 @@ function ReporteIntervaloDetalleTablaDash({ flujo, campana, ini, fin }) {
         },
         {
             name: <div className="text-wrap">TMO</div>,
-            selector: row =>secondsToString(parseInt(row.tmo).toFixed(2)),
+            selector: row =>(parseInt(row.tmo)),
             center:true
         },
         {

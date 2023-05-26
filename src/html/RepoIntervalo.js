@@ -216,7 +216,7 @@ useEffect(() => {
 
                                 }}
                               /></div>
-                            <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
+                            {/* <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
                               <DatePicker
                                 id="fin"
                                 locale='es'
@@ -283,7 +283,7 @@ useEffect(() => {
                                   setStartDateFin(date);
 
                                 }}
-                              /></div>
+                              /></div> */}
                             <div className="col-sm-12 col-md-3 col-lg-3 mt-lg-0 mt-sm-2">
                             {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar(1)}>Buscar</button>}
                             {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2(2)}>Buscar</button>}

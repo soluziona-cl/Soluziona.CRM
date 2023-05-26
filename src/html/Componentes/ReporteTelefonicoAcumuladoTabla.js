@@ -196,12 +196,12 @@ const columns = [
     },
     {
         name: <div className="text-wrap">Nivel de Atención (%)</div>,
-        selector: row => row.n_atencion,
+        selector: row => parseFloat(row.n_atencion).toFixed(1) + '%',
         center: true
     },
     {
         name: <div className="text-wrap">Nivel de Servicio (%)</div>,
-        selector: row => row.n_servicio,
+        selector: row => parseFloat(row.n_servicio).toFixed(1) + '%',
         center: true
     },
     {
@@ -211,7 +211,7 @@ const columns = [
     },
     {
         name: <div className="text-wrap">TMO IN</div>,
-        selector: row => secondsToString(parseInt(row.tmo).toFixed(2)),
+        selector: row => parseInt(row.tmo).toFixed(2),
         center: true
     }
 ];

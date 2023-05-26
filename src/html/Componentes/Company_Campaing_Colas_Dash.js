@@ -50,7 +50,6 @@ function Company_Campaing_Colas_Dash() {
             const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/api/Ventas_CRM/CRM/Campaign/Colas', { dato: event }, { headers: { "Authorization": `Bearer ${sesiones.stoken}` } })
 
             setSelectedLlamada(event)
-
             if (result.status === 200) {
 
                 setOptionListDetalle(result.data)
@@ -67,6 +66,7 @@ function Company_Campaing_Colas_Dash() {
         setOptionListDetalleEstado(false)
         setOptionListDetalleEstadoSelect(event)
         setSelectedLlamadaDetalle(event)
+        
 
     })
 
@@ -95,11 +95,13 @@ function Company_Campaing_Colas_Dash() {
                     onChange={(e) => (ChangeConectaDetalle(e.target.value))}
                 >
                     <option value="0">Campaña</option>
+                    <option value="9999">Todos</option>
                     {optionListDetalle.map((item) => (
                         <option key={item.id} value={item.id}>
                             {item.detalle}
                         </option>
                     ))}
+                   
                 </select>
             </div>
 
