@@ -135,6 +135,14 @@ const RepoExcel = () => {
                           <td>Marzo</td>
                           <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Marzo.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Marzo</Link></td>
                         </tr>
+                        <tr>
+                          <td>Abril</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Abril.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Abril</Link></td>
+                        </tr>
+                        <tr>
+                          <td>Mayo</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Mayo.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Mayo</Link></td>
+                        </tr>
                       </tbody>
                     </table>
 
