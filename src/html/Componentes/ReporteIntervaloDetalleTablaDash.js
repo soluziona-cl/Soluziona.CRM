@@ -193,7 +193,7 @@ function ReporteIntervaloDetalleTablaDash({ flujo, campana, ini, fin }) {
         },
         {
             name: <div className="text-wrap">Nivel de atención obtenido</div>,
-            selector: row => parseFloat(row.n_atencion_o).toFixed(1) + "%",
+            selector: row =>(row.recibidas === '0') ? 0 :  parseFloat((row.atendidas/row.recibidas)*100).toFixed(1) + "%",
             center:true
         },
         {
