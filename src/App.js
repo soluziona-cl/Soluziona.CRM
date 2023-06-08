@@ -16,6 +16,7 @@ import RepoExcel from "./html/RepoExcel";
 import SubirArchivos from "./html/subirArchivos";
 import RepoResultanteCampana from "./html/RepoResultanteCampana";
 import RepoResultanteAcumuladoCampana from "./html/RepoResultanteAcumuladoCampana";
+import EditorHTML from "./html/EditorHTML";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path={rutaservidor + "/SubirArchivos"} element={<SubirArchivos />} />
         <Route path={rutaservidor + "/RepoResultanteCampana"} element={<RepoResultanteCampana />} />
         <Route path={rutaservidor + "/RepoResultanteAcumuladoCampana"} element={<RepoResultanteAcumuladoCampana />} />
+        <Route path={rutaservidor + "/EditorHTML"} element={<EditorHTML />} />
       </Routes>
     </Router>
   );
