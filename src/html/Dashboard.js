@@ -1,53 +1,54 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Donut from './Componentes/Donut';
-import Barras from './Componentes/Barras';
-import Pie from './Componentes/Pie';
+
+import { format } from "date-fns";
 import Header from './Componentes/Header';
 import Sidebar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 import Company_Campaing_Dash from './Componentes/Company_Campaing_Dash';
 import { Animated } from "react-animated-css";
 
-import DashReporteCargaTabla from './Componentes/DashReporteCargaTabla';
-import DashReporteCargaTablaFilter from './Componentes/DashReporteCargaTablaFilter';
-import PieGestion from './Componentes/PieGestion';
-import DashReporteFechaPago from './Componentes/DashReporteFechaPago';
+
+import Gauge from "./Componentes/Gauge";
+import DonutTrafico from './Componentes/DonutTrafico';
+import Grafico from "./Componentes/Grafico";
+import TablaTrafico from './Componentes/TablaTrafico';
+
+import DatePicker, { registerLocale } from "react-datepicker";
+import es from 'date-fns/locale/es'
+
+import "react-datepicker/dist/react-datepicker.css";
+import { getMonth, getYear } from "date-fns";
+import range from "lodash/range";
+
 
 const Dashboard = () => {
 
 
-  const [mostrarGrid, setMostrarGrid] = useState(false);
+  const [mostrarGrid, setMostrarGrid] = useState(true);
   const [mostrarGrid2, setMostrarGrid2] = useState(false);
   const [carga, setCarga] = useState('');
 
   const [company, setStartCompany] = useState('');
   const [campana, setStartCampana] = useState('');
-  // const HideLogo = () => {
-  //   // setshowlogo(!showlogo);
-  //   setCompany(document.getElementById("ddl_company").value)
-  //   setCarga(document.getElementById("ddl_campana").value)
 
-  //   Filtrar(!filtrar)
-  // }
+  const [startdateini, setStartDateIni] = useState(new Date());
+  const [startdatefin, setStartDateFin] = useState(new Date());
 
   const filtrar = (event) => {
 
-    setStartCompany(document.getElementById("ddl_company").value)
-    setStartCampana(document.getElementById("ddl_campana").value)
+
     setMostrarGrid(true);
     setMostrarGrid2(false);
-    // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
+
 
   };
 
   const filtrar2 = (event) => {
 
-    setStartCompany(document.getElementById("ddl_company").value)
-    setStartCampana(document.getElementById("ddl_campana").value)
+
     setMostrarGrid(false);
     setMostrarGrid2(true);
 
-    // setFlujo(document.getElementById("ddl_campana").options[document.getElementById("ddl_campana").selectedIndex].text)
   };
 
 
@@ -69,20 +70,10 @@ const Dashboard = () => {
                 <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
                   <h2>Dashboard</h2>
                 </div>
-
-                <Company_Campaing_Dash></Company_Campaing_Dash>
-
-
                 <div className="col-sm-12 col-lg-3 mt-lg-0 mt-sm-2">
-                  {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Buscar</button>}
-                  {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Buscar</button>}
+                  {mostrarGrid === false && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar()}>Actualizar</button>}
+                  {mostrarGrid === true && <button type="button" className="mb-0 btn btn-success" onClick={() => filtrar2()}>Actualizar</button>}
 
-
-                  {/* <button
-                    className="mb-0 btn btn-success"
-                    onClick={HideLogo}
-                  >Filtrar
-                  </button> */}
                 </div>
               </div>
 
@@ -90,116 +81,87 @@ const Dashboard = () => {
             <hr />
             <div className="row">
 
-              <div className="row">
-                <div className="col-12">
-                  <div className="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                    <div className="col-sm-12 col-lg-4">
-                      <Animated animationIn="bounceInLeft" animationOut="fadeOut" isVisible={true}>
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Agentes Conectados</h4>
+              <div className='row'>
+                <div className='col-3'>
+                  <div className='row'>
+                    <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
+                      <div className="card mb-4 rounded-3 shadow-sm">
+                        <div className="card-header">
+                          <h4 className="my-0 font-weight-normal">Trafico</h4>
+                        </div>
+                        <div className="card-body">
+                          <div className="table-responsive overflow-x: hidden;">
+                            {mostrarGrid !== false && <DonutTrafico  ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                            {mostrarGrid2 !== false && <DonutTrafico  ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+
                           </div>
-                          <div className="card-body">
 
+                        </div>
+                      </div>
+                    </Animated>
+                    <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
+                      <div className="card mb-4 rounded-3 shadow-sm">
+                        <div className="card-header">
+                          <h4 className="my-0 font-weight-normal">TMO</h4>
+                        </div>
+                        <div className="card-body">
 
-                            {mostrarGrid !== false && <Pie company={campana}></Pie>}
-                            {mostrarGrid2 !== false && <Pie company={campana}></Pie>}
-
-
+                          <div className='mt-lg-0 mt-sm-0 ml-4 w-100 p-3 h-100 d-inline-block'>
+                            <div className="p-2">  {mostrarGrid !== false && <Gauge ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")}  />}
+                              {mostrarGrid2 !== false && <Gauge ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}</div>
 
                           </div>
                         </div>
-                      </Animated>
-                    </div>
-                    <div className="col-sm-12 col-lg-8">
-                      <Animated animationIn="bounceInRight" animationOut="fadeOut" isVisible={true}>
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Trafico Intervalo</h4>
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <Barras company={campana}></Barras>}
-                            {mostrarGrid2 !== false && <Barras company={campana}></Barras>}
-
-                          </div>
-                        </div>
-                      </Animated>
-                    </div>
+                      </div>
+                    </Animated>
                   </div>
                 </div>
-              </div>
-              <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
-                <div className="row">
-                  <div className="col-12">
-                    <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                      <div className="col-sm-12 col-lg-4">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Gestion de Cargas</h4>
-                          </div>
-                          <div className="card-body">
-                            <div className="table-responsive overflow-x: hidden;">
-                              {mostrarGrid !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
-                              {mostrarGrid2 !== false && <DashReporteCargaTabla company={campana}></DashReporteCargaTabla>}
+                <div className='col-9'>
 
+                  <div className='row'>
+                    <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header">
+                              <h4 className="my-0 font-weight-normal">Trafico</h4>
+                            </div>
+                            <div className="card-body">
+                              {mostrarGrid !== false && <Grafico  ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")}  />}
+                              {mostrarGrid2 !== false && <Grafico  ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")}  />}
 
                             </div>
+                          </div>
 
+                        </div>
+                      </div>
+
+                    </Animated>
+                    <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="card mb-4 rounded-3 shadow-sm">
+                            <div className="card-header">
+                              <h4>Intervalos</h4>
+
+                            </div>
+                            <div className="card-body">
+                              {mostrarGrid !== false && <TablaTrafico  ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+                              {mostrarGrid2 !== false && <TablaTrafico  ini={format(startdateini, "yyyyMMdd")} fin={format(startdatefin, "yyyyMMdd")} />}
+
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div className="col-sm-12 col-lg-4">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Compromiso de Pagos</h4>
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <PieGestion company={campana}></PieGestion>}
-                            {mostrarGrid2 !== false && <PieGestion company={campana}></PieGestion>}
 
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-sm-12 col-lg-4">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Fechas Compromiso</h4>
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
-                            {mostrarGrid2 !== false && <DashReporteFechaPago company={campana}></DashReporteFechaPago>}
-
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </Animated>
-              <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
-                <div className="row">
-
-                  <div className="col-12">
-                    <div className="row row-cols-1 row-cols-md-2 mb-2 text-center">
-                      <div className="col-sm-12 col-lg-12">
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                          <div className="card-header">
-                            <h4 className="my-0 font-weight-normal">Gestion Ultimos 10 Dias</h4>
-                            <hr />
-                          </div>
-                          <div className="card-body">
-                            {mostrarGrid !== false && <DashReporteCargaTablaFilter company={company} carga={campana}></DashReporteCargaTablaFilter>}
-                            {mostrarGrid2 !== false && <DashReporteCargaTablaFilter company={company} carga={campana}></DashReporteCargaTablaFilter>}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    </Animated>
                   </div>
 
                 </div>
-              </Animated>
+              </div>
+
+
+
 
             </div>
           </main>
