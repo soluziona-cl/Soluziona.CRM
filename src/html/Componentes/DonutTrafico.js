@@ -41,8 +41,6 @@ function DonutTrafico({ ini, fin }) {
     let valores_aba = {}
     let valores_fue = {}
 
-    console.log('Donut')
-    console.log(data)
 
     let recibidas = 0
     let contestadas = 0

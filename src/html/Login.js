@@ -67,7 +67,7 @@ const Login = () => {
           setUserSession(login.token, login.id_usuario);
 
           if (id === '1') {
-            navigate("/Orkesta/CallSouth/Salcobrand/CRM/Dashboard");
+            navigate("/Orkesta/CallSouth/Salcobrand/CRM/DashboardCliente");
             return
           }
           if (id === '2') {

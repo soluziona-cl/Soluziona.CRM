@@ -8,6 +8,7 @@ import RepoEpa from "./html/RepoEpa";
 import RepoAgente from "./html/RepoAgente";
 import RepoRegion from "./html/RepoRegion";
 import RepoTipificaciones from "./html/RepoTipificaciones";
+import DashboardCliente from "./html/DashboardCliente";
 
 // import AdminCargas2 from "./html/AdminCargas2";
 
@@ -27,6 +28,7 @@ function App() {
         <Route path={rutaservidor + "/RepoAgente"} element={<RepoAgente />} />
         <Route path={rutaservidor + "/RepoRegion"} element={<RepoRegion />} />
         <Route path={rutaservidor + "/RepoTipificaciones"} element={<RepoTipificaciones />} />
+        <Route path={rutaservidor + "/DashboardCliente"} element={<DashboardCliente />} />
       
         {/* <Route path={rutaservidor + "/AdminCargas2"} element={<AdminCargas2 />} /> */}
         {/* <Route path="/" element={<Login />} /> */}

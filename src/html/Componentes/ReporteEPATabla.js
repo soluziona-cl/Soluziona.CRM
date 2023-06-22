@@ -138,14 +138,14 @@ function ReporteEPATabla({ ini, fin }) {
 
     const columns = [
         { name: <div className="text-wrap">Agente</div>, selector: row => row.agente, center: true,wrap:true },
-        { name: <div className="text-wrap">Nota 0</div>, selector: row => row.nota0, center: true },
+        // { name: <div className="text-wrap">Nota 0</div>, selector: row => row.nota0, center: true },
         { name: <div className="text-wrap">Nota 1</div>, selector: row => row.nota1, center: true },
         { name: <div className="text-wrap">Nota 2</div>, selector: row => row.nota2, center: true },
         { name: <div className="text-wrap">Nota 3</div>, selector: row => row.nota3, center: true },
         { name: <div className="text-wrap">Nota 4</div>, selector: row => row.nota4, center: true },
         { name: <div className="text-wrap">Nota 5</div>, selector: row => row.nota5, center: true },
         { name: <div className="text-wrap">Evaluaciones Totales</div>, selector: row => row.evaluacionesTotales, center: true },
-        { name: <div className="text-wrap">Nota 0 Preg02</div>, selector: row => row.nota0Preg02, center: true },
+        // { name: <div className="text-wrap">Nota 0 Preg02</div>, selector: row => row.nota0Preg02, center: true },
         { name: <div className="text-wrap">Nota 1 Preg02</div>, selector: row => row.nota1Preg02, center: true },
         { name: <div className="text-wrap">Nota 2 Preg02</div>, selector: row => row.nota2Preg02, center: true },
         { name: <div className="text-wrap">Evaluaciones Totales Preg02</div>, selector: row => row.evaluacionesTotalesPreg02, center: true }
