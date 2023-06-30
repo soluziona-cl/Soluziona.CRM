@@ -18,6 +18,8 @@ import RepoResultanteCampana from "./html/RepoResultanteCampana";
 import RepoResultanteAcumuladoCampana from "./html/RepoResultanteAcumuladoCampana";
 import EditorHTML from "./html/EditorHTML";
 
+import Documentacion from "./html/Documentacion";
+
 
 function App() {
 
@@ -42,6 +44,7 @@ function App() {
         <Route path={rutaservidor + "/RepoResultanteCampana"} element={<RepoResultanteCampana />} />
         <Route path={rutaservidor + "/RepoResultanteAcumuladoCampana"} element={<RepoResultanteAcumuladoCampana />} />
         <Route path={rutaservidor + "/EditorHTML"} element={<EditorHTML />} />
+        <Route path={rutaservidor + "/Documentacion"} element={<Documentacion />} />
       </Routes>
     </Router>
   );
