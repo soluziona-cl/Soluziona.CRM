@@ -2,9 +2,9 @@ import Header from './Componentes/Header';
 import Sidebar from './Componentes/Sidebar';
 import Footer from './Componentes/Footer';
 
-import Documento_Detalle from './Componentes/Documento_Detalle';
+import Documento_Detalle_Listado from './Componentes/Documento_Detalle_Listado';
 
-function Documentacion() {
+function DocumentacionListado() {
     return (
         <>
 
@@ -24,10 +24,10 @@ function Documentacion() {
                          
                             <div className="card mb-4 rounded-3 shadow-sm">
                                 <div className="card-header">
-                                    <h4 className="my-0 font-weight-normal">Ingresar Nuevo Documento</h4>
+                                    <h4 className="my-0 font-weight-normal">Listado</h4>
                                 </div>
                                 <div className="card-body">
-                                    <Documento_Detalle />
+                                    <Documento_Detalle_Listado />
                                    
                                 </div>
                             </div>
@@ -41,4 +41,4 @@ function Documentacion() {
         </>
     )
 }
-export default Documentacion
+export default DocumentacionListado

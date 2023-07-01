@@ -19,7 +19,8 @@ import RepoResultanteAcumuladoCampana from "./html/RepoResultanteAcumuladoCampan
 import EditorHTML from "./html/EditorHTML";
 
 import Documentacion from "./html/Documentacion";
-
+import DocumentacionListado from "./html/DocumentacionListado";
+import DocumentacionCRUD from "./html/DocumentacionCRUD";
 
 function App() {
 
@@ -45,6 +46,8 @@ function App() {
         <Route path={rutaservidor + "/RepoResultanteAcumuladoCampana"} element={<RepoResultanteAcumuladoCampana />} />
         <Route path={rutaservidor + "/EditorHTML"} element={<EditorHTML />} />
         <Route path={rutaservidor + "/Documentacion"} element={<Documentacion />} />
+        <Route path={rutaservidor + "/DocumentacionListado"} element={<DocumentacionListado />} />
+        <Route path={rutaservidor + "/DocumentacionCRUD"} element={<DocumentacionCRUD />} />
       </Routes>
     </Router>
   );

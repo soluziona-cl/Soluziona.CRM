@@ -38,6 +38,19 @@ function Documento_Detalle() {
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
+
+        const allowedExtensions = /(\.pdf)$/i;
+
+        if (!allowedExtensions.test(selectedFile.name)) {
+            event.target.value = null;
+            toast.error('Solo se permiten archivos PDF.', { position: toast.POSITION.TOP_RIGHT });
+            setFile(null);
+            setSelect(0);
+            setSelectDetalle(0);
+            setDescripcion('');
+            return;
+        }
+
         setFile(selectedFile);
     };
 
@@ -157,11 +170,17 @@ function Documento_Detalle() {
             <ToastContainer />
             <div className="row">
 
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlFile1">Ingresar Nueva Documentacion</label>
-                    <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={handleFileChange} />
+
+
+
+                <div className="row mt-4">
+                    <div className="form-group">
+                        <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={handleFileChange} accept=".pdf" />
+                    </div>
+
                 </div>
-                <div className="form-row">
+
+                <div className="row mt-4">
                     <div className="col-sm-12 col-md-12 col-lg-4">
                         <select className="form-control form-select" id="ddl_company" disabled={false} onChange={(e) => (ChangeConecta(e.target.value))}>
                             <option value="0">Documento</option>
@@ -172,7 +191,7 @@ function Documento_Detalle() {
                             ))}
                         </select>
                     </div>
-                    <div className="col-sm-12 col-md-12 col-lg-4 mt-sm-4 mt-lg-0">
+                    <div className="col-sm-12 col-md-12 col-lg-4">
                         <select className="form-control form-select" id="ddl_campana" disabled={optionListDetalleEstado} value={selectDetalle} onChange={(e) => ChangeConectaDetalle(e.target.value)}>
                             <option value="0">Detalle</option>
                             {optionListDetalle.map((item) => (
@@ -182,11 +201,17 @@ function Documento_Detalle() {
                             ))}
                         </select>
                     </div>
-                    <div className="col-sm-12 col-md-12 col-lg-4 mt-sm-4 mt-lg-0">
-                        <textarea className="form-control" placeholder="Descripcion" rows={3} value={descripcion} onChange={handleDescripcionChange}></textarea>
+                    <div className="col-sm-12 col-md-12 col-lg-4">
+                        <textarea className="form-control" placeholder="Descripcion del Documento" rows={3} value={descripcion} onChange={handleDescripcionChange}></textarea>
                     </div>
                 </div>
-                <button className='btn btn-success form-control' id="btn-carga" onClick={guardar}>Agregar</button>
+                <div className="row">
+                    <div className="col-sm-12 col-md-12 col-lg-4">
+                        <button className='btn btn-success form-control' id="btn-carga" onClick={guardar}><i className='fa-solid fa-file me-2'></i> Subir Documento</button>
+                    </div>
+
+                </div>
+
 
             </div>
         </>
