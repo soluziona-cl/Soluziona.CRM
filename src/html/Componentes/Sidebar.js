@@ -58,18 +58,15 @@ const SideBar = () => {
           <div className="dropdown ">
             <a className="d-flex align-items-center  list-group-item border-end-0   d-inline-block text-truncate link-dark text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown" id="navbarDropdownReportes" aria-expanded="false"><i className="fa-solid fa-bars"></i><span className="ms-1 d-none d-sm-inline">Documentacion</span></a>
             <ul className="dropdown-menu   text-small shadow" aria-labelledby="navbarDropdownReportes">
-            <Link to={rutaservidor + '/DocumentacionCRUD'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Administrar Tipologia</span></div></Link>
-            <Link to={rutaservidor + '/Documentacion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Ingresar Nuevo Documento</span></div></Link>
-            <Link to={rutaservidor + '/DocumentacionListado'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Listado Documentos</span></div></Link>
+              <Link to={rutaservidor + '/DocumentacionCRUD'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Administrar Tipologia</span></div></Link>
+              <Link to={rutaservidor + '/Documentacion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Ingresar Nuevo Documento</span></div></Link>
+              <Link to={rutaservidor + '/DocumentacionListado'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Listado Documentos</span></div></Link>
 
 
 
             </ul>
           </div>
-          {/* <a href={rutaservidor + "/Dashboard"} className="list-group-item    d-inline-block text-truncate" data-bs-parent="#sidebar"><i className="fa-solid fa-chart-line"></i><span className="ms-1  d-none d-sm-inline">Dashboard</span></a> */}
-          {/* <a href={rutaservidor + "/SubirArchivos"} className="list-group-item   d-inline-block text-truncate" data-bs-parent="#sidebar"><i className="fa-solid fa-upload"></i><span className="ms-1 d-none d-sm-inline">Subir Archivos</span></a>
-          <a href={rutaservidor + "/AdminCargas"} className="list-group-item  d-inline-block text-truncate" data-bs-parent="#sidebar"><i className="fa-solid fa-user"></i><span className="ms-1 d-none d-sm-inline">Administrador de Cargas</span></a> */}
-          <div className="dropdown ">
+            <div className="dropdown ">
             <a className="d-flex align-items-center  list-group-item border-end-0   d-inline-block text-truncate link-dark text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown" id="navbarDropdownReportes" aria-expanded="false"><i className="fa-solid fa-file"></i><span className="ms-1 d-none d-sm-inline  ">Reportes</span></a>
             <ul className="dropdown-menu   text-small shadow" aria-labelledby="navbarDropdownReportes">
               <Link to={rutaservidor + '/RepoIntervalo'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Telefonico Intervalo</span></div></Link>
@@ -93,8 +90,13 @@ const SideBar = () => {
         </div> : ''
 
       }
+      {sesiones.sid_usuario === "20" ?
+        <div id="sidebar-nav" className="list-group border-0 rounded-0 text-sm-start min-vh-100">
+          {/* <Link to={rutaservidor + '/DashboardAgente'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Agente</span></div></Link> */}
+          <Link to={rutaservidor + '/DocumentacionListado'} className='list-group-item    d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><i className="fa-solid fa-user"></i><span className="ms-1  d-none d-sm-inline">Listado Documentos</span></div></Link>
+        </div> : ''
 
-
+      }
       {sesiones.sid_usuario === "10" ?
         <div id="sidebar-nav" className="list-group border-0 rounded-0 text-sm-start min-vh-100">
 
@@ -104,9 +106,9 @@ const SideBar = () => {
           <div className="dropdown ">
             <a className="d-flex align-items-center  list-group-item border-end-0   d-inline-block text-truncate link-dark text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown" id="navbarDropdownReportes" aria-expanded="false"><i className="fa-solid fa-file"></i><span className="ms-1 d-none d-sm-inline">Documentacion</span></a>
             <ul className="dropdown-menu   text-small shadow" aria-labelledby="navbarDropdownReportes">
-            <Link to={rutaservidor + '/DocumentacionCRUD'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Administrar Tipologia</span></div></Link>
-            <Link to={rutaservidor + '/Documentacion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Ingresar Nuevo Documento</span></div></Link>
-            <Link to={rutaservidor + '/DocumentacionListado'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Listado Documentos</span></div></Link>
+              <Link to={rutaservidor + '/DocumentacionCRUD'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Administrar Tipologia</span></div></Link>
+              <Link to={rutaservidor + '/Documentacion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Ingresar Nuevo Documento</span></div></Link>
+              <Link to={rutaservidor + '/DocumentacionListado'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Listado Documentos</span></div></Link>
 
 
 
