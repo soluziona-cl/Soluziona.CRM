@@ -58,9 +58,8 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
 function Documento_Detalle_Listado() {
     const [fileDetails, setFileDetails] = useState(null);
     const [fileData, setFileData] = useState(null);
-
+    const [pressed, setPressed] = useState(null);
     const [datafull, setData] = useState([]);
-
     const [fileUrlView, setFileUrlView] = useState(false);
     const [fileUrl, setFileUrl] = useState(null);
 
@@ -108,6 +107,7 @@ function Documento_Detalle_Listado() {
 
         setFileUrl(id);
         setFileUrlView(true);
+        setPressed(true);
 
 
 
@@ -116,7 +116,6 @@ function Documento_Detalle_Listado() {
 
     });
 
-   
     const [filterText, setFilterText] = React.useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
     const filteredItems = datafull.filter(
@@ -142,7 +141,7 @@ function Documento_Detalle_Listado() {
             style: {
                 minHeight: '40px', // override the row height
                 maxHeight: '60px',
-              
+
             },
         },
         headCells: {
@@ -168,7 +167,11 @@ function Documento_Detalle_Listado() {
     const handleMouseOver = (row) => {
         console.log(`Mouse over row with ID: ${row}`);
         // Realiza las acciones adicionales que desees aquí
-      };
+    };
+
+    const restaurar =() =>{
+        setFileUrlView(false)
+    }
 
 
     const columns = [
@@ -181,8 +184,8 @@ function Documento_Detalle_Listado() {
             name: <div className="text-wrap">Fecha</div>,
             selector: row => row.fecha,
             center: true,
-            
-    		
+
+
         },
         {
             name: <div className="text-wrap">Nombre</div>,
@@ -201,7 +204,7 @@ function Documento_Detalle_Listado() {
         },
         {
             name: <div className="text-wrap">Descripcion</div>,
-            selector: row => <div onMouseOver={() => handleMouseOver(row.descripcion)}>{row.descripcion}</div>  ,
+            selector: row => <div onMouseOver={() => handleMouseOver(row.descripcion)}>{row.descripcion}</div>,
             center: true
         }
 
@@ -220,46 +223,58 @@ function Documento_Detalle_Listado() {
                                 <h4 className="my-0 font-weight-normal">Listado</h4>
                             </div>
                             <div className="card-body">
+                               
+                                        
+                                            {fileUrlView !== true && (
+                                                <div className=" mt-5 col-12" id='original'> 
 
-                                <div className='row'>
-                                    <div className='col-6'> {loading ? (
-                                        <div className="d-flex justify-content-center mt-3">
+                                                <DataTable
+                                                    columns={columns}
+                                                    data={filteredItems}
+                                                    customStyles={customStyles}
+                                                    pagination
+                                                    paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+                                                    subHeader
+                                                    subHeaderComponent={subHeaderComponentMemo}
+                                                    // selectableRows
+                                                    persistTableHead
+                                                />
 
-                                            <ClockLoader
-                                                className='loading'
-                                                color={'#5b198a'}
-                                                loading={loading}
-                                                size={70}
-                                                aria-label="Loading Spinner"
-                                                data-testid="loader"
-                                            />
-                                        </div>
+                                                </div>
+                                            )}
+                                    
 
-                                    ) : (
-                                        <div className=" mt-5 "  >
-
+                                     {fileUrlView !== false && (
+                                        <div classname='row' id='ambos'>
+                                        <button
+                                            className="mb-0 btn btn-success"
+                                            onClick={restaurar}
+                                        >volver
+                                        </button>
+                                            <div className='col-3'>
                                             <DataTable
-                                                columns={columns}
-                                                data={filteredItems}
-                                                customStyles={customStyles}
-                                                pagination
-                                                paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-                                                subHeader
-                                                subHeaderComponent={subHeaderComponentMemo}
-                                                // selectableRows
-                                                persistTableHead
-                                            />
+                                                    columns={columns}
+                                                    data={filteredItems}
+                                                    customStyles={customStyles}
+                                                    pagination
+                                                    paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+                                                    subHeader
+                                                    subHeaderComponent={subHeaderComponentMemo}
+                                                    // selectableRows
+                                                    persistTableHead
+                                                />
+
+                                              
+                                            </div>
 
 
+                                            <div className='col-8'>
+                                                <p>Archivo cargado:</p>
+                                                {/* <button onClick={downloadFile}>Descargar Archivo</button> */}
+                                                <embed src={'https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/Documentacion/' + fileUrl} title="Archivo" />
+                                            </div>
                                         </div>
-                                    )}</div>
-                                    <div className='col-6'>  {fileUrlView !== false && (
-                                        <div>
-                                            <p>Archivo cargado:</p>
-                                            {/* <button onClick={downloadFile}>Descargar Archivo</button> */}
-                                            <embed src={'https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/Documentacion/' + fileUrl} title="Archivo" width="100%" height="500px" />
-                                        </div>
-                                    )}</div>
+                                    )}
                                 </div>
 
                             </div>
@@ -268,7 +283,7 @@ function Documento_Detalle_Listado() {
 
                 </div>
 
-            </div>
+
         </>
     )
 }
