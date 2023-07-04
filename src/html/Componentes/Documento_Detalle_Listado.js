@@ -169,7 +169,7 @@ function Documento_Detalle_Listado() {
         // Realiza las acciones adicionales que desees aquí
     };
 
-    const restaurar =() =>{
+    const restaurar = () => {
         setFileUrlView(false)
     }
 
@@ -218,70 +218,71 @@ function Documento_Detalle_Listado() {
                 <div className="col-12">
 
                     <div className="col-sm-12 col-md-12 col-lg-12 text-center">
-                        <div className="card mb-4 rounded-3 shadow-sm">
+                        <div className="card rounded-3 shadow-sm">
                             <div className="card-header">
                                 <h4 className="my-0 font-weight-normal">Listado</h4>
                             </div>
                             <div className="card-body">
-                               
-                                        
-                                            {fileUrlView !== true && (
-                                                <div className=" mt-5 col-12" id='original'> 
 
-                                                <DataTable
-                                                    columns={columns}
-                                                    data={filteredItems}
-                                                    customStyles={customStyles}
-                                                    pagination
-                                                    paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-                                                    subHeader
-                                                    subHeaderComponent={subHeaderComponentMemo}
-                                                    // selectableRows
-                                                    persistTableHead
-                                                />
 
-                                                </div>
-                                            )}
-                                    
+                                {fileUrlView !== true && (
+                                    <div className='row'>
+                                        <div className=" mt-5 col-12">
 
-                                     {fileUrlView !== false && (
-                                        <div classname='row' id='ambos'>
-                                        <button
-                                            className="mb-0 btn btn-success"
-                                            onClick={restaurar}
-                                        >volver
-                                        </button>
-                                            <div className='col-3'>
                                             <DataTable
-                                                    columns={columns}
-                                                    data={filteredItems}
-                                                    customStyles={customStyles}
-                                                    pagination
-                                                    paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-                                                    subHeader
-                                                    subHeaderComponent={subHeaderComponentMemo}
-                                                    // selectableRows
-                                                    persistTableHead
-                                                />
+                                                columns={columns}
+                                                data={filteredItems}
+                                                customStyles={customStyles}
+                                                pagination
+                                                paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                                // selectableRows
+                                                persistTableHead
+                                            />
 
-                                              
-                                            </div>
-
-
-                                            <div className='col-8'>
-                                                <p>Archivo cargado:</p>
-                                                {/* <button onClick={downloadFile}>Descargar Archivo</button> */}
-                                                <embed src={'https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/Documentacion/' + fileUrl} title="Archivo" />
-                                            </div>
                                         </div>
-                                    )}
-                                </div>
+                                    </div>
 
+                                )}
+
+                                {fileUrlView !== false && (
+                                    <div className='row'>
+
+                                        <div className='mt-5 col-4'>
+                                            <DataTable
+                                                columns={columns}
+                                                data={filteredItems}
+                                                customStyles={customStyles}
+                                                // pagination
+                                                paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                                // selectableRows
+                                                persistTableHead
+                                            />
+
+
+                                        </div>
+
+
+                                        <div className='col-8'>
+                                            <div className='col-12'> <button className="mb-0 btn btn-success" onClick={restaurar}>Volver</button></div>
+                                            <p>Archivo cargado</p>
+                                            {/* <button onClick={downloadFile}>Descargar Archivo</button> */}
+                                            <embed src={'https://app.soluziona.cl/API_v1_prod/CallSouth/API_CallSouth_CRM_LosHeroes/Documentacion/' + fileUrl} title="Archivo" width="100%" height="800px" />
+                                        </div>
+
+                                    </div>
+
+                                )}
                             </div>
+
                         </div>
                     </div>
-
                 </div>
+
+            </div>
 
 
         </>
