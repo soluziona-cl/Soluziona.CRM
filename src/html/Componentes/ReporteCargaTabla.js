@@ -9,8 +9,6 @@ import * as XLSX from "xlsx";
 import DotLoader from "react-spinners/DotLoader";
 
 
-
-
 function ReporteCargaTabla({ flujo, campana, ini, fin }) {
 
     const [datafull, setData] = useState([]);

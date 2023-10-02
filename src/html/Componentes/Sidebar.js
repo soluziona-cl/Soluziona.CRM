@@ -61,6 +61,7 @@ const SideBar = () => {
               <Link to={rutaservidor + '/DocumentacionCRUD'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Administrar Tipologia</span></div></Link>
               <Link to={rutaservidor + '/Documentacion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Ingresar Nuevo Documento</span></div></Link>
               <Link to={rutaservidor + '/DocumentacionListado'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Listado Documentos</span></div></Link>
+              <Link to={rutaservidor + '/DocumentacionListado_2'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Listado Documentos 2</span></div></Link>
 
 
 
@@ -109,6 +110,7 @@ const SideBar = () => {
               <Link to={rutaservidor + '/DocumentacionCRUD'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Administrar Tipologia</span></div></Link>
               <Link to={rutaservidor + '/Documentacion'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Ingresar Nuevo Documento</span></div></Link>
               <Link to={rutaservidor + '/DocumentacionListado'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Listado Documentos</span></div></Link>
+              <Link to={rutaservidor + '/DocumentacionListado_2'} className='dropdown-item border-end-0 d-inline-block text-truncate'><div className='ml-2  text-slate-200 text-sm font-medium'><span className="ms-1  d-none d-sm-inline">Listado Documentos 2</span></div></Link>
 
 
 

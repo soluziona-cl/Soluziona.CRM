@@ -1,0 +1,56 @@
+.popular-categories {
+ padding:48px 0
+}
+.popular-categories h2 {
+ font-size:28px;
+ line-height:42px;
+ margin-bottom:40px
+}
+.popular-categories #categories {
+ display:grid;
+ grid-template-columns:repeat(auto-fill, minmax(319px, 1fr));
+ grid-gap:30px
+}
+@media (min-width: 767px) {
+ .popular-categories #categories {
+  grid-gap:50px
+ }
+}
+.popular-categories #categories .category {
+ display:flex;
+ text-align:center;
+ text-decoration:none;
+ transition:.1s ease
+}
+.popular-categories #categories .category:hover {
+ -webkit-transform:scale(1.05);
+ -ms-transform:scale(1.05);
+ transform:scale(1.05)
+}
+.popular-categories #categories .category .icon {
+ width:150px;
+ height:auto
+}
+.popular-categories #categories .category .icon img {
+ width:100%;
+ height:100%;
+ object-fit:contain
+}
+.popular-categories #categories .category .icon i {
+ font-size:64px
+}
+.popular-categories #categories .category-info {
+    margin-left:32px;
+    flex:1;
+    text-align:left
+   }
+   
+.popular-categories #categories .category-info h3 {
+ font-size:18px;
+ line-height:27px;
+ margin-bottom:16px
+}
+.popular-categories #categories .category-info .category-description {
+ line-height:26px
+}
+

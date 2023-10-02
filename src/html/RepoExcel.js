@@ -56,8 +56,8 @@ const RepoExcel = () => {
     sid: localStorage.getItem("localid"),
     sid_usuario: localStorage.getItem("localid_usuario"),
     stoken: localStorage.getItem("token")
-};
-  
+  };
+
   // useEffect(() => {
   //   FullTable()
   //   // IntervaleFullTable()
@@ -68,15 +68,15 @@ const RepoExcel = () => {
 
   useEffect(() => {
     const token = getToken();
-        const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
-        if (!token) {
+    const rutaservidor = "/Orkesta/CallSouth/LosHeroes/CRM"
+    if (!token) {
 
-            // console.log('Vacio')
-            navigate(rutaservidor);
-            return;
+      // console.log('Vacio')
+      navigate(rutaservidor);
+      return;
 
-        }
-        setAuthLoading(false);
+    }
+    setAuthLoading(false);
 
 
   }, []);
@@ -142,6 +142,26 @@ const RepoExcel = () => {
                         <tr>
                           <td>Mayo</td>
                           <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Mayo.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Mayo</Link></td>
+                        </tr>
+                        <tr>
+                          <td>Junio</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Junio.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Junio</Link></td>
+                        </tr>
+                        <tr>
+                          <td>Julio</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Julio.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Julio</Link></td>
+                        </tr>
+                        <tr>
+                          <td>Agosto</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Agosto.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Agosto</Link></td>
+                        </tr>
+                        <tr>
+                          <td>Septiembre</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Septiembre.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Septiembre</Link></td>
+                        </tr>
+                        <tr>
+                          <td>Octubre</td>
+                          <td> <Link to="/Orkesta/CallSouth/LosHeroes/CRM/Reportes_Octubre.xlsx" target="_blank" download><i className='fa-solid fa-file m-lg-2'></i>Archivo Reportes Octubre</Link></td>
                         </tr>
                       </tbody>
                     </table>

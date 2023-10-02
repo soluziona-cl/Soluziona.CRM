@@ -20,6 +20,9 @@ import EditorHTML from "./html/EditorHTML";
 
 import Documentacion from "./html/Documentacion";
 import DocumentacionListado from "./html/DocumentacionListado";
+import DocumentacionListado_2 from "./html/DocumentacionListado_2";
+
+
 import DocumentacionCRUD from "./html/DocumentacionCRUD";
 
 function App() {
@@ -48,6 +51,7 @@ function App() {
         <Route path={rutaservidor + "/Documentacion"} element={<Documentacion />} />
         <Route path={rutaservidor + "/DocumentacionListado"} element={<DocumentacionListado />} />
         <Route path={rutaservidor + "/DocumentacionCRUD"} element={<DocumentacionCRUD />} />
+        <Route path={rutaservidor + "/DocumentacionListado_2"} element={<DocumentacionListado_2 />} />
       </Routes>
     </Router>
   );
