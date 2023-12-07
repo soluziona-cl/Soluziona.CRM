@@ -13,7 +13,9 @@ import RepoResumenFlujoLLamada from "./html/RepoResumenFlujoLLamada";
 import RepoDetalleFlujoLLamada from "./html/RepoDetalleFlujoLLamada";
 import RepoTipificadasAgente from "./html/RepoTipificadasAgente";
 import RepoExcel from "./html/RepoExcel";
-
+import Ocr from "./html/Ocr.js";
+import OcrResultados from "./html/OcrResultados.js";
+import OcrFiltro from "./html/OcrFiltro";
 
 function App() {
 
@@ -34,6 +36,11 @@ function App() {
         <Route path={rutaservidor + "/RepoDetalleFlujoLLamada"} element={<RepoDetalleFlujoLLamada />} />
         <Route path={rutaservidor + "/RepoTipificadasAgente"} element={<RepoTipificadasAgente />} />
         <Route path={rutaservidor + "/RepoExcel"} element={<RepoExcel />} />
+        <Route path={rutaservidor + "/Ocr"} element={<Ocr />} />
+        <Route path={rutaservidor + "/OcrResultados"} element={<OcrResultados />} />
+        <Route path={rutaservidor + "/OcrFiltro"} element={<OcrFiltro />} />
+        
+        
         </Routes>
     </Router>  
   );
